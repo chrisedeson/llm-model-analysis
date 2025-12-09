@@ -165,12 +165,25 @@ def build_comparison_json(
     """Build JSON structure for the comparison page."""
     from config import GRADER_MODEL, GRADER_REASONING_EFFORT
     
-    # Calculate totals
-    total_cost1 = sum(r.cost for r in responses1 if r.error is None)
-    total_cost2 = sum(r.cost for r in responses2 if r.error is None)
-    
+    # Separate successful vs error responses
     successful1 = [r for r in responses1 if r.error is None]
     successful2 = [r for r in responses2 if r.error is None]
+    
+    # Calculate actual token usage from API responses
+    total_input_tokens1 = sum(r.input_tokens for r in successful1)
+    total_output_tokens1 = sum(r.output_tokens for r in successful1)
+    total_input_tokens2 = sum(r.input_tokens for r in successful2)
+    total_output_tokens2 = sum(r.output_tokens for r in successful2)
+    
+    # Calculate actual costs from API usage
+    total_cost1 = sum(r.cost for r in successful1)
+    total_cost2 = sum(r.cost for r in successful2)
+    
+    # Break down costs by input/output
+    input_cost1 = (total_input_tokens1 / 1_000_000) * model1.input_price_per_million
+    output_cost1 = (total_output_tokens1 / 1_000_000) * model1.output_price_per_million
+    input_cost2 = (total_input_tokens2 / 1_000_000) * model2.input_price_per_million
+    output_cost2 = (total_output_tokens2 / 1_000_000) * model2.output_price_per_million
     
     # Latency stats
     latencies1 = sorted([r.latency_ms for r in successful1])
@@ -185,13 +198,13 @@ def build_comparison_json(
     p95_latency1 = latencies1[min(p95_idx1, len(latencies1) - 1)] if latencies1 else 0
     p95_latency2 = latencies2[min(p95_idx2, len(latencies2) - 1)] if latencies2 else 0
     
-    # Token stats
-    tokens1 = [r.tokens for r in successful1 if hasattr(r, 'tokens') and r.tokens]
-    tokens2 = [r.tokens for r in successful2 if hasattr(r, 'tokens') and r.tokens]
-    avg_tokens1 = sum(tokens1) / len(tokens1) if tokens1 else 0
-    avg_tokens2 = sum(tokens2) / len(tokens2) if tokens2 else 0
+    # Average tokens per query (from actual API responses)
+    avg_input_tokens1 = total_input_tokens1 / len(successful1) if successful1 else 0
+    avg_output_tokens1 = total_output_tokens1 / len(successful1) if successful1 else 0
+    avg_input_tokens2 = total_input_tokens2 / len(successful2) if successful2 else 0
+    avg_output_tokens2 = total_output_tokens2 / len(successful2) if successful2 else 0
     
-    # Cost per query and projections
+    # Cost per query (actual)
     cost_per_query1 = total_cost1 / len(successful1) if successful1 else 0
     cost_per_query2 = total_cost2 / len(successful2) if successful2 else 0
     
@@ -221,7 +234,7 @@ def build_comparison_json(
         "overall": avg_dimension(grades2, "overall"),
     }
     
-    # Build per-question comparison
+    # Build per-question comparison (include token details)
     comparisons = []
     for i, q in enumerate(questions):
         r1 = responses1[i]
@@ -236,6 +249,8 @@ def build_comparison_json(
             "model1": {
                 "response": r1.response,
                 "latency_ms": r1.latency_ms,
+                "input_tokens": r1.input_tokens,
+                "output_tokens": r1.output_tokens,
                 "cost": r1.cost,
                 "grade": {
                     "on_topic": g1.on_topic,
@@ -250,6 +265,8 @@ def build_comparison_json(
             "model2": {
                 "response": r2.response,
                 "latency_ms": r2.latency_ms,
+                "input_tokens": r2.input_tokens,
+                "output_tokens": r2.output_tokens,
                 "cost": r2.cost,
                 "grade": {
                     "on_topic": g2.on_topic,
@@ -276,14 +293,33 @@ def build_comparison_json(
             "api_type": model1.api_type,
             "reasoning_effort": model1.reasoning_effort,
             "verbosity": model1.verbosity,
-            "total_cost": total_cost1,
-            "avg_latency_ms": avg_latency1,
-            "p95_latency_ms": p95_latency1,
-            "avg_tokens": avg_tokens1,
-            "cost_per_1k": cost_per_query1 * 1000,
-            "cost_per_10k": cost_per_query1 * 10000,
-            "avg_score": avg_score1,
-            "scores": scores1,
+            # Actual token usage from API
+            "usage": {
+                "total_input_tokens": total_input_tokens1,
+                "total_output_tokens": total_output_tokens1,
+                "total_tokens": total_input_tokens1 + total_output_tokens1,
+                "avg_input_tokens": round(avg_input_tokens1, 1),
+                "avg_output_tokens": round(avg_output_tokens1, 1),
+            },
+            # Actual costs from API usage
+            "costs": {
+                "input_cost": round(input_cost1, 6),
+                "output_cost": round(output_cost1, 6),
+                "total_cost": round(total_cost1, 6),
+                "cost_per_query": round(cost_per_query1, 6),
+                "cost_per_1k": round(cost_per_query1 * 1000, 4),
+                "cost_per_10k": round(cost_per_query1 * 10000, 4),
+            },
+            # Pricing used for calculation
+            "pricing": {
+                "input_price_per_million": model1.input_price_per_million,
+                "output_price_per_million": model1.output_price_per_million,
+            },
+            # Performance
+            "avg_latency_ms": round(avg_latency1, 1),
+            "p95_latency_ms": round(p95_latency1, 1),
+            "avg_score": round(avg_score1, 2),
+            "scores": {k: round(v, 2) for k, v in scores1.items()},
             "successful_responses": len(successful1),
         },
         "model2": {
@@ -292,14 +328,33 @@ def build_comparison_json(
             "api_type": model2.api_type,
             "reasoning_effort": model2.reasoning_effort,
             "verbosity": model2.verbosity,
-            "total_cost": total_cost2,
-            "avg_latency_ms": avg_latency2,
-            "p95_latency_ms": p95_latency2,
-            "avg_tokens": avg_tokens2,
-            "cost_per_1k": cost_per_query2 * 1000,
-            "cost_per_10k": cost_per_query2 * 10000,
-            "avg_score": avg_score2,
-            "scores": scores2,
+            # Actual token usage from API
+            "usage": {
+                "total_input_tokens": total_input_tokens2,
+                "total_output_tokens": total_output_tokens2,
+                "total_tokens": total_input_tokens2 + total_output_tokens2,
+                "avg_input_tokens": round(avg_input_tokens2, 1),
+                "avg_output_tokens": round(avg_output_tokens2, 1),
+            },
+            # Actual costs from API usage
+            "costs": {
+                "input_cost": round(input_cost2, 6),
+                "output_cost": round(output_cost2, 6),
+                "total_cost": round(total_cost2, 6),
+                "cost_per_query": round(cost_per_query2, 6),
+                "cost_per_1k": round(cost_per_query2 * 1000, 4),
+                "cost_per_10k": round(cost_per_query2 * 10000, 4),
+            },
+            # Pricing used for calculation
+            "pricing": {
+                "input_price_per_million": model2.input_price_per_million,
+                "output_price_per_million": model2.output_price_per_million,
+            },
+            # Performance
+            "avg_latency_ms": round(avg_latency2, 1),
+            "p95_latency_ms": round(p95_latency2, 1),
+            "avg_score": round(avg_score2, 2),
+            "scores": {k: round(v, 2) for k, v in scores2.items()},
             "successful_responses": len(successful2),
         },
         "comparisons": comparisons,

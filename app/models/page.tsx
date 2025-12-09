@@ -8,10 +8,35 @@ interface ModelSummary {
   api_type: string;
   reasoning_effort: string | null;
   verbosity: string | null;
-  total_cost: number;
+  total_cost?: number;
   avg_latency_ms: number;
   avg_score: number;
   successful_responses: number;
+  // New nested format
+  usage?: {
+    total_input_tokens: number;
+    total_output_tokens: number;
+    total_tokens: number;
+    avg_input_tokens: number;
+    avg_output_tokens: number;
+  };
+  costs?: {
+    input_cost: number;
+    output_cost: number;
+    total_cost: number;
+    cost_per_query: number;
+    cost_per_1k: number;
+    cost_per_10k: number;
+  };
+  pricing?: {
+    input_price_per_million: number;
+    output_price_per_million: number;
+  };
+}
+
+// Helper function to get total cost from either old or new format
+function getTotalCost(model: ModelSummary): number {
+  return model.costs?.total_cost ?? model.total_cost ?? 0;
 }
 
 interface ComparisonData {
@@ -99,7 +124,7 @@ export default async function ModelsPage() {
   // Calculate cost-effectiveness (score per dollar * 1000)
   const modelsWithEfficiency = sortedModels.map((m) => ({
     ...m,
-    costEfficiency: m.total_cost > 0 ? (m.avg_score / m.total_cost) * 1000 : 0,
+    costEfficiency: getTotalCost(m) > 0 ? (m.avg_score / getTotalCost(m)) * 1000 : 0,
   }));
 
   return (
@@ -175,7 +200,7 @@ export default async function ModelsPage() {
           <div className="bg-[#141517] rounded-lg border border-white/[0.08] p-4">
             <div className="text-xs text-gray-500 mb-1">Lowest Cost</div>
             <div className="text-2xl font-semibold text-[#9D5BD2]">
-              ${Math.min(...models.map((m) => m.total_cost)).toFixed(4)}
+              ${Math.min(...models.map((m) => getTotalCost(m))).toFixed(4)}
             </div>
           </div>
         </div>
@@ -250,7 +275,7 @@ export default async function ModelsPage() {
                   </td>
                   <td className="px-6 py-4 text-right">
                     <span className="text-sm text-gray-300">
-                      ${model.total_cost.toFixed(4)}
+                      ${getTotalCost(model).toFixed(4)}
                     </span>
                   </td>
                   <td className="px-6 py-4 text-right">

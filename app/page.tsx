@@ -17,6 +17,8 @@ interface Grade {
 interface ModelResult {
   response: string;
   latency_ms: number;
+  input_tokens?: number;
+  output_tokens?: number;
   cost: number;
   grade: Grade;
   error: string | null;
@@ -36,7 +38,30 @@ interface ModelSummary {
   api_type: string;
   reasoning_effort: string | null;
   verbosity: string | null;
-  total_cost: number;
+  // New: Actual token usage from API
+  usage?: {
+    total_input_tokens: number;
+    total_output_tokens: number;
+    total_tokens: number;
+    avg_input_tokens: number;
+    avg_output_tokens: number;
+  };
+  // New: Actual costs calculated from API usage
+  costs?: {
+    input_cost: number;
+    output_cost: number;
+    total_cost: number;
+    cost_per_query: number;
+    cost_per_1k: number;
+    cost_per_10k: number;
+  };
+  // New: Pricing rates used for calculation
+  pricing?: {
+    input_price_per_million: number;
+    output_price_per_million: number;
+  };
+  // Legacy fields (kept for backwards compatibility)
+  total_cost?: number;
   avg_latency_ms: number;
   p95_latency_ms?: number;
   avg_tokens?: number;
@@ -123,7 +148,13 @@ python scripts/run_evaluation.py --samples 100 --models gpt-4o-mini gpt-5-mini_m
   const scoreDiff = Math.abs(data.model1.avg_score - data.model2.avg_score);
   const timeDiff = Math.abs(data.model1.avg_latency_ms - data.model2.avg_latency_ms);
   const model1Faster = data.model1.avg_latency_ms < data.model2.avg_latency_ms;
-  const costDiff = ((data.model2.total_cost - data.model1.total_cost) / data.model1.total_cost) * 100;
+  
+  // Use new costs structure if available, otherwise fallback to legacy
+  const model1TotalCost = data.model1.costs?.total_cost ?? data.model1.total_cost ?? 0;
+  const model2TotalCost = data.model2.costs?.total_cost ?? data.model2.total_cost ?? 0;
+  const costDiff = model1TotalCost > 0 
+    ? ((model2TotalCost - model1TotalCost) / model1TotalCost) * 100
+    : 0;
 
   return (
     <div className="min-h-screen bg-[#0C0C0D]">
@@ -174,7 +205,7 @@ python scripts/run_evaluation.py --samples 100 --models gpt-4o-mini gpt-5-mini_m
           <StatCard
             title="Cost Difference"
             value={`${costDiff > 0 ? "+" : ""}${costDiff.toFixed(1)}%`}
-            subtitle={`M1: $${data.model1.total_cost.toFixed(4)} | M2: $${data.model2.total_cost.toFixed(4)}`}
+            subtitle={`M1: $${model1TotalCost.toFixed(4)} | M2: $${model2TotalCost.toFixed(4)}`}
             color={costDiff > 0 ? "orange" : "green"}
             icon={
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -245,9 +276,16 @@ function ModelCard({
   };
   const accent = accentColors[color];
 
-  // Calculate cost projections if not in data
-  const costPer1k = model.cost_per_1k ?? (model.total_cost / numQuestions) * 1000;
-  const costPer10k = model.cost_per_10k ?? (model.total_cost / numQuestions) * 10000;
+  // Use new costs structure if available, otherwise calculate from legacy fields
+  const totalCost = model.costs?.total_cost ?? model.total_cost ?? 0;
+  const costPer1k = model.costs?.cost_per_1k ?? model.cost_per_1k ?? (totalCost / numQuestions) * 1000;
+  const costPer10k = model.costs?.cost_per_10k ?? model.cost_per_10k ?? (totalCost / numQuestions) * 10000;
+  
+  // Token usage from API
+  const hasUsageData = model.usage?.total_tokens !== undefined;
+  const totalTokens = model.usage?.total_tokens ?? 0;
+  const avgInputTokens = model.usage?.avg_input_tokens ?? 0;
+  const avgOutputTokens = model.usage?.avg_output_tokens ?? model.avg_tokens ?? 0;
 
   return (
     <div className="bg-[#141517] rounded-xl border border-white/[0.08] p-5 hover:border-white/[0.12] transition-colors">
@@ -294,9 +332,51 @@ function ModelCard({
         </div>
       </div>
 
+      {/* Actual Token Usage from API */}
+      {hasUsageData && (
+        <div className="mt-4 pt-3 border-t border-white/[0.06]">
+          <div className="text-[10px] text-white/40 uppercase tracking-wider mb-2">Actual Token Usage (from API)</div>
+          <div className="grid grid-cols-3 gap-2 text-center">
+            <div className="bg-white/[0.02] rounded p-2">
+              <div className="text-[10px] text-white/40">Total</div>
+              <div className="text-sm font-medium text-white/70">{totalTokens.toLocaleString()}</div>
+            </div>
+            <div className="bg-white/[0.02] rounded p-2">
+              <div className="text-[10px] text-white/40">Avg In</div>
+              <div className="text-sm font-medium text-white/70">{Math.round(avgInputTokens)}</div>
+            </div>
+            <div className="bg-white/[0.02] rounded p-2">
+              <div className="text-[10px] text-white/40">Avg Out</div>
+              <div className="text-sm font-medium text-white/70">{Math.round(avgOutputTokens)}</div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Cost Breakdown from API */}
+      {model.costs && (
+        <div className="mt-3 pt-3 border-t border-white/[0.06]">
+          <div className="text-[10px] text-white/40 uppercase tracking-wider mb-2">Cost Breakdown ({numQuestions} samples)</div>
+          <div className="grid grid-cols-3 gap-2 text-center">
+            <div className="bg-white/[0.02] rounded p-2">
+              <div className="text-[10px] text-white/40">Input</div>
+              <div className="text-sm font-medium text-white/70">${model.costs.input_cost.toFixed(4)}</div>
+            </div>
+            <div className="bg-white/[0.02] rounded p-2">
+              <div className="text-[10px] text-white/40">Output</div>
+              <div className="text-sm font-medium text-white/70">${model.costs.output_cost.toFixed(4)}</div>
+            </div>
+            <div className="bg-white/[0.02] rounded p-2">
+              <div className="text-[10px] text-white/40">Total</div>
+              <div className="text-sm font-medium" style={{ color: accent }}>${model.costs.total_cost.toFixed(4)}</div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Quality Scores Breakdown */}
       {model.scores && (
-        <div className="mt-4 pt-3 border-t border-white/[0.06]">
+        <div className="mt-3 pt-3 border-t border-white/[0.06]">
           <div className="text-[10px] text-white/40 uppercase tracking-wider mb-2">Quality Dimensions</div>
           <div className="grid grid-cols-5 gap-1 text-center">
             <div>
@@ -333,7 +413,17 @@ function ModelCard({
         </div>
       )}
 
-      <div className="mt-4 pt-3 border-t border-white/[0.06] flex items-center gap-2">
+      {/* Pricing Info */}
+      {model.pricing && (
+        <div className="mt-3 pt-3 border-t border-white/[0.06]">
+          <div className="text-[10px] text-white/30 flex justify-between">
+            <span>Input: ${model.pricing.input_price_per_million}/1M tokens</span>
+            <span>Output: ${model.pricing.output_price_per_million}/1M tokens</span>
+          </div>
+        </div>
+      )}
+
+      <div className="mt-3 pt-3 border-t border-white/[0.06] flex items-center gap-2">
         {model.api_type === "responses" ? (
           <>
             <span className="px-2 py-1 text-[11px] bg-white/[0.04] text-white/50 rounded border border-white/[0.06]">Reasoning: {model.reasoning_effort}</span>

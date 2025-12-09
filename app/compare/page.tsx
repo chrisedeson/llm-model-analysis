@@ -10,10 +10,35 @@ interface ModelInfo {
   api_type: string;
   reasoning_effort: string | null;
   verbosity: string | null;
-  total_cost: number;
+  total_cost?: number;
   avg_latency_ms: number;
   avg_score: number;
   successful_responses: number;
+  // New nested format
+  usage?: {
+    total_input_tokens: number;
+    total_output_tokens: number;
+    total_tokens: number;
+    avg_input_tokens: number;
+    avg_output_tokens: number;
+  };
+  costs?: {
+    input_cost: number;
+    output_cost: number;
+    total_cost: number;
+    cost_per_query: number;
+    cost_per_1k: number;
+    cost_per_10k: number;
+  };
+  pricing?: {
+    input_price_per_million: number;
+    output_price_per_million: number;
+  };
+}
+
+// Helper function to get total cost from either old or new format
+function getTotalCost(model: ModelInfo): number {
+  return model.costs?.total_cost ?? model.total_cost ?? 0;
 }
 
 interface ComparisonData {
@@ -211,7 +236,7 @@ export default function ComparePage() {
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-400">Total Cost</span>
-                    <span className="text-white font-medium">${comparisonData.model1.total_cost.toFixed(4)}</span>
+                    <span className="text-white font-medium">${getTotalCost(comparisonData.model1).toFixed(4)}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-400">Successful</span>
@@ -249,7 +274,7 @@ export default function ComparePage() {
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-400">Total Cost</span>
-                    <span className="text-white font-medium">${comparisonData.model2.total_cost.toFixed(4)}</span>
+                    <span className="text-white font-medium">${getTotalCost(comparisonData.model2).toFixed(4)}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-400">Successful</span>
