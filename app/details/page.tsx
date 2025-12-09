@@ -1,8 +1,8 @@
 import { promises as fs } from "fs";
 import path from "path";
-import Link from "next/link";
+import { Navigation, PageHeader } from "../components/Navigation";
 
-// Types (shared with main page)
+// Types for unified JSON structure
 interface Grade {
   on_topic: number;
   grounded: number;
@@ -12,20 +12,21 @@ interface Grade {
   average: number;
 }
 
-interface ModelResult {
+interface QuestionResponse {
   response: string;
   latency_ms: number;
+  input_tokens: number;
+  output_tokens: number;
   cost: number;
   grade: Grade;
   error: string | null;
 }
 
-interface Comparison {
+interface Question {
   id: number;
   question: string;
   context: string;
-  model1: ModelResult;
-  model2: ModelResult;
+  responses: Record<string, QuestionResponse>;
 }
 
 interface ModelSummary {
@@ -34,33 +35,44 @@ interface ModelSummary {
   api_type: string;
   reasoning_effort: string | null;
   verbosity: string | null;
-  total_cost: number;
-  avg_latency_ms: number;
   avg_score: number;
+  avg_latency_ms: number;
   successful_responses: number;
+  total_responses: number;
+  scores: {
+    on_topic: number;
+    grounded: number;
+    no_contradiction: number;
+    understandability: number;
+    overall: number;
+  };
+  costs: {
+    total_cost: number;
+    cost_per_query: number;
+  };
+  usage: {
+    total_input_tokens: number;
+    total_output_tokens: number;
+  };
 }
 
-interface ComparisonData {
+interface EvaluationData {
   metadata: {
     generated_at: string;
     num_questions: number;
+    num_models: number;
+    grader_model: string;
+    grader_reasoning_effort: string;
+    model_keys: string[];
   };
-  model1: ModelSummary;
-  model2: ModelSummary;
-  comparisons: Comparison[];
+  models: Record<string, ModelSummary>;
+  questions: Question[];
 }
 
-async function getComparisonData(): Promise<ComparisonData | null> {
+async function getEvaluationData(): Promise<EvaluationData | null> {
   try {
     const dataDir = path.join(process.cwd(), "public/data");
-    const files = await fs.readdir(dataDir);
-    const comparisonFile = files.find(f => f.startsWith("comparison_") && f.endsWith(".json"));
-    
-    if (!comparisonFile) {
-      return null;
-    }
-    
-    const filePath = path.join(dataDir, comparisonFile);
+    const filePath = path.join(dataDir, "evaluation_results.json");
     const fileContents = await fs.readFile(filePath, "utf8");
     return JSON.parse(fileContents);
   } catch {
@@ -69,55 +81,30 @@ async function getComparisonData(): Promise<ComparisonData | null> {
 }
 
 export default async function DetailsPage() {
-  const data = await getComparisonData();
+  const data = await getEvaluationData();
+
+  // Get first two models for default display
+  const modelKeys = data?.metadata.model_keys.slice(0, 2) || [];
+  const model1Key = modelKeys[0];
+  const model2Key = modelKeys[1];
+  const model1 = model1Key ? data?.models[model1Key] : null;
+  const model2 = model2Key ? data?.models[model2Key] : null;
 
   return (
     <div className="min-h-screen bg-[#0C0C0D]">
-      {/* Navigation */}
-      <nav className="sticky top-0 z-50 bg-[#0C0C0D]/80 backdrop-blur-xl border-b border-white/[0.08]">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex items-center justify-between h-14">
-            <div className="flex items-center gap-8">
-              <Link href="/" className="flex items-center gap-2 text-white font-semibold">
-                <svg className="w-5 h-5 text-[#5E6AD2]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                </svg>
-                LLM Analysis
-              </Link>
-              <div className="flex items-center gap-1">
-                <Link href="/" className="px-3 py-1.5 text-sm text-gray-400 hover:text-white hover:bg-white/[0.06] rounded-md transition-colors">
-                  Overview
-                </Link>
-                <Link href="/models" className="px-3 py-1.5 text-sm text-gray-400 hover:text-white hover:bg-white/[0.06] rounded-md transition-colors">
-                  All Models
-                </Link>
-                <Link href="/compare" className="px-3 py-1.5 text-sm text-gray-400 hover:text-white hover:bg-white/[0.06] rounded-md transition-colors">
-                  Compare
-                </Link>
-                <Link href="/details" className="px-3 py-1.5 text-sm text-white bg-white/[0.08] rounded-md">
-                  Details
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Navigation currentPath="/details" />
 
       <main className="max-w-7xl mx-auto px-6 py-8">
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-2xl font-semibold text-white mb-2">
-            {data ? `${data.model1.name} vs ${data.model2.name}` : "Detailed Results"}
-          </h1>
-          <p className="text-gray-500 text-sm">
-            {data 
-              ? `Full responses and grading breakdown for ${data.metadata.num_questions} questions`
-              : "Run the evaluation script to generate comparison data"
-            }
-          </p>
-        </div>
+        <PageHeader
+          title={data && model1 && model2 ? `${model1.name} vs ${model2.name}` : "Detailed Results"}
+          description={data 
+            ? `Full responses and grading breakdown for ${data.metadata.num_questions} questions. Graded by ${data.metadata.grader_model}.`
+            : "Run the evaluation script to generate comparison data"
+          }
+          badge="Details"
+        />
 
-        {!data ? (
+        {!data || !model1 || !model2 ? (
           <div className="text-center py-12 bg-[#141517] rounded-lg border border-white/[0.08]">
             <p className="text-gray-400">No comparison data available.</p>
             <p className="text-gray-500 text-sm mt-2">
@@ -127,28 +114,33 @@ export default async function DetailsPage() {
         ) : (
         /* Per-question cards */
         <div className="space-y-4">
-          {data.comparisons.map((comp) => (
+          {data.questions.map((q) => {
+            const resp1 = q.responses[model1Key];
+            const resp2 = q.responses[model2Key];
+            if (!resp1 || !resp2) return null;
+
+            return (
             <div
-              key={comp.id}
+              key={q.id}
               className="bg-[#141517] rounded-lg border border-white/[0.08] overflow-hidden"
             >
               {/* Question header */}
               <div className="px-6 py-4 border-b border-white/[0.08]">
                 <div className="flex items-center gap-3">
                   <span className="bg-[#5E6AD2]/15 text-[#5E6AD2] text-xs font-medium px-2.5 py-1 rounded-full">
-                    Q{comp.id}
+                    Q{q.id}
                   </span>
                   <h2 className="text-sm font-medium text-white">
-                    {comp.question}
+                    {q.question}
                   </h2>
                 </div>
-                {comp.context && (
+                {q.context && (
                   <details className="mt-3 group">
                     <summary className="text-xs text-gray-500 cursor-pointer hover:text-gray-300 transition-colors">
                       Show context
                     </summary>
                     <p className="mt-2 text-xs text-gray-400 bg-[#0C0C0D] p-3 rounded-md border border-white/[0.06]">
-                      {comp.context}
+                      {q.context}
                     </p>
                   </details>
                 )}
@@ -159,73 +151,84 @@ export default async function DetailsPage() {
                 {/* Model 1 */}
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-sm font-medium text-[#5E6AD2]">{data.model1.name}</h3>
+                    <h3 className="text-sm font-medium text-[#5E6AD2]">{model1.name}</h3>
                     <div className="flex gap-2">
                       <span className="bg-[#5E6AD2]/15 text-[#5E6AD2] text-xs px-2 py-1 rounded-md">
-                        {Math.round(comp.model1.latency_ms)}ms
+                        {Math.round(resp1.latency_ms)}ms
                       </span>
                       <span className="bg-white/[0.06] text-gray-400 text-xs px-2 py-1 rounded-md">
-                        ${comp.model1.cost.toFixed(5)}
+                        ${resp1.cost.toFixed(5)}
                       </span>
                     </div>
                   </div>
                   <p className="text-gray-300 text-sm leading-relaxed mb-4">
-                    {comp.model1.response || (
+                    {resp1.response || (
                       <span className="text-red-400 italic">
-                        Error: {comp.model1.error}
+                        Error: {resp1.error}
                       </span>
                     )}
                   </p>
-                  <GradeDisplay grade={comp.model1.grade} color="blue" />
+                  <GradeDisplay grade={resp1.grade} color="blue" />
                 </div>
 
                 {/* Model 2 */}
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-sm font-medium text-[#4CAF79]">{data.model2.name}</h3>
+                    <h3 className="text-sm font-medium text-[#4CAF79]">{model2.name}</h3>
                     <div className="flex gap-2">
                       <span className="bg-[#4CAF79]/15 text-[#4CAF79] text-xs px-2 py-1 rounded-md">
-                        {Math.round(comp.model2.latency_ms)}ms
+                        {Math.round(resp2.latency_ms)}ms
                       </span>
                       <span className="bg-white/[0.06] text-gray-400 text-xs px-2 py-1 rounded-md">
-                        ${comp.model2.cost.toFixed(5)}
+                        ${resp2.cost.toFixed(5)}
                       </span>
                     </div>
                   </div>
                   <p className="text-gray-300 text-sm leading-relaxed mb-4">
-                    {comp.model2.response || (
+                    {resp2.response || (
                       <span className="text-red-400 italic">
-                        Error: {comp.model2.error}
+                        Error: {resp2.error}
                       </span>
                     )}
                   </p>
-                  <GradeDisplay grade={comp.model2.grade} color="green" />
+                  <GradeDisplay grade={resp2.grade} color="green" />
                 </div>
               </div>
 
               {/* Winner indicator */}
               <div className="px-6 py-3 text-center text-sm border-t border-white/[0.08] bg-[#0C0C0D]/50">
-                {comp.model1.grade.average > comp.model2.grade.average ? (
+                {resp1.grade.average > resp2.grade.average ? (
                   <span className="text-[#5E6AD2] text-xs font-medium">
-                    ✓ {data.model1.name} scored higher (
-                    {comp.model1.grade.average.toFixed(2)} vs{" "}
-                    {comp.model2.grade.average.toFixed(2)})
+                    ✓ {model1.name} scored higher (
+                    {resp1.grade.average.toFixed(2)} vs{" "}
+                    {resp2.grade.average.toFixed(2)})
                   </span>
-                ) : comp.model2.grade.average > comp.model1.grade.average ? (
+                ) : resp2.grade.average > resp1.grade.average ? (
                   <span className="text-[#4CAF79] text-xs font-medium">
-                    ✓ {data.model2.name} scored higher (
-                    {comp.model2.grade.average.toFixed(2)} vs{" "}
-                    {comp.model1.grade.average.toFixed(2)})
+                    ✓ {model2.name} scored higher (
+                    {resp2.grade.average.toFixed(2)} vs{" "}
+                    {resp1.grade.average.toFixed(2)})
                   </span>
                 ) : (
                   <span className="text-gray-500 text-xs font-medium">
-                    Tie ({comp.model1.grade.average.toFixed(2)})
+                    Tie ({resp1.grade.average.toFixed(2)})
                   </span>
                 )}
               </div>
             </div>
-          ))}
+          )})}
         </div>
+        )}
+
+        {/* Info about viewing more comparisons */}
+        {data && (
+          <div className="mt-6 p-4 bg-[#141517] rounded-lg border border-white/[0.08]">
+            <p className="text-sm text-gray-400">
+              <span className="text-[#5E6AD2]">Tip:</span> Use the{" "}
+              <a href="/compare" className="text-[#5E6AD2] hover:underline">Compare</a>{" "}
+              page to dynamically select any two models from the {data.metadata.num_models} evaluated models.
+            </p>
+          </div>
         )}
       </main>
     </div>

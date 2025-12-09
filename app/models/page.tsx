@@ -1,6 +1,7 @@
 import { promises as fs } from "fs";
 import path from "path";
 import Link from "next/link";
+import { Navigation, PageHeader } from "../components/Navigation";
 
 // Unified JSON structure - flat format from sample
 interface UnifiedModelData {
@@ -201,46 +202,14 @@ export default async function ModelsPage() {
 
   return (
     <div className="min-h-screen bg-[#0C0C0D]">
-      {/* Navigation */}
-      <nav className="sticky top-0 z-50 bg-[#0C0C0D]/80 backdrop-blur-xl border-b border-white/[0.08]">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex items-center justify-between h-14">
-            <div className="flex items-center gap-8">
-              <Link href="/" className="flex items-center gap-2 text-white font-semibold">
-                <svg className="w-5 h-5 text-[#5E6AD2]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                </svg>
-                LLM Analysis
-              </Link>
-              <div className="flex items-center gap-1">
-                <Link href="/" className="px-3 py-1.5 text-sm text-gray-400 hover:text-white hover:bg-white/[0.06] rounded-md transition-colors">
-                  Overview
-                </Link>
-                <Link href="/models" className="px-3 py-1.5 text-sm text-white bg-white/[0.08] rounded-md">
-                  All Models
-                </Link>
-                <Link href="/compare" className="px-3 py-1.5 text-sm text-gray-400 hover:text-white hover:bg-white/[0.06] rounded-md transition-colors">
-                  Compare
-                </Link>
-                <Link href="/details" className="px-3 py-1.5 text-sm text-gray-400 hover:text-white hover:bg-white/[0.06] rounded-md transition-colors">
-                  Details
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Navigation currentPath="/models" />
 
       <main className="max-w-7xl mx-auto px-6 py-8">
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-2xl font-semibold text-white mb-2">
-            Model Leaderboard
-          </h1>
-          <p className="text-gray-500 text-sm">
-            All evaluated models ranked by average quality score
-          </p>
-        </div>
+        <PageHeader
+          title="Model Leaderboard"
+          description="All evaluated models ranked by average quality score"
+          badge="Rankings"
+        />
 
         {models.length === 0 ? (
           <div className="text-center py-12 bg-[#141517] rounded-lg border border-white/[0.08]">

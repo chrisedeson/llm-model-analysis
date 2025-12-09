@@ -1,952 +1,952 @@
 {
-    "metadata": {
-        "generated_at": "2024-12-09T14:30:00.000000",
-        "num_questions": 10,
-        "num_models": 13,
-        "grader_model": "gpt-5.1",
-        "grader_reasoning_effort": "high",
-        "model_keys": [
-            "gpt-4o-mini",
-            "gpt-5-mini_minimal_low",
-            "gpt-5-mini_minimal_medium",
-            "gpt-5-mini_minimal_high",
-            "gpt-5-mini_low_low",
-            "gpt-5-mini_low_medium",
-            "gpt-5-mini_low_high",
-            "gpt-5-nano_minimal_low",
-            "gpt-5-nano_minimal_medium",
-            "gpt-5-nano_minimal_high",
-            "gpt-5-nano_low_low",
-            "gpt-5-nano_low_medium",
-            "gpt-5-nano_low_high"
-        ]
+  "metadata": {
+    "generated_at": "2024-12-09T14:30:00.000000",
+    "num_questions": 10,
+    "num_models": 13,
+    "grader_model": "gpt-5.1",
+    "grader_reasoning_effort": "high",
+    "model_keys": [
+      "gpt-4o-mini",
+      "gpt-5-mini_minimal_low",
+      "gpt-5-mini_minimal_medium",
+      "gpt-5-mini_minimal_high",
+      "gpt-5-mini_low_low",
+      "gpt-5-mini_low_medium",
+      "gpt-5-mini_low_high",
+      "gpt-5-nano_minimal_low",
+      "gpt-5-nano_minimal_medium",
+      "gpt-5-nano_minimal_high",
+      "gpt-5-nano_low_low",
+      "gpt-5-nano_low_medium",
+      "gpt-5-nano_low_high"
+    ]
+  },
+  "models": {
+    "gpt-4o-mini": {
+      "name": "GPT-4o-mini",
+      "model_id": "gpt-4o-mini",
+      "api_type": "chat_completions",
+      "reasoning_effort": null,
+      "verbosity": null,
+      "successful_responses": 10,
+      "total_responses": 10,
+      "avg_score": 4.12,
+      "scores": {
+        "on_topic": 4.5,
+        "grounded": 3.9,
+        "no_contradiction": 4.2,
+        "understandability": 4.3,
+        "overall": 3.7
+      },
+      "avg_latency_ms": 892.3,
+      "p95_latency_ms": 1245.0,
+      "usage": {
+        "total_input_tokens": 2850,
+        "total_output_tokens": 1625,
+        "total_tokens": 4475,
+        "avg_input_tokens": 285.0,
+        "avg_output_tokens": 162.5
+      },
+      "costs": {
+        "input_cost": 0.000428,
+        "output_cost": 0.000975,
+        "total_cost": 0.001403,
+        "cost_per_query": 0.00014028,
+        "cost_per_1k": 0.1403,
+        "cost_per_10k": 1.4028
+      },
+      "pricing": {
+        "input_price_per_million": 0.15,
+        "output_price_per_million": 0.60
+      }
     },
-    "models": {
+    "gpt-5-mini_minimal_low": {
+      "name": "GPT-5-mini (minimal, low)",
+      "model_id": "gpt-5-mini_minimal_low",
+      "api_type": "responses",
+      "reasoning_effort": "minimal",
+      "verbosity": "low",
+      "successful_responses": 10,
+      "total_responses": 10,
+      "avg_score": 4.28,
+      "scores": {
+        "on_topic": 4.6,
+        "grounded": 4.1,
+        "no_contradiction": 4.4,
+        "understandability": 4.3,
+        "overall": 4.0
+      },
+      "avg_latency_ms": 654.2,
+      "p95_latency_ms": 890.0,
+      "usage": {
+        "total_input_tokens": 2900,
+        "total_output_tokens": 980,
+        "total_tokens": 3880,
+        "avg_input_tokens": 290.0,
+        "avg_output_tokens": 98.0
+      },
+      "costs": {
+        "input_cost": 0.000725,
+        "output_cost": 0.00196,
+        "total_cost": 0.002685,
+        "cost_per_query": 0.00026850,
+        "cost_per_1k": 0.2685,
+        "cost_per_10k": 2.685
+      },
+      "pricing": {
+        "input_price_per_million": 0.25,
+        "output_price_per_million": 2.0
+      }
+    },
+    "gpt-5-mini_minimal_medium": {
+      "name": "GPT-5-mini (minimal, medium)",
+      "model_id": "gpt-5-mini_minimal_medium",
+      "api_type": "responses",
+      "reasoning_effort": "minimal",
+      "verbosity": "medium",
+      "successful_responses": 10,
+      "total_responses": 10,
+      "avg_score": 4.35,
+      "scores": {
+        "on_topic": 4.7,
+        "grounded": 4.2,
+        "no_contradiction": 4.4,
+        "understandability": 4.4,
+        "overall": 4.1
+      },
+      "avg_latency_ms": 712.5,
+      "p95_latency_ms": 950.0,
+      "usage": {
+        "total_input_tokens": 2920,
+        "total_output_tokens": 1450,
+        "total_tokens": 4370,
+        "avg_input_tokens": 292.0,
+        "avg_output_tokens": 145.0
+      },
+      "costs": {
+        "input_cost": 0.00073,
+        "output_cost": 0.0029,
+        "total_cost": 0.00363,
+        "cost_per_query": 0.000363,
+        "cost_per_1k": 0.363,
+        "cost_per_10k": 3.63
+      },
+      "pricing": {
+        "input_price_per_million": 0.25,
+        "output_price_per_million": 2.0
+      }
+    },
+    "gpt-5-mini_minimal_high": {
+      "name": "GPT-5-mini (minimal, high)",
+      "model_id": "gpt-5-mini_minimal_high",
+      "api_type": "responses",
+      "reasoning_effort": "minimal",
+      "verbosity": "high",
+      "successful_responses": 10,
+      "total_responses": 10,
+      "avg_score": 4.42,
+      "scores": {
+        "on_topic": 4.8,
+        "grounded": 4.3,
+        "no_contradiction": 4.5,
+        "understandability": 4.5,
+        "overall": 4.0
+      },
+      "avg_latency_ms": 845.0,
+      "p95_latency_ms": 1100.0,
+      "usage": {
+        "total_input_tokens": 2940,
+        "total_output_tokens": 2100,
+        "total_tokens": 5040,
+        "avg_input_tokens": 294.0,
+        "avg_output_tokens": 210.0
+      },
+      "costs": {
+        "input_cost": 0.000735,
+        "output_cost": 0.0042,
+        "total_cost": 0.004935,
+        "cost_per_query": 0.0004935,
+        "cost_per_1k": 0.4935,
+        "cost_per_10k": 4.935
+      },
+      "pricing": {
+        "input_price_per_million": 0.25,
+        "output_price_per_million": 2.0
+      }
+    },
+    "gpt-5-mini_low_low": {
+      "name": "GPT-5-mini (low, low)",
+      "model_id": "gpt-5-mini_low_low",
+      "api_type": "responses",
+      "reasoning_effort": "low",
+      "verbosity": "low",
+      "successful_responses": 10,
+      "total_responses": 10,
+      "avg_score": 4.45,
+      "scores": {
+        "on_topic": 4.7,
+        "grounded": 4.4,
+        "no_contradiction": 4.5,
+        "understandability": 4.4,
+        "overall": 4.3
+      },
+      "avg_latency_ms": 780.0,
+      "p95_latency_ms": 1020.0,
+      "usage": {
+        "total_input_tokens": 2910,
+        "total_output_tokens": 1100,
+        "total_tokens": 4010,
+        "avg_input_tokens": 291.0,
+        "avg_output_tokens": 110.0
+      },
+      "costs": {
+        "input_cost": 0.000728,
+        "output_cost": 0.0022,
+        "total_cost": 0.002928,
+        "cost_per_query": 0.0002928,
+        "cost_per_1k": 0.2928,
+        "cost_per_10k": 2.928
+      },
+      "pricing": {
+        "input_price_per_million": 0.25,
+        "output_price_per_million": 2.0
+      }
+    },
+    "gpt-5-mini_low_medium": {
+      "name": "GPT-5-mini (low, medium)",
+      "model_id": "gpt-5-mini_low_medium",
+      "api_type": "responses",
+      "reasoning_effort": "low",
+      "verbosity": "medium",
+      "successful_responses": 10,
+      "total_responses": 10,
+      "avg_score": 4.52,
+      "scores": {
+        "on_topic": 4.8,
+        "grounded": 4.5,
+        "no_contradiction": 4.6,
+        "understandability": 4.5,
+        "overall": 4.2
+      },
+      "avg_latency_ms": 865.0,
+      "p95_latency_ms": 1150.0,
+      "usage": {
+        "total_input_tokens": 2930,
+        "total_output_tokens": 1580,
+        "total_tokens": 4510,
+        "avg_input_tokens": 293.0,
+        "avg_output_tokens": 158.0
+      },
+      "costs": {
+        "input_cost": 0.000733,
+        "output_cost": 0.00316,
+        "total_cost": 0.003893,
+        "cost_per_query": 0.0003893,
+        "cost_per_1k": 0.3893,
+        "cost_per_10k": 3.893
+      },
+      "pricing": {
+        "input_price_per_million": 0.25,
+        "output_price_per_million": 2.0
+      }
+    },
+    "gpt-5-mini_low_high": {
+      "name": "GPT-5-mini (low, high)",
+      "model_id": "gpt-5-mini_low_high",
+      "api_type": "responses",
+      "reasoning_effort": "low",
+      "verbosity": "high",
+      "successful_responses": 10,
+      "total_responses": 10,
+      "avg_score": 4.58,
+      "scores": {
+        "on_topic": 4.9,
+        "grounded": 4.5,
+        "no_contradiction": 4.6,
+        "understandability": 4.6,
+        "overall": 4.3
+      },
+      "avg_latency_ms": 985.0,
+      "p95_latency_ms": 1280.0,
+      "usage": {
+        "total_input_tokens": 2950,
+        "total_output_tokens": 2350,
+        "total_tokens": 5300,
+        "avg_input_tokens": 295.0,
+        "avg_output_tokens": 235.0
+      },
+      "costs": {
+        "input_cost": 0.000738,
+        "output_cost": 0.0047,
+        "total_cost": 0.005438,
+        "cost_per_query": 0.0005438,
+        "cost_per_1k": 0.5438,
+        "cost_per_10k": 5.438
+      },
+      "pricing": {
+        "input_price_per_million": 0.25,
+        "output_price_per_million": 2.0
+      }
+    },
+    "gpt-5-nano_minimal_low": {
+      "name": "GPT-5-nano (minimal, low)",
+      "model_id": "gpt-5-nano_minimal_low",
+      "api_type": "responses",
+      "reasoning_effort": "minimal",
+      "verbosity": "low",
+      "successful_responses": 10,
+      "total_responses": 10,
+      "avg_score": 3.85,
+      "scores": {
+        "on_topic": 4.2,
+        "grounded": 3.6,
+        "no_contradiction": 4.0,
+        "understandability": 3.9,
+        "overall": 3.6
+      },
+      "avg_latency_ms": 420.0,
+      "p95_latency_ms": 580.0,
+      "usage": {
+        "total_input_tokens": 2800,
+        "total_output_tokens": 850,
+        "total_tokens": 3650,
+        "avg_input_tokens": 280.0,
+        "avg_output_tokens": 85.0
+      },
+      "costs": {
+        "input_cost": 0.00028,
+        "output_cost": 0.00034,
+        "total_cost": 0.00062,
+        "cost_per_query": 0.000062,
+        "cost_per_1k": 0.062,
+        "cost_per_10k": 0.62
+      },
+      "pricing": {
+        "input_price_per_million": 0.10,
+        "output_price_per_million": 0.40
+      }
+    },
+    "gpt-5-nano_minimal_medium": {
+      "name": "GPT-5-nano (minimal, medium)",
+      "model_id": "gpt-5-nano_minimal_medium",
+      "api_type": "responses",
+      "reasoning_effort": "minimal",
+      "verbosity": "medium",
+      "successful_responses": 10,
+      "total_responses": 10,
+      "avg_score": 3.92,
+      "scores": {
+        "on_topic": 4.3,
+        "grounded": 3.7,
+        "no_contradiction": 4.1,
+        "understandability": 4.0,
+        "overall": 3.5
+      },
+      "avg_latency_ms": 485.0,
+      "p95_latency_ms": 650.0,
+      "usage": {
+        "total_input_tokens": 2820,
+        "total_output_tokens": 1200,
+        "total_tokens": 4020,
+        "avg_input_tokens": 282.0,
+        "avg_output_tokens": 120.0
+      },
+      "costs": {
+        "input_cost": 0.000282,
+        "output_cost": 0.00048,
+        "total_cost": 0.000762,
+        "cost_per_query": 0.0000762,
+        "cost_per_1k": 0.0762,
+        "cost_per_10k": 0.762
+      },
+      "pricing": {
+        "input_price_per_million": 0.10,
+        "output_price_per_million": 0.40
+      }
+    },
+    "gpt-5-nano_minimal_high": {
+      "name": "GPT-5-nano (minimal, high)",
+      "model_id": "gpt-5-nano_minimal_high",
+      "api_type": "responses",
+      "reasoning_effort": "minimal",
+      "verbosity": "high",
+      "successful_responses": 10,
+      "total_responses": 10,
+      "avg_score": 3.98,
+      "scores": {
+        "on_topic": 4.4,
+        "grounded": 3.8,
+        "no_contradiction": 4.1,
+        "understandability": 4.1,
+        "overall": 3.5
+      },
+      "avg_latency_ms": 560.0,
+      "p95_latency_ms": 720.0,
+      "usage": {
+        "total_input_tokens": 2840,
+        "total_output_tokens": 1750,
+        "total_tokens": 4590,
+        "avg_input_tokens": 284.0,
+        "avg_output_tokens": 175.0
+      },
+      "costs": {
+        "input_cost": 0.000284,
+        "output_cost": 0.0007,
+        "total_cost": 0.000984,
+        "cost_per_query": 0.0000984,
+        "cost_per_1k": 0.0984,
+        "cost_per_10k": 0.984
+      },
+      "pricing": {
+        "input_price_per_million": 0.10,
+        "output_price_per_million": 0.40
+      }
+    },
+    "gpt-5-nano_low_low": {
+      "name": "GPT-5-nano (low, low)",
+      "model_id": "gpt-5-nano_low_low",
+      "api_type": "responses",
+      "reasoning_effort": "low",
+      "verbosity": "low",
+      "successful_responses": 10,
+      "total_responses": 10,
+      "avg_score": 4.02,
+      "scores": {
+        "on_topic": 4.4,
+        "grounded": 3.9,
+        "no_contradiction": 4.2,
+        "understandability": 4.0,
+        "overall": 3.6
+      },
+      "avg_latency_ms": 510.0,
+      "p95_latency_ms": 680.0,
+      "usage": {
+        "total_input_tokens": 2810,
+        "total_output_tokens": 920,
+        "total_tokens": 3730,
+        "avg_input_tokens": 281.0,
+        "avg_output_tokens": 92.0
+      },
+      "costs": {
+        "input_cost": 0.000281,
+        "output_cost": 0.000368,
+        "total_cost": 0.000649,
+        "cost_per_query": 0.0000649,
+        "cost_per_1k": 0.0649,
+        "cost_per_10k": 0.649
+      },
+      "pricing": {
+        "input_price_per_million": 0.10,
+        "output_price_per_million": 0.40
+      }
+    },
+    "gpt-5-nano_low_medium": {
+      "name": "GPT-5-nano (low, medium)",
+      "model_id": "gpt-5-nano_low_medium",
+      "api_type": "responses",
+      "reasoning_effort": "low",
+      "verbosity": "medium",
+      "successful_responses": 10,
+      "total_responses": 10,
+      "avg_score": 4.08,
+      "scores": {
+        "on_topic": 4.5,
+        "grounded": 4.0,
+        "no_contradiction": 4.2,
+        "understandability": 4.1,
+        "overall": 3.6
+      },
+      "avg_latency_ms": 575.0,
+      "p95_latency_ms": 750.0,
+      "usage": {
+        "total_input_tokens": 2830,
+        "total_output_tokens": 1320,
+        "total_tokens": 4150,
+        "avg_input_tokens": 283.0,
+        "avg_output_tokens": 132.0
+      },
+      "costs": {
+        "input_cost": 0.000283,
+        "output_cost": 0.000528,
+        "total_cost": 0.000811,
+        "cost_per_query": 0.0000811,
+        "cost_per_1k": 0.0811,
+        "cost_per_10k": 0.811
+      },
+      "pricing": {
+        "input_price_per_million": 0.10,
+        "output_price_per_million": 0.40
+      }
+    },
+    "gpt-5-nano_low_high": {
+      "name": "GPT-5-nano (low, high)",
+      "model_id": "gpt-5-nano_low_high",
+      "api_type": "responses",
+      "reasoning_effort": "low",
+      "verbosity": "high",
+      "successful_responses": 10,
+      "total_responses": 10,
+      "avg_score": 4.15,
+      "scores": {
+        "on_topic": 4.6,
+        "grounded": 4.0,
+        "no_contradiction": 4.3,
+        "understandability": 4.2,
+        "overall": 3.7
+      },
+      "avg_latency_ms": 640.0,
+      "p95_latency_ms": 820.0,
+      "usage": {
+        "total_input_tokens": 2860,
+        "total_output_tokens": 1850,
+        "total_tokens": 4710,
+        "avg_input_tokens": 286.0,
+        "avg_output_tokens": 185.0
+      },
+      "costs": {
+        "input_cost": 0.000286,
+        "output_cost": 0.00074,
+        "total_cost": 0.001026,
+        "cost_per_query": 0.0001026,
+        "cost_per_1k": 0.1026,
+        "cost_per_10k": 1.026
+      },
+      "pricing": {
+        "input_price_per_million": 0.10,
+        "output_price_per_million": 0.40
+      }
+    }
+  },
+  "questions": [
+    {
+      "id": 1,
+      "question": "What is the tuition cost for BYU-Pathway?",
+      "context": "BYU-Pathway Worldwide offers affordable education with tuition starting at $85 per credit for PathwayConnect and varying rates for degree programs.",
+      "responses": {
         "gpt-4o-mini": {
-            "name": "GPT-4o-mini",
-            "model_id": "gpt-4o-mini",
-            "api_type": "chat_completions",
-            "reasoning_effort": null,
-            "verbosity": null,
-            "successful_responses": 10,
-            "total_responses": 10,
-            "avg_score": 4.12,
-            "scores": {
-                "on_topic": 4.5,
-                "grounded": 3.9,
-                "no_contradiction": 4.2,
-                "understandability": 4.3,
-                "overall": 3.7
-            },
-            "avg_latency_ms": 892.3,
-            "p95_latency_ms": 1245.0,
-            "usage": {
-                "total_input_tokens": 2850,
-                "total_output_tokens": 1625,
-                "total_tokens": 4475,
-                "avg_input_tokens": 285.0,
-                "avg_output_tokens": 162.5
-            },
-            "costs": {
-                "input_cost": 0.000428,
-                "output_cost": 0.000975,
-                "total_cost": 0.001403,
-                "cost_per_query": 0.00014028,
-                "cost_per_1k": 0.1403,
-                "cost_per_10k": 1.4028
-            },
-            "pricing": {
-                "input_price_per_million": 0.15,
-                "output_price_per_million": 0.60
-            }
+          "response": "BYU-Pathway tuition starts at $85 per credit for PathwayConnect courses. Degree program rates vary depending on the specific program.",
+          "latency_ms": 856,
+          "input_tokens": 285,
+          "output_tokens": 142,
+          "cost": 0.000128,
+          "grade": {
+            "on_topic": 5,
+            "grounded": 4,
+            "no_contradiction": 5,
+            "understandability": 5,
+            "overall": 4,
+            "average": 4.6
+          },
+          "error": null
         },
         "gpt-5-mini_minimal_low": {
-            "name": "GPT-5-mini (minimal, low)",
-            "model_id": "gpt-5-mini",
-            "api_type": "responses",
-            "reasoning_effort": "minimal",
-            "verbosity": "low",
-            "successful_responses": 10,
-            "total_responses": 10,
-            "avg_score": 4.28,
-            "scores": {
-                "on_topic": 4.6,
-                "grounded": 4.1,
-                "no_contradiction": 4.4,
-                "understandability": 4.3,
-                "overall": 4.0
-            },
-            "avg_latency_ms": 654.2,
-            "p95_latency_ms": 890.0,
-            "usage": {
-                "total_input_tokens": 2900,
-                "total_output_tokens": 980,
-                "total_tokens": 3880,
-                "avg_input_tokens": 290.0,
-                "avg_output_tokens": 98.0
-            },
-            "costs": {
-                "input_cost": 0.000725,
-                "output_cost": 0.00196,
-                "total_cost": 0.002685,
-                "cost_per_query": 0.00026850,
-                "cost_per_1k": 0.2685,
-                "cost_per_10k": 2.685
-            },
-            "pricing": {
-                "input_price_per_million": 0.25,
-                "output_price_per_million": 2.0
-            }
+          "response": "Tuition is $85/credit for PathwayConnect.",
+          "latency_ms": 612,
+          "input_tokens": 290,
+          "output_tokens": 45,
+          "cost": 0.000163,
+          "grade": {
+            "on_topic": 5,
+            "grounded": 5,
+            "no_contradiction": 5,
+            "understandability": 5,
+            "overall": 4,
+            "average": 4.8
+          },
+          "error": null
         },
         "gpt-5-mini_minimal_medium": {
-            "name": "GPT-5-mini (minimal, medium)",
-            "model_id": "gpt-5-mini",
-            "api_type": "responses",
-            "reasoning_effort": "minimal",
-            "verbosity": "medium",
-            "successful_responses": 10,
-            "total_responses": 10,
-            "avg_score": 4.35,
-            "scores": {
-                "on_topic": 4.7,
-                "grounded": 4.2,
-                "no_contradiction": 4.4,
-                "understandability": 4.4,
-                "overall": 4.1
-            },
-            "avg_latency_ms": 712.5,
-            "p95_latency_ms": 950.0,
-            "usage": {
-                "total_input_tokens": 2920,
-                "total_output_tokens": 1450,
-                "total_tokens": 4370,
-                "avg_input_tokens": 292.0,
-                "avg_output_tokens": 145.0
-            },
-            "costs": {
-                "input_cost": 0.00073,
-                "output_cost": 0.0029,
-                "total_cost": 0.00363,
-                "cost_per_query": 0.000363,
-                "cost_per_1k": 0.363,
-                "cost_per_10k": 3.63
-            },
-            "pricing": {
-                "input_price_per_million": 0.25,
-                "output_price_per_million": 2.0
-            }
+          "response": "BYU-Pathway tuition starts at $85 per credit for PathwayConnect. Degree program rates vary by program.",
+          "latency_ms": 698,
+          "input_tokens": 292,
+          "output_tokens": 85,
+          "cost": 0.000243,
+          "grade": {
+            "on_topic": 5,
+            "grounded": 5,
+            "no_contradiction": 5,
+            "understandability": 5,
+            "overall": 4,
+            "average": 4.8
+          },
+          "error": null
         },
         "gpt-5-mini_minimal_high": {
-            "name": "GPT-5-mini (minimal, high)",
-            "model_id": "gpt-5-mini",
-            "api_type": "responses",
-            "reasoning_effort": "minimal",
-            "verbosity": "high",
-            "successful_responses": 10,
-            "total_responses": 10,
-            "avg_score": 4.42,
-            "scores": {
-                "on_topic": 4.8,
-                "grounded": 4.3,
-                "no_contradiction": 4.5,
-                "understandability": 4.5,
-                "overall": 4.0
-            },
-            "avg_latency_ms": 845.0,
-            "p95_latency_ms": 1100.0,
-            "usage": {
-                "total_input_tokens": 2940,
-                "total_output_tokens": 2100,
-                "total_tokens": 5040,
-                "avg_input_tokens": 294.0,
-                "avg_output_tokens": 210.0
-            },
-            "costs": {
-                "input_cost": 0.000735,
-                "output_cost": 0.0042,
-                "total_cost": 0.004935,
-                "cost_per_query": 0.0004935,
-                "cost_per_1k": 0.4935,
-                "cost_per_10k": 4.935
-            },
-            "pricing": {
-                "input_price_per_million": 0.25,
-                "output_price_per_million": 2.0
-            }
+          "response": "BYU-Pathway Worldwide offers affordable education options. For PathwayConnect courses, tuition is $85 per credit hour. For degree programs, the tuition rates vary depending on the specific program you choose. This makes BYU-Pathway one of the most affordable higher education options available.",
+          "latency_ms": 824,
+          "input_tokens": 294,
+          "output_tokens": 165,
+          "cost": 0.000404,
+          "grade": {
+            "on_topic": 5,
+            "grounded": 4,
+            "no_contradiction": 5,
+            "understandability": 5,
+            "overall": 4,
+            "average": 4.6
+          },
+          "error": null
         },
         "gpt-5-mini_low_low": {
-            "name": "GPT-5-mini (low, low)",
-            "model_id": "gpt-5-mini",
-            "api_type": "responses",
-            "reasoning_effort": "low",
-            "verbosity": "low",
-            "successful_responses": 10,
-            "total_responses": 10,
-            "avg_score": 4.45,
-            "scores": {
-                "on_topic": 4.7,
-                "grounded": 4.4,
-                "no_contradiction": 4.5,
-                "understandability": 4.4,
-                "overall": 4.3
-            },
-            "avg_latency_ms": 780.0,
-            "p95_latency_ms": 1020.0,
-            "usage": {
-                "total_input_tokens": 2910,
-                "total_output_tokens": 1100,
-                "total_tokens": 4010,
-                "avg_input_tokens": 291.0,
-                "avg_output_tokens": 110.0
-            },
-            "costs": {
-                "input_cost": 0.000728,
-                "output_cost": 0.0022,
-                "total_cost": 0.002928,
-                "cost_per_query": 0.0002928,
-                "cost_per_1k": 0.2928,
-                "cost_per_10k": 2.928
-            },
-            "pricing": {
-                "input_price_per_million": 0.25,
-                "output_price_per_million": 2.0
-            }
+          "response": "$85/credit for PathwayConnect; varies for degrees.",
+          "latency_ms": 745,
+          "input_tokens": 291,
+          "output_tokens": 52,
+          "cost": 0.000177,
+          "grade": {
+            "on_topic": 5,
+            "grounded": 5,
+            "no_contradiction": 5,
+            "understandability": 4,
+            "overall": 4,
+            "average": 4.6
+          },
+          "error": null
         },
         "gpt-5-mini_low_medium": {
-            "name": "GPT-5-mini (low, medium)",
-            "model_id": "gpt-5-mini",
-            "api_type": "responses",
-            "reasoning_effort": "low",
-            "verbosity": "medium",
-            "successful_responses": 10,
-            "total_responses": 10,
-            "avg_score": 4.52,
-            "scores": {
-                "on_topic": 4.8,
-                "grounded": 4.5,
-                "no_contradiction": 4.6,
-                "understandability": 4.5,
-                "overall": 4.2
-            },
-            "avg_latency_ms": 865.0,
-            "p95_latency_ms": 1150.0,
-            "usage": {
-                "total_input_tokens": 2930,
-                "total_output_tokens": 1580,
-                "total_tokens": 4510,
-                "avg_input_tokens": 293.0,
-                "avg_output_tokens": 158.0
-            },
-            "costs": {
-                "input_cost": 0.000733,
-                "output_cost": 0.00316,
-                "total_cost": 0.003893,
-                "cost_per_query": 0.0003893,
-                "cost_per_1k": 0.3893,
-                "cost_per_10k": 3.893
-            },
-            "pricing": {
-                "input_price_per_million": 0.25,
-                "output_price_per_million": 2.0
-            }
+          "response": "BYU-Pathway tuition is very affordable at $85 per credit for PathwayConnect courses. Degree programs have varying rates depending on your chosen field of study.",
+          "latency_ms": 842,
+          "input_tokens": 293,
+          "output_tokens": 112,
+          "cost": 0.000297,
+          "grade": {
+            "on_topic": 5,
+            "grounded": 5,
+            "no_contradiction": 5,
+            "understandability": 5,
+            "overall": 5,
+            "average": 5.0
+          },
+          "error": null
         },
         "gpt-5-mini_low_high": {
-            "name": "GPT-5-mini (low, high)",
-            "model_id": "gpt-5-mini",
-            "api_type": "responses",
-            "reasoning_effort": "low",
-            "verbosity": "high",
-            "successful_responses": 10,
-            "total_responses": 10,
-            "avg_score": 4.58,
-            "scores": {
-                "on_topic": 4.9,
-                "grounded": 4.5,
-                "no_contradiction": 4.6,
-                "understandability": 4.6,
-                "overall": 4.3
-            },
-            "avg_latency_ms": 985.0,
-            "p95_latency_ms": 1280.0,
-            "usage": {
-                "total_input_tokens": 2950,
-                "total_output_tokens": 2350,
-                "total_tokens": 5300,
-                "avg_input_tokens": 295.0,
-                "avg_output_tokens": 235.0
-            },
-            "costs": {
-                "input_cost": 0.000738,
-                "output_cost": 0.0047,
-                "total_cost": 0.005438,
-                "cost_per_query": 0.0005438,
-                "cost_per_1k": 0.5438,
-                "cost_per_10k": 5.438
-            },
-            "pricing": {
-                "input_price_per_million": 0.25,
-                "output_price_per_million": 2.0
-            }
+          "response": "BYU-Pathway Worldwide is known for its affordable education model. The tuition structure is designed to be accessible to students worldwide. For PathwayConnect, the introductory program, tuition is just $85 per credit hour. This makes it one of the most affordable options for starting your higher education journey. For degree programs, tuition rates vary based on the specific program and partnership institution.",
+          "latency_ms": 965,
+          "input_tokens": 295,
+          "output_tokens": 198,
+          "cost": 0.000470,
+          "grade": {
+            "on_topic": 5,
+            "grounded": 4,
+            "no_contradiction": 5,
+            "understandability": 5,
+            "overall": 5,
+            "average": 4.8
+          },
+          "error": null
         },
         "gpt-5-nano_minimal_low": {
-            "name": "GPT-5-nano (minimal, low)",
-            "model_id": "gpt-5-nano",
-            "api_type": "responses",
-            "reasoning_effort": "minimal",
-            "verbosity": "low",
-            "successful_responses": 10,
-            "total_responses": 10,
-            "avg_score": 3.85,
-            "scores": {
-                "on_topic": 4.2,
-                "grounded": 3.6,
-                "no_contradiction": 4.0,
-                "understandability": 3.9,
-                "overall": 3.6
-            },
-            "avg_latency_ms": 420.0,
-            "p95_latency_ms": 580.0,
-            "usage": {
-                "total_input_tokens": 2800,
-                "total_output_tokens": 850,
-                "total_tokens": 3650,
-                "avg_input_tokens": 280.0,
-                "avg_output_tokens": 85.0
-            },
-            "costs": {
-                "input_cost": 0.00028,
-                "output_cost": 0.00034,
-                "total_cost": 0.00062,
-                "cost_per_query": 0.000062,
-                "cost_per_1k": 0.062,
-                "cost_per_10k": 0.62
-            },
-            "pricing": {
-                "input_price_per_million": 0.10,
-                "output_price_per_million": 0.40
-            }
+          "response": "$85/credit PathwayConnect.",
+          "latency_ms": 398,
+          "input_tokens": 280,
+          "output_tokens": 32,
+          "cost": 0.000041,
+          "grade": {
+            "on_topic": 4,
+            "grounded": 4,
+            "no_contradiction": 5,
+            "understandability": 3,
+            "overall": 3,
+            "average": 3.8
+          },
+          "error": null
         },
         "gpt-5-nano_minimal_medium": {
-            "name": "GPT-5-nano (minimal, medium)",
-            "model_id": "gpt-5-nano",
-            "api_type": "responses",
-            "reasoning_effort": "minimal",
-            "verbosity": "medium",
-            "successful_responses": 10,
-            "total_responses": 10,
-            "avg_score": 3.92,
-            "scores": {
-                "on_topic": 4.3,
-                "grounded": 3.7,
-                "no_contradiction": 4.1,
-                "understandability": 4.0,
-                "overall": 3.5
-            },
-            "avg_latency_ms": 485.0,
-            "p95_latency_ms": 650.0,
-            "usage": {
-                "total_input_tokens": 2820,
-                "total_output_tokens": 1200,
-                "total_tokens": 4020,
-                "avg_input_tokens": 282.0,
-                "avg_output_tokens": 120.0
-            },
-            "costs": {
-                "input_cost": 0.000282,
-                "output_cost": 0.00048,
-                "total_cost": 0.000762,
-                "cost_per_query": 0.0000762,
-                "cost_per_1k": 0.0762,
-                "cost_per_10k": 0.762
-            },
-            "pricing": {
-                "input_price_per_million": 0.10,
-                "output_price_per_million": 0.40
-            }
+          "response": "Tuition for PathwayConnect is $85 per credit. Degree programs have different rates.",
+          "latency_ms": 462,
+          "input_tokens": 282,
+          "output_tokens": 68,
+          "cost": 0.000055,
+          "grade": {
+            "on_topic": 5,
+            "grounded": 4,
+            "no_contradiction": 5,
+            "understandability": 4,
+            "overall": 4,
+            "average": 4.4
+          },
+          "error": null
         },
         "gpt-5-nano_minimal_high": {
-            "name": "GPT-5-nano (minimal, high)",
-            "model_id": "gpt-5-nano",
-            "api_type": "responses",
-            "reasoning_effort": "minimal",
-            "verbosity": "high",
-            "successful_responses": 10,
-            "total_responses": 10,
-            "avg_score": 3.98,
-            "scores": {
-                "on_topic": 4.4,
-                "grounded": 3.8,
-                "no_contradiction": 4.1,
-                "understandability": 4.1,
-                "overall": 3.5
-            },
-            "avg_latency_ms": 560.0,
-            "p95_latency_ms": 720.0,
-            "usage": {
-                "total_input_tokens": 2840,
-                "total_output_tokens": 1750,
-                "total_tokens": 4590,
-                "avg_input_tokens": 284.0,
-                "avg_output_tokens": 175.0
-            },
-            "costs": {
-                "input_cost": 0.000284,
-                "output_cost": 0.0007,
-                "total_cost": 0.000984,
-                "cost_per_query": 0.0000984,
-                "cost_per_1k": 0.0984,
-                "cost_per_10k": 0.984
-            },
-            "pricing": {
-                "input_price_per_million": 0.10,
-                "output_price_per_million": 0.40
-            }
+          "response": "BYU-Pathway offers affordable education. PathwayConnect tuition is $85 per credit. Degree program rates depend on the program you select.",
+          "latency_ms": 538,
+          "input_tokens": 284,
+          "output_tokens": 102,
+          "cost": 0.000069,
+          "grade": {
+            "on_topic": 5,
+            "grounded": 4,
+            "no_contradiction": 5,
+            "understandability": 5,
+            "overall": 4,
+            "average": 4.6
+          },
+          "error": null
         },
         "gpt-5-nano_low_low": {
-            "name": "GPT-5-nano (low, low)",
-            "model_id": "gpt-5-nano",
-            "api_type": "responses",
-            "reasoning_effort": "low",
-            "verbosity": "low",
-            "successful_responses": 10,
-            "total_responses": 10,
-            "avg_score": 4.02,
-            "scores": {
-                "on_topic": 4.4,
-                "grounded": 3.9,
-                "no_contradiction": 4.2,
-                "understandability": 4.0,
-                "overall": 3.6
-            },
-            "avg_latency_ms": 510.0,
-            "p95_latency_ms": 680.0,
-            "usage": {
-                "total_input_tokens": 2810,
-                "total_output_tokens": 920,
-                "total_tokens": 3730,
-                "avg_input_tokens": 281.0,
-                "avg_output_tokens": 92.0
-            },
-            "costs": {
-                "input_cost": 0.000281,
-                "output_cost": 0.000368,
-                "total_cost": 0.000649,
-                "cost_per_query": 0.0000649,
-                "cost_per_1k": 0.0649,
-                "cost_per_10k": 0.649
-            },
-            "pricing": {
-                "input_price_per_million": 0.10,
-                "output_price_per_million": 0.40
-            }
+          "response": "$85/credit for PathwayConnect.",
+          "latency_ms": 485,
+          "input_tokens": 281,
+          "output_tokens": 38,
+          "cost": 0.000043,
+          "grade": {
+            "on_topic": 4,
+            "grounded": 5,
+            "no_contradiction": 5,
+            "understandability": 4,
+            "overall": 4,
+            "average": 4.4
+          },
+          "error": null
         },
         "gpt-5-nano_low_medium": {
-            "name": "GPT-5-nano (low, medium)",
-            "model_id": "gpt-5-nano",
-            "api_type": "responses",
-            "reasoning_effort": "low",
-            "verbosity": "medium",
-            "successful_responses": 10,
-            "total_responses": 10,
-            "avg_score": 4.08,
-            "scores": {
-                "on_topic": 4.5,
-                "grounded": 4.0,
-                "no_contradiction": 4.2,
-                "understandability": 4.1,
-                "overall": 3.6
-            },
-            "avg_latency_ms": 575.0,
-            "p95_latency_ms": 750.0,
-            "usage": {
-                "total_input_tokens": 2830,
-                "total_output_tokens": 1320,
-                "total_tokens": 4150,
-                "avg_input_tokens": 283.0,
-                "avg_output_tokens": 132.0
-            },
-            "costs": {
-                "input_cost": 0.000283,
-                "output_cost": 0.000528,
-                "total_cost": 0.000811,
-                "cost_per_query": 0.0000811,
-                "cost_per_1k": 0.0811,
-                "cost_per_10k": 0.811
-            },
-            "pricing": {
-                "input_price_per_million": 0.10,
-                "output_price_per_million": 0.40
-            }
+          "response": "BYU-Pathway tuition starts at $85 per credit for PathwayConnect. Degree programs have varying rates.",
+          "latency_ms": 552,
+          "input_tokens": 283,
+          "output_tokens": 78,
+          "cost": 0.000059,
+          "grade": {
+            "on_topic": 5,
+            "grounded": 5,
+            "no_contradiction": 5,
+            "understandability": 5,
+            "overall": 4,
+            "average": 4.8
+          },
+          "error": null
         },
         "gpt-5-nano_low_high": {
-            "name": "GPT-5-nano (low, high)",
-            "model_id": "gpt-5-nano",
-            "api_type": "responses",
-            "reasoning_effort": "low",
-            "verbosity": "high",
-            "successful_responses": 10,
-            "total_responses": 10,
-            "avg_score": 4.15,
-            "scores": {
-                "on_topic": 4.6,
-                "grounded": 4.0,
-                "no_contradiction": 4.3,
-                "understandability": 4.2,
-                "overall": 3.7
-            },
-            "avg_latency_ms": 640.0,
-            "p95_latency_ms": 820.0,
-            "usage": {
-                "total_input_tokens": 2860,
-                "total_output_tokens": 1850,
-                "total_tokens": 4710,
-                "avg_input_tokens": 286.0,
-                "avg_output_tokens": 185.0
-            },
-            "costs": {
-                "input_cost": 0.000286,
-                "output_cost": 0.00074,
-                "total_cost": 0.001026,
-                "cost_per_query": 0.0001026,
-                "cost_per_1k": 0.1026,
-                "cost_per_10k": 1.026
-            },
-            "pricing": {
-                "input_price_per_million": 0.10,
-                "output_price_per_million": 0.40
-            }
+          "response": "BYU-Pathway Worldwide provides affordable higher education. For PathwayConnect courses, tuition is $85 per credit hour, making it very accessible. Degree program tuition varies depending on the specific program.",
+          "latency_ms": 618,
+          "input_tokens": 286,
+          "output_tokens": 125,
+          "cost": 0.000079,
+          "grade": {
+            "on_topic": 5,
+            "grounded": 4,
+            "no_contradiction": 5,
+            "understandability": 5,
+            "overall": 4,
+            "average": 4.6
+          },
+          "error": null
         }
+      }
     },
-    "questions": [
-        {
-            "id": 1,
-            "question": "What is the tuition cost for BYU-Pathway?",
-            "context": "BYU-Pathway Worldwide offers affordable education with tuition starting at $85 per credit for PathwayConnect and varying rates for degree programs.",
-            "responses": {
-                "gpt-4o-mini": {
-                    "response": "BYU-Pathway tuition starts at $85 per credit for PathwayConnect courses. Degree program rates vary depending on the specific program.",
-                    "latency_ms": 856,
-                    "input_tokens": 285,
-                    "output_tokens": 142,
-                    "cost": 0.000128,
-                    "grade": {
-                        "on_topic": 5,
-                        "grounded": 4,
-                        "no_contradiction": 5,
-                        "understandability": 5,
-                        "overall": 4,
-                        "average": 4.6
-                    },
-                    "error": null
-                },
-                "gpt-5-mini_minimal_low": {
-                    "response": "Tuition is $85/credit for PathwayConnect.",
-                    "latency_ms": 612,
-                    "input_tokens": 290,
-                    "output_tokens": 45,
-                    "cost": 0.000163,
-                    "grade": {
-                        "on_topic": 5,
-                        "grounded": 5,
-                        "no_contradiction": 5,
-                        "understandability": 5,
-                        "overall": 4,
-                        "average": 4.8
-                    },
-                    "error": null
-                },
-                "gpt-5-mini_minimal_medium": {
-                    "response": "BYU-Pathway tuition starts at $85 per credit for PathwayConnect. Degree program rates vary by program.",
-                    "latency_ms": 698,
-                    "input_tokens": 292,
-                    "output_tokens": 85,
-                    "cost": 0.000243,
-                    "grade": {
-                        "on_topic": 5,
-                        "grounded": 5,
-                        "no_contradiction": 5,
-                        "understandability": 5,
-                        "overall": 4,
-                        "average": 4.8
-                    },
-                    "error": null
-                },
-                "gpt-5-mini_minimal_high": {
-                    "response": "BYU-Pathway Worldwide offers affordable education options. For PathwayConnect courses, tuition is $85 per credit hour. For degree programs, the tuition rates vary depending on the specific program you choose. This makes BYU-Pathway one of the most affordable higher education options available.",
-                    "latency_ms": 824,
-                    "input_tokens": 294,
-                    "output_tokens": 165,
-                    "cost": 0.000404,
-                    "grade": {
-                        "on_topic": 5,
-                        "grounded": 4,
-                        "no_contradiction": 5,
-                        "understandability": 5,
-                        "overall": 4,
-                        "average": 4.6
-                    },
-                    "error": null
-                },
-                "gpt-5-mini_low_low": {
-                    "response": "$85/credit for PathwayConnect; varies for degrees.",
-                    "latency_ms": 745,
-                    "input_tokens": 291,
-                    "output_tokens": 52,
-                    "cost": 0.000177,
-                    "grade": {
-                        "on_topic": 5,
-                        "grounded": 5,
-                        "no_contradiction": 5,
-                        "understandability": 4,
-                        "overall": 4,
-                        "average": 4.6
-                    },
-                    "error": null
-                },
-                "gpt-5-mini_low_medium": {
-                    "response": "BYU-Pathway tuition is very affordable at $85 per credit for PathwayConnect courses. Degree programs have varying rates depending on your chosen field of study.",
-                    "latency_ms": 842,
-                    "input_tokens": 293,
-                    "output_tokens": 112,
-                    "cost": 0.000297,
-                    "grade": {
-                        "on_topic": 5,
-                        "grounded": 5,
-                        "no_contradiction": 5,
-                        "understandability": 5,
-                        "overall": 5,
-                        "average": 5.0
-                    },
-                    "error": null
-                },
-                "gpt-5-mini_low_high": {
-                    "response": "BYU-Pathway Worldwide is known for its affordable education model. The tuition structure is designed to be accessible to students worldwide. For PathwayConnect, the introductory program, tuition is just $85 per credit hour. This makes it one of the most affordable options for starting your higher education journey. For degree programs, tuition rates vary based on the specific program and partnership institution.",
-                    "latency_ms": 965,
-                    "input_tokens": 295,
-                    "output_tokens": 198,
-                    "cost": 0.000470,
-                    "grade": {
-                        "on_topic": 5,
-                        "grounded": 4,
-                        "no_contradiction": 5,
-                        "understandability": 5,
-                        "overall": 5,
-                        "average": 4.8
-                    },
-                    "error": null
-                },
-                "gpt-5-nano_minimal_low": {
-                    "response": "$85/credit PathwayConnect.",
-                    "latency_ms": 398,
-                    "input_tokens": 280,
-                    "output_tokens": 32,
-                    "cost": 0.000041,
-                    "grade": {
-                        "on_topic": 4,
-                        "grounded": 4,
-                        "no_contradiction": 5,
-                        "understandability": 3,
-                        "overall": 3,
-                        "average": 3.8
-                    },
-                    "error": null
-                },
-                "gpt-5-nano_minimal_medium": {
-                    "response": "Tuition for PathwayConnect is $85 per credit. Degree programs have different rates.",
-                    "latency_ms": 462,
-                    "input_tokens": 282,
-                    "output_tokens": 68,
-                    "cost": 0.000055,
-                    "grade": {
-                        "on_topic": 5,
-                        "grounded": 4,
-                        "no_contradiction": 5,
-                        "understandability": 4,
-                        "overall": 4,
-                        "average": 4.4
-                    },
-                    "error": null
-                },
-                "gpt-5-nano_minimal_high": {
-                    "response": "BYU-Pathway offers affordable education. PathwayConnect tuition is $85 per credit. Degree program rates depend on the program you select.",
-                    "latency_ms": 538,
-                    "input_tokens": 284,
-                    "output_tokens": 102,
-                    "cost": 0.000069,
-                    "grade": {
-                        "on_topic": 5,
-                        "grounded": 4,
-                        "no_contradiction": 5,
-                        "understandability": 5,
-                        "overall": 4,
-                        "average": 4.6
-                    },
-                    "error": null
-                },
-                "gpt-5-nano_low_low": {
-                    "response": "$85/credit for PathwayConnect.",
-                    "latency_ms": 485,
-                    "input_tokens": 281,
-                    "output_tokens": 38,
-                    "cost": 0.000043,
-                    "grade": {
-                        "on_topic": 4,
-                        "grounded": 5,
-                        "no_contradiction": 5,
-                        "understandability": 4,
-                        "overall": 4,
-                        "average": 4.4
-                    },
-                    "error": null
-                },
-                "gpt-5-nano_low_medium": {
-                    "response": "BYU-Pathway tuition starts at $85 per credit for PathwayConnect. Degree programs have varying rates.",
-                    "latency_ms": 552,
-                    "input_tokens": 283,
-                    "output_tokens": 78,
-                    "cost": 0.000059,
-                    "grade": {
-                        "on_topic": 5,
-                        "grounded": 5,
-                        "no_contradiction": 5,
-                        "understandability": 5,
-                        "overall": 4,
-                        "average": 4.8
-                    },
-                    "error": null
-                },
-                "gpt-5-nano_low_high": {
-                    "response": "BYU-Pathway Worldwide provides affordable higher education. For PathwayConnect courses, tuition is $85 per credit hour, making it very accessible. Degree program tuition varies depending on the specific program.",
-                    "latency_ms": 618,
-                    "input_tokens": 286,
-                    "output_tokens": 125,
-                    "cost": 0.000079,
-                    "grade": {
-                        "on_topic": 5,
-                        "grounded": 4,
-                        "no_contradiction": 5,
-                        "understandability": 5,
-                        "overall": 4,
-                        "average": 4.6
-                    },
-                    "error": null
-                }
-            }
+    {
+      "id": 2,
+      "question": "How do I apply for financial aid?",
+      "context": "Students can apply for financial aid through the BYU-Pathway student portal. US students should complete the FAFSA, while international students may qualify for institutional grants.",
+      "responses": {
+        "gpt-4o-mini": {
+          "response": "To apply for financial aid, log into the BYU-Pathway student portal. US students need to complete the FAFSA. International students may qualify for institutional grants.",
+          "latency_ms": 912,
+          "input_tokens": 288,
+          "output_tokens": 156,
+          "cost": 0.000137,
+          "grade": {
+            "on_topic": 5,
+            "grounded": 5,
+            "no_contradiction": 5,
+            "understandability": 5,
+            "overall": 4,
+            "average": 4.8
+          },
+          "error": null
         },
-        {
-            "id": 2,
-            "question": "How do I apply for financial aid?",
-            "context": "Students can apply for financial aid through the BYU-Pathway student portal. US students should complete the FAFSA, while international students may qualify for institutional grants.",
-            "responses": {
-                "gpt-4o-mini": {
-                    "response": "To apply for financial aid, log into the BYU-Pathway student portal. US students need to complete the FAFSA. International students may qualify for institutional grants.",
-                    "latency_ms": 912,
-                    "input_tokens": 288,
-                    "output_tokens": 156,
-                    "cost": 0.000137,
-                    "grade": {
-                        "on_topic": 5,
-                        "grounded": 5,
-                        "no_contradiction": 5,
-                        "understandability": 5,
-                        "overall": 4,
-                        "average": 4.8
-                    },
-                    "error": null
-                },
-                "gpt-5-mini_minimal_low": {
-                    "response": "Apply through student portal. US: FAFSA. International: institutional grants.",
-                    "latency_ms": 598,
-                    "input_tokens": 292,
-                    "output_tokens": 48,
-                    "cost": 0.000169,
-                    "grade": {
-                        "on_topic": 5,
-                        "grounded": 5,
-                        "no_contradiction": 5,
-                        "understandability": 4,
-                        "overall": 4,
-                        "average": 4.6
-                    },
-                    "error": null
-                },
-                "gpt-5-mini_minimal_medium": {
-                    "response": "Apply through the BYU-Pathway student portal. If you're a US student, complete the FAFSA. International students may be eligible for institutional grants.",
-                    "latency_ms": 685,
-                    "input_tokens": 294,
-                    "output_tokens": 92,
-                    "cost": 0.000257,
-                    "grade": {
-                        "on_topic": 5,
-                        "grounded": 5,
-                        "no_contradiction": 5,
-                        "understandability": 5,
-                        "overall": 5,
-                        "average": 5.0
-                    },
-                    "error": null
-                },
-                "gpt-5-mini_minimal_high": {
-                    "response": "To apply for financial aid at BYU-Pathway, you'll need to access the student portal. The process differs based on your location. If you're a US student, you should complete the Free Application for Federal Student Aid (FAFSA). International students have different options and may qualify for institutional grants provided by BYU-Pathway.",
-                    "latency_ms": 856,
-                    "input_tokens": 296,
-                    "output_tokens": 178,
-                    "cost": 0.000430,
-                    "grade": {
-                        "on_topic": 5,
-                        "grounded": 5,
-                        "no_contradiction": 5,
-                        "understandability": 5,
-                        "overall": 5,
-                        "average": 5.0
-                    },
-                    "error": null
-                },
-                "gpt-5-mini_low_low": {
-                    "response": "Use student portal. FAFSA for US, grants for international.",
-                    "latency_ms": 762,
-                    "input_tokens": 293,
-                    "output_tokens": 55,
-                    "cost": 0.000183,
-                    "grade": {
-                        "on_topic": 5,
-                        "grounded": 5,
-                        "no_contradiction": 5,
-                        "understandability": 4,
-                        "overall": 4,
-                        "average": 4.6
-                    },
-                    "error": null
-                },
-                "gpt-5-mini_low_medium": {
-                    "response": "To apply for financial aid, access the BYU-Pathway student portal. US students should fill out the FAFSA form. International students may qualify for institutional grants offered by the university.",
-                    "latency_ms": 878,
-                    "input_tokens": 295,
-                    "output_tokens": 118,
-                    "cost": 0.000310,
-                    "grade": {
-                        "on_topic": 5,
-                        "grounded": 5,
-                        "no_contradiction": 5,
-                        "understandability": 5,
-                        "overall": 5,
-                        "average": 5.0
-                    },
-                    "error": null
-                },
-                "gpt-5-mini_low_high": {
-                    "response": "Applying for financial aid at BYU-Pathway is straightforward. First, log into your BYU-Pathway student portal where you'll find the financial aid section. The application process varies depending on your citizenship. US students should complete the FAFSA (Free Application for Federal Student Aid) to be considered for federal financial aid programs. International students have different options available - they may qualify for institutional grants provided directly by BYU-Pathway Worldwide.",
-                    "latency_ms": 998,
-                    "input_tokens": 298,
-                    "output_tokens": 212,
-                    "cost": 0.000498,
-                    "grade": {
-                        "on_topic": 5,
-                        "grounded": 5,
-                        "no_contradiction": 5,
-                        "understandability": 5,
-                        "overall": 5,
-                        "average": 5.0
-                    },
-                    "error": null
-                },
-                "gpt-5-nano_minimal_low": {
-                    "response": "Portal. FAFSA (US) or grants (intl).",
-                    "latency_ms": 412,
-                    "input_tokens": 282,
-                    "output_tokens": 35,
-                    "cost": 0.000042,
-                    "grade": {
-                        "on_topic": 4,
-                        "grounded": 4,
-                        "no_contradiction": 5,
-                        "understandability": 3,
-                        "overall": 3,
-                        "average": 3.8
-                    },
-                    "error": null
-                },
-                "gpt-5-nano_minimal_medium": {
-                    "response": "Apply via student portal. US students: FAFSA. International: institutional grants.",
-                    "latency_ms": 478,
-                    "input_tokens": 284,
-                    "output_tokens": 62,
-                    "cost": 0.000053,
-                    "grade": {
-                        "on_topic": 5,
-                        "grounded": 5,
-                        "no_contradiction": 5,
-                        "understandability": 4,
-                        "overall": 4,
-                        "average": 4.6
-                    },
-                    "error": null
-                },
-                "gpt-5-nano_minimal_high": {
-                    "response": "To apply for financial aid, use the BYU-Pathway student portal. US students need to complete FAFSA. International students may receive institutional grants.",
-                    "latency_ms": 548,
-                    "input_tokens": 286,
-                    "output_tokens": 98,
-                    "cost": 0.000068,
-                    "grade": {
-                        "on_topic": 5,
-                        "grounded": 5,
-                        "no_contradiction": 5,
-                        "understandability": 5,
-                        "overall": 4,
-                        "average": 4.8
-                    },
-                    "error": null
-                },
-                "gpt-5-nano_low_low": {
-                    "response": "Student portal. FAFSA for US, grants for international.",
-                    "latency_ms": 498,
-                    "input_tokens": 283,
-                    "output_tokens": 42,
-                    "cost": 0.000045,
-                    "grade": {
-                        "on_topic": 5,
-                        "grounded": 5,
-                        "no_contradiction": 5,
-                        "understandability": 4,
-                        "overall": 4,
-                        "average": 4.6
-                    },
-                    "error": null
-                },
-                "gpt-5-nano_low_medium": {
-                    "response": "Apply through the BYU-Pathway student portal. US students complete FAFSA. International students may get institutional grants.",
-                    "latency_ms": 562,
-                    "input_tokens": 285,
-                    "output_tokens": 75,
-                    "cost": 0.000059,
-                    "grade": {
-                        "on_topic": 5,
-                        "grounded": 5,
-                        "no_contradiction": 5,
-                        "understandability": 5,
-                        "overall": 4,
-                        "average": 4.8
-                    },
-                    "error": null
-                },
-                "gpt-5-nano_low_high": {
-                    "response": "Financial aid applications are handled through the BYU-Pathway student portal. US students should complete the FAFSA for federal aid consideration. International students may be eligible for institutional grants from BYU-Pathway.",
-                    "latency_ms": 628,
-                    "input_tokens": 288,
-                    "output_tokens": 118,
-                    "cost": 0.000076,
-                    "grade": {
-                        "on_topic": 5,
-                        "grounded": 5,
-                        "no_contradiction": 5,
-                        "understandability": 5,
-                        "overall": 5,
-                        "average": 5.0
-                    },
-                    "error": null
-                }
-            }
+        "gpt-5-mini_minimal_low": {
+          "response": "Apply through student portal. US: FAFSA. International: institutional grants.",
+          "latency_ms": 598,
+          "input_tokens": 292,
+          "output_tokens": 48,
+          "cost": 0.000169,
+          "grade": {
+            "on_topic": 5,
+            "grounded": 5,
+            "no_contradiction": 5,
+            "understandability": 4,
+            "overall": 4,
+            "average": 4.6
+          },
+          "error": null
+        },
+        "gpt-5-mini_minimal_medium": {
+          "response": "Apply through the BYU-Pathway student portal. If you're a US student, complete the FAFSA. International students may be eligible for institutional grants.",
+          "latency_ms": 685,
+          "input_tokens": 294,
+          "output_tokens": 92,
+          "cost": 0.000257,
+          "grade": {
+            "on_topic": 5,
+            "grounded": 5,
+            "no_contradiction": 5,
+            "understandability": 5,
+            "overall": 5,
+            "average": 5.0
+          },
+          "error": null
+        },
+        "gpt-5-mini_minimal_high": {
+          "response": "To apply for financial aid at BYU-Pathway, you'll need to access the student portal. The process differs based on your location. If you're a US student, you should complete the Free Application for Federal Student Aid (FAFSA). International students have different options and may qualify for institutional grants provided by BYU-Pathway.",
+          "latency_ms": 856,
+          "input_tokens": 296,
+          "output_tokens": 178,
+          "cost": 0.000430,
+          "grade": {
+            "on_topic": 5,
+            "grounded": 5,
+            "no_contradiction": 5,
+            "understandability": 5,
+            "overall": 5,
+            "average": 5.0
+          },
+          "error": null
+        },
+        "gpt-5-mini_low_low": {
+          "response": "Use student portal. FAFSA for US, grants for international.",
+          "latency_ms": 762,
+          "input_tokens": 293,
+          "output_tokens": 55,
+          "cost": 0.000183,
+          "grade": {
+            "on_topic": 5,
+            "grounded": 5,
+            "no_contradiction": 5,
+            "understandability": 4,
+            "overall": 4,
+            "average": 4.6
+          },
+          "error": null
+        },
+        "gpt-5-mini_low_medium": {
+          "response": "To apply for financial aid, access the BYU-Pathway student portal. US students should fill out the FAFSA form. International students may qualify for institutional grants offered by the university.",
+          "latency_ms": 878,
+          "input_tokens": 295,
+          "output_tokens": 118,
+          "cost": 0.000310,
+          "grade": {
+            "on_topic": 5,
+            "grounded": 5,
+            "no_contradiction": 5,
+            "understandability": 5,
+            "overall": 5,
+            "average": 5.0
+          },
+          "error": null
+        },
+        "gpt-5-mini_low_high": {
+          "response": "Applying for financial aid at BYU-Pathway is straightforward. First, log into your BYU-Pathway student portal where you'll find the financial aid section. The application process varies depending on your citizenship. US students should complete the FAFSA (Free Application for Federal Student Aid) to be considered for federal financial aid programs. International students have different options available - they may qualify for institutional grants provided directly by BYU-Pathway Worldwide.",
+          "latency_ms": 998,
+          "input_tokens": 298,
+          "output_tokens": 212,
+          "cost": 0.000498,
+          "grade": {
+            "on_topic": 5,
+            "grounded": 5,
+            "no_contradiction": 5,
+            "understandability": 5,
+            "overall": 5,
+            "average": 5.0
+          },
+          "error": null
+        },
+        "gpt-5-nano_minimal_low": {
+          "response": "Portal. FAFSA (US) or grants (intl).",
+          "latency_ms": 412,
+          "input_tokens": 282,
+          "output_tokens": 35,
+          "cost": 0.000042,
+          "grade": {
+            "on_topic": 4,
+            "grounded": 4,
+            "no_contradiction": 5,
+            "understandability": 3,
+            "overall": 3,
+            "average": 3.8
+          },
+          "error": null
+        },
+        "gpt-5-nano_minimal_medium": {
+          "response": "Apply via student portal. US students: FAFSA. International: institutional grants.",
+          "latency_ms": 478,
+          "input_tokens": 284,
+          "output_tokens": 62,
+          "cost": 0.000053,
+          "grade": {
+            "on_topic": 5,
+            "grounded": 5,
+            "no_contradiction": 5,
+            "understandability": 4,
+            "overall": 4,
+            "average": 4.6
+          },
+          "error": null
+        },
+        "gpt-5-nano_minimal_high": {
+          "response": "To apply for financial aid, use the BYU-Pathway student portal. US students need to complete FAFSA. International students may receive institutional grants.",
+          "latency_ms": 548,
+          "input_tokens": 286,
+          "output_tokens": 98,
+          "cost": 0.000068,
+          "grade": {
+            "on_topic": 5,
+            "grounded": 5,
+            "no_contradiction": 5,
+            "understandability": 5,
+            "overall": 4,
+            "average": 4.8
+          },
+          "error": null
+        },
+        "gpt-5-nano_low_low": {
+          "response": "Student portal. FAFSA for US, grants for international.",
+          "latency_ms": 498,
+          "input_tokens": 283,
+          "output_tokens": 42,
+          "cost": 0.000045,
+          "grade": {
+            "on_topic": 5,
+            "grounded": 5,
+            "no_contradiction": 5,
+            "understandability": 4,
+            "overall": 4,
+            "average": 4.6
+          },
+          "error": null
+        },
+        "gpt-5-nano_low_medium": {
+          "response": "Apply through the BYU-Pathway student portal. US students complete FAFSA. International students may get institutional grants.",
+          "latency_ms": 562,
+          "input_tokens": 285,
+          "output_tokens": 75,
+          "cost": 0.000059,
+          "grade": {
+            "on_topic": 5,
+            "grounded": 5,
+            "no_contradiction": 5,
+            "understandability": 5,
+            "overall": 4,
+            "average": 4.8
+          },
+          "error": null
+        },
+        "gpt-5-nano_low_high": {
+          "response": "Financial aid applications are handled through the BYU-Pathway student portal. US students should complete the FAFSA for federal aid consideration. International students may be eligible for institutional grants from BYU-Pathway.",
+          "latency_ms": 628,
+          "input_tokens": 288,
+          "output_tokens": 118,
+          "cost": 0.000076,
+          "grade": {
+            "on_topic": 5,
+            "grounded": 5,
+            "no_contradiction": 5,
+            "understandability": 5,
+            "overall": 5,
+            "average": 5.0
+          },
+          "error": null
         }
-    ]
+      }
+    }
+  ]
 }
