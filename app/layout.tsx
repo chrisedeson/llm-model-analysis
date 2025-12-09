@@ -11,6 +11,9 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "LLM Analysis | BYU-Pathway",
   description: "Compare GPT-4o-mini vs GPT-5-mini for BYU-Pathway Chatbot",
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({
