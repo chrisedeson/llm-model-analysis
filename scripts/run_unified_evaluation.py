@@ -24,11 +24,15 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
+from dotenv import load_dotenv
 from openai import AsyncOpenAI
 
 from config import ALL_MODELS, MODELS_BY_NAME, ModelConfig, GRADER_MODEL, GRADER_REASONING_EFFORT
 from grader import Grader, GradingResult
 from model_runner import AsyncModelRunner, ModelResponse
+
+# Load environment variables from .env file
+load_dotenv()
 
 
 def list_available_models():
