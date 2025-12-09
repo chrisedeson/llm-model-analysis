@@ -1,0 +1,196 @@
+{
+  "metadata": {
+    "generated_at": "2025-12-09T00:00:00.000Z",
+    "num_questions": 5,
+    "note": "Sample data for development - replace with real evaluation results"
+  },
+  "model1": {
+    "name": "GPT-4o-mini",
+    "model_id": "gpt-4o-mini",
+    "api_type": "chat_completions",
+    "reasoning_effort": null,
+    "verbosity": null,
+    "total_cost": 0.0023,
+    "avg_latency_ms": 850,
+    "avg_score": 4.2,
+    "successful_responses": 5
+  },
+  "model2": {
+    "name": "GPT-5-mini (minimal, low)",
+    "model_id": "gpt-5-mini",
+    "api_type": "responses",
+    "reasoning_effort": "low",
+    "verbosity": "low",
+    "total_cost": 0.0041,
+    "avg_latency_ms": 620,
+    "avg_score": 4.5,
+    "successful_responses": 5
+  },
+  "comparisons": [
+    {
+      "id": 1,
+      "question": "What are the admission requirements for BYU-Pathway?",
+      "context": "BYU-Pathway Worldwide is an online educational program...",
+      "model1": {
+        "response": "BYU-Pathway admission requirements include: being at least 17 years old, having a high school diploma or equivalent, and completing an online application. International students may need additional documentation.",
+        "latency_ms": 823,
+        "cost": 0.00045,
+        "grade": {
+          "on_topic": 5,
+          "grounded": 4,
+          "no_contradiction": 5,
+          "understandability": 5,
+          "overall": 4,
+          "average": 4.6
+        },
+        "error": null
+      },
+      "model2": {
+        "response": "To be admitted to BYU-Pathway, you need to: (1) be 17+ years old, (2) have a high school diploma or equivalent, (3) complete the online application, and (4) meet English proficiency requirements if applicable.",
+        "latency_ms": 612,
+        "cost": 0.00082,
+        "grade": {
+          "on_topic": 5,
+          "grounded": 5,
+          "no_contradiction": 5,
+          "understandability": 5,
+          "overall": 5,
+          "average": 5.0
+        },
+        "error": null
+      }
+    },
+    {
+      "id": 2,
+      "question": "How much does PathwayConnect cost?",
+      "context": "PathwayConnect is a one-year certificate program...",
+      "model1": {
+        "response": "PathwayConnect costs approximately $75-85 per credit hour. The total program cost is typically around $1,500-2,000 for the full year.",
+        "latency_ms": 756,
+        "cost": 0.00042,
+        "grade": {
+          "on_topic": 5,
+          "grounded": 3,
+          "no_contradiction": 4,
+          "understandability": 5,
+          "overall": 4,
+          "average": 4.2
+        },
+        "error": null
+      },
+      "model2": {
+        "response": "PathwayConnect is very affordable at about $75-85 per credit hour. For the full year program, expect to pay around $1,500-2,000 total, making it one of the most affordable pathways to a degree.",
+        "latency_ms": 589,
+        "cost": 0.00079,
+        "grade": {
+          "on_topic": 5,
+          "grounded": 4,
+          "no_contradiction": 5,
+          "understandability": 5,
+          "overall": 4,
+          "average": 4.6
+        },
+        "error": null
+      }
+    },
+    {
+      "id": 3,
+      "question": "Can I transfer credits from PathwayConnect?",
+      "context": "Credits earned through PathwayConnect can be transferred...",
+      "model1": {
+        "response": "Yes, credits earned in PathwayConnect can be transferred. They are accepted at BYU-Idaho and Ensign College, and many other institutions also accept these credits.",
+        "latency_ms": 892,
+        "cost": 0.00048,
+        "grade": {
+          "on_topic": 5,
+          "grounded": 4,
+          "no_contradiction": 5,
+          "understandability": 5,
+          "overall": 4,
+          "average": 4.6
+        },
+        "error": null
+      },
+      "model2": {
+        "response": "PathwayConnect credits are fully transferable to BYU-Idaho and Ensign College degree programs. Other institutions may also accept these credits - check with your target school's transfer office.",
+        "latency_ms": 634,
+        "cost": 0.00085,
+        "grade": {
+          "on_topic": 5,
+          "grounded": 5,
+          "no_contradiction": 5,
+          "understandability": 5,
+          "overall": 5,
+          "average": 5.0
+        },
+        "error": null
+      }
+    },
+    {
+      "id": 4,
+      "question": "What degrees can I earn through BYU-Pathway?",
+      "context": "BYU-Pathway offers access to various degree programs...",
+      "model1": {
+        "response": "Through BYU-Pathway, you can earn associate's and bachelor's degrees in fields like Business, IT, Healthcare, and more through BYU-Idaho and Ensign College online programs.",
+        "latency_ms": 945,
+        "cost": 0.00051,
+        "grade": {
+          "on_topic": 5,
+          "grounded": 4,
+          "no_contradiction": 4,
+          "understandability": 4,
+          "overall": 4,
+          "average": 4.2
+        },
+        "error": null
+      },
+      "model2": {
+        "response": "BYU-Pathway provides access to online degrees from BYU-Idaho and Ensign College: associate's degrees (2-year), bachelor's degrees (4-year), and professional certificates across Business, Technology, Healthcare, and Education fields.",
+        "latency_ms": 678,
+        "cost": 0.00088,
+        "grade": {
+          "on_topic": 5,
+          "grounded": 4,
+          "no_contradiction": 5,
+          "understandability": 5,
+          "overall": 4,
+          "average": 4.6
+        },
+        "error": null
+      }
+    },
+    {
+      "id": 5,
+      "question": "Is BYU-Pathway accredited?",
+      "context": "BYU-Pathway Worldwide operates under the accreditation...",
+      "model1": {
+        "response": "Yes, BYU-Pathway is accredited. It operates under the accreditation of BYU-Idaho, which is accredited by the Northwest Commission on Colleges and Universities (NWCCU).",
+        "latency_ms": 834,
+        "cost": 0.00044,
+        "grade": {
+          "on_topic": 5,
+          "grounded": 4,
+          "no_contradiction": 5,
+          "understandability": 4,
+          "overall": 4,
+          "average": 4.4
+        },
+        "error": null
+      },
+      "model2": {
+        "response": "BYU-Pathway is fully accredited through BYU-Idaho's accreditation from the Northwest Commission on Colleges and Universities (NWCCU), a recognized regional accreditor.",
+        "latency_ms": 587,
+        "cost": 0.00076,
+        "grade": {
+          "on_topic": 5,
+          "grounded": 5,
+          "no_contradiction": 5,
+          "understandability": 5,
+          "overall": 4,
+          "average": 4.8
+        },
+        "error": null
+      }
+    }
+  ]
+}
