@@ -2,7 +2,45 @@ import { promises as fs } from "fs";
 import path from "path";
 import Link from "next/link";
 
-interface ModelSummary {
+// Unified JSON structure - flat format from sample
+interface UnifiedModelData {
+  name: string;
+  model_id: string;
+  api_type: string;
+  reasoning_effort: string | null;
+  verbosity: string | null;
+  successful_responses: number;
+  total_responses?: number;
+  avg_score: number;
+  avg_latency_ms: number;
+  usage?: {
+    total_input_tokens: number;
+    total_output_tokens: number;
+    total_tokens?: number;
+    avg_input_tokens?: number;
+    avg_output_tokens?: number;
+  };
+  costs?: {
+    input_cost?: number;
+    output_cost?: number;
+    total_cost: number;
+    cost_per_query?: number;
+  };
+}
+
+interface UnifiedEvaluationData {
+  metadata: {
+    generated_at: string;
+    num_questions: number;
+    num_models: number;
+    model_keys: string[];
+  };
+  models: Record<string, UnifiedModelData>;
+  questions: unknown[];
+}
+
+// Legacy format for backward compatibility
+interface LegacyModelSummary {
   name: string;
   model_id: string;
   api_type: string;
@@ -12,60 +50,94 @@ interface ModelSummary {
   avg_latency_ms: number;
   avg_score: number;
   successful_responses: number;
-  // New nested format
   usage?: {
     total_input_tokens: number;
     total_output_tokens: number;
-    total_tokens: number;
-    avg_input_tokens: number;
-    avg_output_tokens: number;
   };
   costs?: {
-    input_cost: number;
-    output_cost: number;
     total_cost: number;
-    cost_per_query: number;
-    cost_per_1k: number;
-    cost_per_10k: number;
-  };
-  pricing?: {
-    input_price_per_million: number;
-    output_price_per_million: number;
   };
 }
 
-// Helper function to get total cost from either old or new format
-function getTotalCost(model: ModelSummary): number {
-  return model.costs?.total_cost ?? model.total_cost ?? 0;
-}
-
-interface ComparisonData {
+interface LegacyComparisonData {
   metadata: {
     generated_at: string;
     num_questions: number;
   };
-  model1: ModelSummary;
-  model2: ModelSummary;
+  model1: LegacyModelSummary;
+  model2: LegacyModelSummary;
 }
 
-async function getAllModels(): Promise<ModelSummary[]> {
+// Normalized model interface for display
+interface NormalizedModel {
+  key: string;
+  name: string;
+  model_id: string;
+  api_type: string;
+  reasoning_effort: string | null;
+  verbosity: string | null;
+  avg_score: number;
+  avg_latency_ms: number;
+  total_cost: number;
+  total_input_tokens: number;
+  total_output_tokens: number;
+  successful_responses: number;
+}
+
+async function getAllModels(): Promise<NormalizedModel[]> {
   const dataDir = path.join(process.cwd(), "public/data");
   const files = await fs.readdir(dataDir);
-  const jsonFiles = files.filter((f) => f.endsWith(".json"));
-
-  const modelsMap = new Map<string, ModelSummary>();
+  
+  // First, try to load the unified evaluation_results.json
+  if (files.includes("evaluation_results.json")) {
+    const filePath = path.join(dataDir, "evaluation_results.json");
+    const content = await fs.readFile(filePath, "utf8");
+    const data: UnifiedEvaluationData = JSON.parse(content);
+    
+    // Convert unified format to normalized models (handles flat structure)
+    return Object.entries(data.models).map(([key, model]) => ({
+      key,
+      name: model.name,
+      model_id: model.model_id,
+      api_type: model.api_type,
+      reasoning_effort: model.reasoning_effort,
+      verbosity: model.verbosity,
+      avg_score: model.avg_score,
+      avg_latency_ms: model.avg_latency_ms,
+      total_cost: model.costs?.total_cost ?? 0,
+      total_input_tokens: model.usage?.total_input_tokens ?? 0,
+      total_output_tokens: model.usage?.total_output_tokens ?? 0,
+      successful_responses: model.successful_responses,
+    }));
+  }
+  
+  // Fallback to legacy format: multiple comparison JSON files
+  const jsonFiles = files.filter((f) => f.endsWith(".json") && f !== "evaluation_results.json");
+  const modelsMap = new Map<string, NormalizedModel>();
 
   for (const file of jsonFiles) {
     const filePath = path.join(dataDir, file);
     const content = await fs.readFile(filePath, "utf8");
-    const data: ComparisonData = JSON.parse(content);
+    const data: LegacyComparisonData = JSON.parse(content);
 
     // Add both models from each comparison file
-    if (!modelsMap.has(data.model1.model_id)) {
-      modelsMap.set(data.model1.model_id, data.model1);
-    }
-    if (!modelsMap.has(data.model2.model_id)) {
-      modelsMap.set(data.model2.model_id, data.model2);
+    for (const model of [data.model1, data.model2]) {
+      if (!modelsMap.has(model.model_id)) {
+        modelsMap.set(model.model_id, {
+          key: model.model_id,
+          name: model.name,
+          model_id: model.model_id,
+          api_type: model.api_type,
+          reasoning_effort: model.reasoning_effort,
+          verbosity: model.verbosity,
+          avg_score: model.avg_score,
+          avg_latency_ms: model.avg_latency_ms,
+          total_cost: model.costs?.total_cost ?? model.total_cost ?? 0,
+          total_input_tokens: model.usage?.total_input_tokens ?? 0,
+          total_output_tokens: model.usage?.total_output_tokens ?? 0,
+          successful_responses: model.successful_responses,
+        });
+      }
     }
   }
 
@@ -124,7 +196,7 @@ export default async function ModelsPage() {
   // Calculate cost-effectiveness (score per dollar * 1000)
   const modelsWithEfficiency = sortedModels.map((m) => ({
     ...m,
-    costEfficiency: getTotalCost(m) > 0 ? (m.avg_score / getTotalCost(m)) * 1000 : 0,
+    costEfficiency: m.total_cost > 0 ? (m.avg_score / m.total_cost) * 1000 : 0,
   }));
 
   return (
@@ -200,7 +272,7 @@ export default async function ModelsPage() {
           <div className="bg-[#141517] rounded-lg border border-white/[0.08] p-4">
             <div className="text-xs text-gray-500 mb-1">Lowest Cost</div>
             <div className="text-2xl font-semibold text-[#9D5BD2]">
-              ${Math.min(...models.map((m) => getTotalCost(m))).toFixed(4)}
+              ${Math.min(...models.map((m) => m.total_cost)).toFixed(4)}
             </div>
           </div>
         </div>
@@ -275,7 +347,7 @@ export default async function ModelsPage() {
                   </td>
                   <td className="px-6 py-4 text-right">
                     <span className="text-sm text-gray-300">
-                      ${getTotalCost(model).toFixed(4)}
+                      ${model.total_cost.toFixed(4)}
                     </span>
                   </td>
                   <td className="px-6 py-4 text-right">
