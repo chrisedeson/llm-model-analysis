@@ -50,13 +50,22 @@ interface ComparisonData {
   comparisons: Comparison[];
 }
 
-async function getComparisonData(): Promise<ComparisonData> {
-  const filePath = path.join(
-    process.cwd(),
-    "public/data/comparison_gpt-4o-mini_vs_gpt-5-mini.json"
-  );
-  const fileContents = await fs.readFile(filePath, "utf8");
-  return JSON.parse(fileContents);
+async function getComparisonData(): Promise<ComparisonData | null> {
+  try {
+    const dataDir = path.join(process.cwd(), "public/data");
+    const files = await fs.readdir(dataDir);
+    const comparisonFile = files.find(f => f.startsWith("comparison_") && f.endsWith(".json"));
+    
+    if (!comparisonFile) {
+      return null;
+    }
+    
+    const filePath = path.join(dataDir, comparisonFile);
+    const fileContents = await fs.readFile(filePath, "utf8");
+    return JSON.parse(fileContents);
+  } catch {
+    return null;
+  }
 }
 
 export default async function DetailsPage() {
@@ -98,14 +107,25 @@ export default async function DetailsPage() {
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-2xl font-semibold text-white mb-2">
-            Detailed Results
+            {data ? `${data.model1.name} vs ${data.model2.name}` : "Detailed Results"}
           </h1>
           <p className="text-gray-500 text-sm">
-            Full responses and grading breakdown for each question
+            {data 
+              ? `Full responses and grading breakdown for ${data.metadata.num_questions} questions`
+              : "Run the evaluation script to generate comparison data"
+            }
           </p>
         </div>
 
-        {/* Per-question cards */}
+        {!data ? (
+          <div className="text-center py-12 bg-[#141517] rounded-lg border border-white/[0.08]">
+            <p className="text-gray-400">No comparison data available.</p>
+            <p className="text-gray-500 text-sm mt-2">
+              Run the evaluation script to generate data.
+            </p>
+          </div>
+        ) : (
+        /* Per-question cards */
         <div className="space-y-4">
           {data.comparisons.map((comp) => (
             <div
@@ -206,6 +226,7 @@ export default async function DetailsPage() {
             </div>
           ))}
         </div>
+        )}
       </main>
     </div>
   );

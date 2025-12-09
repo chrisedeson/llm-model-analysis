@@ -145,6 +145,15 @@ export default async function ModelsPage() {
           </p>
         </div>
 
+        {models.length === 0 ? (
+          <div className="text-center py-12 bg-[#141517] rounded-lg border border-white/[0.08]">
+            <p className="text-gray-400">No model data available.</p>
+            <p className="text-gray-500 text-sm mt-2">
+              Run the evaluation script to generate comparison data.
+            </p>
+          </div>
+        ) : (
+        <>
         {/* Stats Row */}
         <div className="grid grid-cols-4 gap-4 mb-8">
           <div className="bg-[#141517] rounded-lg border border-white/[0.08] p-4">
@@ -290,6 +299,8 @@ export default async function ModelsPage() {
             </a>
           </div>
         </div>
+        </>
+        )}
       </main>
     </div>
   );

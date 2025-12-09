@@ -38,7 +38,18 @@ interface ModelSummary {
   verbosity: string | null;
   total_cost: number;
   avg_latency_ms: number;
+  p95_latency_ms?: number;
+  avg_tokens?: number;
+  cost_per_1k?: number;
+  cost_per_10k?: number;
   avg_score: number;
+  scores?: {
+    on_topic: number;
+    grounded: number;
+    no_contradiction: number;
+    understandability: number;
+    overall: number;
+  };
   successful_responses: number;
 }
 
@@ -46,19 +57,26 @@ interface ComparisonData {
   metadata: {
     generated_at: string;
     num_questions: number;
+    grader_model?: string;
+    grader_reasoning_effort?: string;
   };
   model1: ModelSummary;
   model2: ModelSummary;
   comparisons: Comparison[];
 }
 
-// Load data at build time
+// Load data at build time - finds the first comparison JSON file
 async function getComparisonData(): Promise<ComparisonData | null> {
   try {
-    const filePath = path.join(
-      process.cwd(),
-      "public/data/comparison_gpt-4o-mini_vs_gpt-5-mini.json"
-    );
+    const dataDir = path.join(process.cwd(), "public/data");
+    const files = await fs.readdir(dataDir);
+    const comparisonFile = files.find(f => f.startsWith("comparison_") && f.endsWith(".json"));
+    
+    if (!comparisonFile) {
+      return null;
+    }
+    
+    const filePath = path.join(dataDir, comparisonFile);
     const fileContents = await fs.readFile(filePath, "utf8");
     return JSON.parse(fileContents);
   } catch {
@@ -76,9 +94,9 @@ export default async function HomePage() {
         <Navigation currentPath="/" />
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <PageHeader
-            title="GPT-4o-mini vs GPT-5-mini"
+            title="LLM Model Comparison"
             description="Head-to-head comparison for BYU-Pathway chatbot. Run the evaluation script to generate data."
-            badge="Primary Comparison"
+            badge="No Data"
           />
           <div className="bg-[#F59E0B]/10 border border-[#F59E0B]/20 rounded-xl p-6 mt-8">
             <h3 className="text-base font-medium text-[#F59E0B] flex items-center gap-2">
@@ -113,8 +131,8 @@ python scripts/run_evaluation.py --samples 100 --models gpt-4o-mini gpt-5-mini_m
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <PageHeader
-          title="GPT-4o-mini vs GPT-5-mini"
-          description="Head-to-head comparison for BYU-Pathway chatbot. This analysis compares response quality, speed, and cost between our current production model (GPT-4o-mini) and the new GPT-5-mini with minimal reasoning."
+          title={`${data.model1.name} vs ${data.model2.name}`}
+          description={`Head-to-head comparison evaluating ${data.metadata.num_questions} questions. Comparing response quality, speed, and cost.`}
           badge="Primary Comparison"
         />
 
@@ -168,8 +186,8 @@ python scripts/run_evaluation.py --samples 100 --models gpt-4o-mini gpt-5-mini_m
 
         {/* Model Cards */}
         <div className="grid md:grid-cols-2 gap-4 mt-6">
-          <ModelCard model={data.model1} label="Model 1 (Current)" color="blue" />
-          <ModelCard model={data.model2} label="Model 2 (Candidate)" color="purple" />
+          <ModelCard model={data.model1} label="Model 1 (Current)" color="blue" numQuestions={data.metadata.num_questions} />
+          <ModelCard model={data.model2} label="Model 2 (Candidate)" color="purple" numQuestions={data.metadata.num_questions} />
         </div>
 
         {/* Comparison Table */}
@@ -203,7 +221,7 @@ python scripts/run_evaluation.py --samples 100 --models gpt-4o-mini gpt-5-mini_m
 
         {/* Footer */}
         <p className="mt-8 text-center text-[13px] text-white/30">
-          Responses graded by GPT-5.1 with high reasoning effort on 5 dimensions (1-5 scale)
+          Responses graded by {data.metadata.grader_model || "GPT-5.1"} with {data.metadata.grader_reasoning_effort || "high"} reasoning effort on 5 dimensions (1-5 scale)
         </p>
       </main>
     </div>
@@ -214,16 +232,22 @@ function ModelCard({
   model,
   label,
   color,
+  numQuestions,
 }: {
   model: ModelSummary;
   label: string;
   color: "blue" | "purple";
+  numQuestions: number;
 }) {
   const accentColors = {
     blue: "#5E6AD2",
     purple: "#9D5BD2",
   };
   const accent = accentColors[color];
+
+  // Calculate cost projections if not in data
+  const costPer1k = model.cost_per_1k ?? (model.total_cost / numQuestions) * 1000;
+  const costPer10k = model.cost_per_10k ?? (model.total_cost / numQuestions) * 10000;
 
   return (
     <div className="bg-[#141517] rounded-xl border border-white/[0.08] p-5 hover:border-white/[0.12] transition-colors">
@@ -254,16 +278,60 @@ function ModelCard({
         <div className="bg-white/[0.03] rounded-lg p-3 border border-white/[0.04]">
           <div className="text-[10px] text-white/40 uppercase tracking-wider">Avg Latency</div>
           <div className="text-xl font-semibold mt-0.5" style={{ color: accent }}>{Math.round(model.avg_latency_ms)}<span className="text-sm text-white/40">ms</span></div>
+          {model.p95_latency_ms && (
+            <div className="text-[11px] text-white/30">p95: {Math.round(model.p95_latency_ms)}ms</div>
+          )}
         </div>
         <div className="bg-white/[0.03] rounded-lg p-3 border border-white/[0.04]">
-          <div className="text-[10px] text-white/40 uppercase tracking-wider">Total Cost</div>
-          <div className="text-base font-medium text-white/80 mt-0.5">${model.total_cost.toFixed(4)}</div>
+          <div className="text-[10px] text-white/40 uppercase tracking-wider">Cost / 1K Queries</div>
+          <div className="text-base font-medium text-white/80 mt-0.5">${costPer1k.toFixed(2)}</div>
+          <div className="text-[11px] text-white/30">10K: ${costPer10k.toFixed(2)}</div>
         </div>
         <div className="bg-white/[0.03] rounded-lg p-3 border border-white/[0.04]">
           <div className="text-[10px] text-white/40 uppercase tracking-wider">Success Rate</div>
           <div className="text-base font-medium text-[#4CAF79] mt-0.5">100%</div>
+          <div className="text-[11px] text-white/30">{model.successful_responses}/{numQuestions} queries</div>
         </div>
       </div>
+
+      {/* Quality Scores Breakdown */}
+      {model.scores && (
+        <div className="mt-4 pt-3 border-t border-white/[0.06]">
+          <div className="text-[10px] text-white/40 uppercase tracking-wider mb-2">Quality Dimensions</div>
+          <div className="grid grid-cols-5 gap-1 text-center">
+            <div>
+              <div className="text-[10px] text-white/40">Topic</div>
+              <div className="text-sm font-medium" style={{ color: model.scores.on_topic >= 4 ? "#4CAF79" : model.scores.on_topic >= 3 ? "#F59E0B" : "#EF4444" }}>
+                {model.scores.on_topic.toFixed(1)}
+              </div>
+            </div>
+            <div>
+              <div className="text-[10px] text-white/40">Ground</div>
+              <div className="text-sm font-medium" style={{ color: model.scores.grounded >= 4 ? "#4CAF79" : model.scores.grounded >= 3 ? "#F59E0B" : "#EF4444" }}>
+                {model.scores.grounded.toFixed(1)}
+              </div>
+            </div>
+            <div>
+              <div className="text-[10px] text-white/40">NoCont</div>
+              <div className="text-sm font-medium" style={{ color: model.scores.no_contradiction >= 4 ? "#4CAF79" : model.scores.no_contradiction >= 3 ? "#F59E0B" : "#EF4444" }}>
+                {model.scores.no_contradiction.toFixed(1)}
+              </div>
+            </div>
+            <div>
+              <div className="text-[10px] text-white/40">Clear</div>
+              <div className="text-sm font-medium" style={{ color: model.scores.understandability >= 4 ? "#4CAF79" : model.scores.understandability >= 3 ? "#F59E0B" : "#EF4444" }}>
+                {model.scores.understandability.toFixed(1)}
+              </div>
+            </div>
+            <div>
+              <div className="text-[10px] text-white/40">Overall</div>
+              <div className="text-sm font-medium" style={{ color: model.scores.overall >= 4 ? "#4CAF79" : model.scores.overall >= 3 ? "#F59E0B" : "#EF4444" }}>
+                {model.scores.overall.toFixed(1)}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="mt-4 pt-3 border-t border-white/[0.06] flex items-center gap-2">
         {model.api_type === "responses" ? (

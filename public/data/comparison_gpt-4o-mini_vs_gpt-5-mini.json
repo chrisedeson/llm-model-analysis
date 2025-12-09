@@ -19,7 +19,7 @@
     "name": "GPT-5-mini (minimal, low)",
     "model_id": "gpt-5-mini",
     "api_type": "responses",
-    "reasoning_effort": "low",
+    "reasoning_effort": "minimal",
     "verbosity": "low",
     "total_cost": 0.0041,
     "avg_latency_ms": 620,

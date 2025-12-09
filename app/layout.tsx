@@ -9,8 +9,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "LLM Analysis | BYU-Pathway",
-  description: "Compare GPT-4o-mini vs GPT-5-mini for BYU-Pathway Chatbot",
+  title: "LLM Model Analysis | BYU-Pathway",
+  description: "Compare and evaluate LLM models for BYU-Pathway Chatbot - response quality, latency, and cost analysis",
   icons: {
     icon: "/favicon.svg",
   },
