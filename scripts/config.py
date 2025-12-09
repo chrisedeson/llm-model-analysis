@@ -340,7 +340,3 @@ Respond with ONLY valid JSON (no markdown, no explanation outside JSON):
     "understandability": {{"score": <1-5>, "explanation": "<justification>"}},
     "overall": {{"score": <1-5>, "explanation": "<justification>"}}
 }}"""
-
-Respond with ONLY a JSON object in this exact format:
-{{"on_topic": X, "grounded": X, "no_contradiction": X, "understandability": X, "overall": X}}
-"""

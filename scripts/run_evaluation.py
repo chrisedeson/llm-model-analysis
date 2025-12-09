@@ -1,18 +1,18 @@
 """
-Main evaluation script that runs comparisons and outputs JSON for the web app.
+Unified evaluation script that runs ALL models and outputs a single JSON file.
+
+This allows the web app to compare ANY two models dynamically without 
+needing separate comparison files.
 
 Usage:
-    # List all available models
-    python run_evaluation.py --list-models
-
-    # Compare two specific models
-    python run_evaluation.py --data ../data/langfuse_traces.csv --samples 100 --models "GPT-4o-mini,GPT-5-mini (minimal, low)"
-
-    # Run ALL comparisons (GPT-4o-mini vs each GPT-5 variant) - generates 12 JSON files
-    python run_evaluation.py --data ../data/langfuse_traces.csv --samples 100 --all
-
-    # Default: compare GPT-4o-mini vs GPT-5-mini (minimal, low)
+    # Run all 13 models and generate unified results
     python run_evaluation.py --data ../data/langfuse_traces.csv --samples 100
+
+    # Run specific models only
+    python run_evaluation.py --data ../data/langfuse_traces.csv --samples 50 --models "GPT-4o-mini,GPT-5-mini (minimal, low)"
+
+    # List available models
+    python run_evaluation.py --list-models
 """
 
 import argparse
@@ -24,73 +24,77 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
-from openai import AsyncOpenAI, OpenAI
+from dotenv import load_dotenv
+from openai import AsyncOpenAI
 
-from config import ALL_MODELS, DEFAULT_COMPARISON, MODELS_BY_NAME, ModelConfig, GPT_4O_MINI
+from config import ALL_MODELS, MODELS_BY_NAME, ModelConfig, GRADER_MODEL, GRADER_REASONING_EFFORT
 from grader import Grader, GradingResult
 from model_runner import AsyncModelRunner, ModelResponse
+
+# Load environment variables from .env file
+load_dotenv()
 
 
 def list_available_models():
     """Print all available models."""
     print("\n" + "=" * 60)
-    print("Available Models")
+    print("Available Models (13 total)")
     print("=" * 60)
     
-    print("\n📌 Baseline Model (no reasoning_effort/verbosity):")
-    print(f"   • GPT-4o-mini")
+    print("\n📌 Baseline Model:")
+    print("   • GPT-4o-mini")
     
-    print("\n🔬 GPT-5-mini Variants (reasoning_effort, verbosity):")
+    print("\n🔬 GPT-5-mini Variants (6):")
     for m in ALL_MODELS:
         if m.model_id == "gpt-5-mini":
             print(f"   • {m.name}")
     
-    print("\n🔬 GPT-5-nano Variants (reasoning_effort, verbosity):")
+    print("\n🔬 GPT-5-nano Variants (6):")
     for m in ALL_MODELS:
         if m.model_id == "gpt-5-nano":
             print(f"   • {m.name}")
     
-    print("\n" + "-" * 60)
-    print("Usage Examples:")
-    print("-" * 60)
-    print('  # Compare specific models:')
-    print('  python run_evaluation.py --data data.csv --models "GPT-4o-mini,GPT-5-mini (low, medium)"')
-    print('')
-    print('  # Run ALL comparisons (GPT-4o-mini vs each GPT-5 variant):')
-    print('  python run_evaluation.py --data data.csv --samples 100 --all')
-    print("=" * 60 + "\n")
+    print("\n" + "=" * 60 + "\n")
 
 
 def load_langfuse_data(csv_path: str, max_samples: int | None = None) -> list[dict]:
-    """
-    Load questions from Langfuse CSV export.
-    
-    Filters out bad rows containing 'args' or 'kwargs' (Langfuse errors).
-    """
+    """Load questions from Langfuse CSV export."""
     questions = []
     
-    with open(csv_path, "r", encoding="utf-8") as f:
+    # Use utf-8-sig to handle BOM (Byte Order Mark) if present
+    with open(csv_path, "r", encoding="utf-8-sig") as f:
         reader = csv.DictReader(f)
         
+        # Validate that we have the expected columns
+        fieldnames = reader.fieldnames or []
+        input_col = next((c for c in ["input", "Input"] if c in fieldnames), None)
+        context_col = next((c for c in ["context", "Context"] if c in fieldnames), None)
+        id_col = next((c for c in ["trace_id", "id", "ID"] if c in fieldnames), None)
+        
+        if not input_col:
+            print(f"Error: No 'input' or 'Input' column found in CSV.")
+            print(f"Available columns: {fieldnames}")
+            return []
+        
+        if not context_col:
+            print(f"Warning: No 'context' or 'Context' column found. Using empty context.")
+        
         for row in reader:
-            # Get the input/question field
-            input_text = row.get("input", "") or row.get("Input", "") or ""
+            input_text = row.get(input_col, "") or ""
             
-            # Skip bad rows (Langfuse errors, not real questions)
+            # Skip bad rows
             if "args" in input_text.lower() or "kwargs" in input_text.lower():
                 continue
-            
-            # Skip empty rows
             if not input_text.strip():
                 continue
             
-            # Get context if available
-            context = row.get("context", "") or row.get("Context", "") or ""
+            context = row.get(context_col, "") if context_col else ""
+            trace_id = row.get(id_col, "") if id_col else ""
             
             questions.append({
                 "question": input_text.strip(),
                 "context": context.strip() if context else "",
-                "trace_id": row.get("trace_id", "") or row.get("id", ""),
+                "trace_id": trace_id,
             })
             
             if max_samples and len(questions) >= max_samples:
@@ -98,6 +102,13 @@ def load_langfuse_data(csv_path: str, max_samples: int | None = None) -> list[di
     
     print(f"Loaded {len(questions)} valid questions from {csv_path}")
     return questions
+
+
+def get_model_key(model: ModelConfig) -> str:
+    """Generate a unique key for a model."""
+    if model.reasoning_effort and model.verbosity:
+        return f"{model.model_id}_{model.reasoning_effort}_{model.verbosity}"
+    return model.model_id
 
 
 async def run_model_evaluation(
@@ -109,7 +120,7 @@ async def run_model_evaluation(
     client = AsyncOpenAI()
     runner = AsyncModelRunner(model, client, max_concurrent)
     
-    print(f"Running {model.name} on {len(questions)} questions...")
+    print(f"\n🔄 Running {model.name} on {len(questions)} questions...")
     
     question_context_pairs = [
         (q["question"], q.get("context", "")) for q in questions
@@ -119,12 +130,22 @@ async def run_model_evaluation(
     
     # Print summary
     successful = [r for r in responses if r.error is None]
-    total_cost = sum(r.cost for r in successful)
-    avg_latency = sum(r.latency_ms for r in successful) / len(successful) if successful else 0
+    failed = [r for r in responses if r.error is not None]
     
-    print(f"  ✓ {len(successful)}/{len(responses)} successful")
-    print(f"  ⏱ Avg latency: {avg_latency:.0f}ms")
-    print(f"  💰 Total cost: ${total_cost:.4f}")
+    if successful:
+        total_cost = sum(r.cost for r in successful)
+        avg_latency = sum(r.latency_ms for r in successful) / len(successful)
+        print(f"   ✓ {len(successful)}/{len(responses)} successful")
+        print(f"   ⏱ Avg latency: {avg_latency:.0f}ms")
+        print(f"   💰 Total cost: ${total_cost:.4f}")
+    else:
+        print(f"   ✗ All {len(responses)} requests failed")
+    
+    if failed:
+        # Show first unique error for debugging
+        unique_errors = set(r.error for r in failed if r.error)
+        for error in list(unique_errors)[:3]:  # Show up to 3 unique errors
+            print(f"   ⚠ Error: {error[:100]}...")
     
     return responses
 
@@ -133,336 +154,326 @@ def grade_responses(
     questions: list[dict],
     responses: list[ModelResponse],
     grader: Grader,
+    model_name: str,
 ) -> list[GradingResult]:
-    """Grade all responses."""
-    print(f"Grading {len(responses)} responses...")
+    """Grade all responses for a model."""
+    print(f"   📝 Grading {model_name} responses...")
     
     grades = []
+    error_count = 0
+    
     for i, (q, r) in enumerate(zip(questions, responses)):
         if r.error:
             grades.append(GradingResult(
                 on_topic=1, grounded=1, no_contradiction=1,
                 understandability=1, overall=1, error=r.error
             ))
+            error_count += 1
         else:
-            grades.append(grader.grade(q["question"], q.get("context", ""), r.response))
+            grade = grader.grade(q["question"], q.get("context", ""), r.response)
+            grades.append(grade)
+            if grade.error:
+                error_count += 1
         
-        if (i + 1) % 10 == 0:
-            print(f"  Graded {i + 1}/{len(responses)}")
+        if (i + 1) % 25 == 0:
+            print(f"      Graded {i + 1}/{len(responses)}")
+    
+    if error_count > 0:
+        print(f"      ⚠ {error_count} grading errors")
     
     return grades
 
 
-def build_comparison_json(
-    model1: ModelConfig,
-    model2: ModelConfig,
-    questions: list[dict],
-    responses1: list[ModelResponse],
-    responses2: list[ModelResponse],
-    grades1: list[GradingResult],
-    grades2: list[GradingResult],
+def build_model_summary(
+    model: ModelConfig,
+    responses: list[ModelResponse],
+    grades: list[GradingResult],
 ) -> dict:
-    """Build JSON structure for the comparison page."""
-    from config import GRADER_MODEL, GRADER_REASONING_EFFORT
+    """Build summary stats for a single model."""
+    successful = [r for r in responses if r.error is None]
+    valid_grades = [g for g in grades if g.error is None]
     
-    # Separate successful vs error responses
-    successful1 = [r for r in responses1 if r.error is None]
-    successful2 = [r for r in responses2 if r.error is None]
+    # Handle case where all responses failed
+    if not successful:
+        return {
+            "name": model.name,
+            "model_id": model.model_id,
+            "api_type": model.api_type,
+            "reasoning_effort": model.reasoning_effort,
+            "verbosity": model.verbosity,
+            "successful_responses": 0,
+            "total_responses": len(responses),
+            "avg_score": 0,
+            "scores": {
+                "on_topic": 0,
+                "grounded": 0,
+                "no_contradiction": 0,
+                "understandability": 0,
+                "overall": 0,
+            },
+            "avg_latency_ms": 0,
+            "p95_latency_ms": 0,
+            "usage": {
+                "total_input_tokens": 0,
+                "total_output_tokens": 0,
+                "total_tokens": 0,
+                "avg_input_tokens": 0,
+                "avg_output_tokens": 0,
+            },
+            "costs": {
+                "input_cost": 0,
+                "output_cost": 0,
+                "total_cost": 0,
+                "cost_per_query": 0,
+                "cost_per_1k": 0,
+                "cost_per_10k": 0,
+            },
+            "pricing": {
+                "input_price_per_million": model.input_price_per_million,
+                "output_price_per_million": model.output_price_per_million,
+            },
+        }
     
-    # Calculate actual token usage from API responses
-    total_input_tokens1 = sum(r.input_tokens for r in successful1)
-    total_output_tokens1 = sum(r.output_tokens for r in successful1)
-    total_input_tokens2 = sum(r.input_tokens for r in successful2)
-    total_output_tokens2 = sum(r.output_tokens for r in successful2)
-    
-    # Calculate actual costs from API usage
-    total_cost1 = sum(r.cost for r in successful1)
-    total_cost2 = sum(r.cost for r in successful2)
-    
-    # Break down costs by input/output
-    input_cost1 = (total_input_tokens1 / 1_000_000) * model1.input_price_per_million
-    output_cost1 = (total_output_tokens1 / 1_000_000) * model1.output_price_per_million
-    input_cost2 = (total_input_tokens2 / 1_000_000) * model2.input_price_per_million
-    output_cost2 = (total_output_tokens2 / 1_000_000) * model2.output_price_per_million
+    # Token usage
+    total_input_tokens = sum(r.input_tokens for r in successful)
+    total_output_tokens = sum(r.output_tokens for r in successful)
+    total_cost = sum(r.cost for r in successful)
     
     # Latency stats
-    latencies1 = sorted([r.latency_ms for r in successful1])
-    latencies2 = sorted([r.latency_ms for r in successful2])
+    latencies = sorted([r.latency_ms for r in successful])
+    avg_latency = sum(latencies) / len(latencies)
+    p95_idx = int(len(latencies) * 0.95)
+    p95_latency = latencies[min(p95_idx, len(latencies) - 1)]
     
-    avg_latency1 = sum(latencies1) / len(latencies1) if latencies1 else 0
-    avg_latency2 = sum(latencies2) / len(latencies2) if latencies2 else 0
+    # Score stats
+    avg_score = sum(g.average for g in valid_grades) / len(valid_grades) if valid_grades else 0
     
-    # P95 latency
-    p95_idx1 = int(len(latencies1) * 0.95) if latencies1 else 0
-    p95_idx2 = int(len(latencies2) * 0.95) if latencies2 else 0
-    p95_latency1 = latencies1[min(p95_idx1, len(latencies1) - 1)] if latencies1 else 0
-    p95_latency2 = latencies2[min(p95_idx2, len(latencies2) - 1)] if latencies2 else 0
-    
-    # Average tokens per query (from actual API responses)
-    avg_input_tokens1 = total_input_tokens1 / len(successful1) if successful1 else 0
-    avg_output_tokens1 = total_output_tokens1 / len(successful1) if successful1 else 0
-    avg_input_tokens2 = total_input_tokens2 / len(successful2) if successful2 else 0
-    avg_output_tokens2 = total_output_tokens2 / len(successful2) if successful2 else 0
-    
-    # Cost per query (actual)
-    cost_per_query1 = total_cost1 / len(successful1) if successful1 else 0
-    cost_per_query2 = total_cost2 / len(successful2) if successful2 else 0
-    
-    valid_grades1 = [g for g in grades1 if g.error is None]
-    valid_grades2 = [g for g in grades2 if g.error is None]
-    
-    avg_score1 = sum(g.average for g in valid_grades1) / len(valid_grades1) if valid_grades1 else 0
-    avg_score2 = sum(g.average for g in valid_grades2) / len(valid_grades2) if valid_grades2 else 0
-    
-    # Average scores by dimension
-    def avg_dimension(grades, attr):
-        vals = [getattr(g, attr) for g in grades if g.error is None]
+    def avg_dimension(attr: str) -> float:
+        vals = [getattr(g, attr) for g in valid_grades]
         return sum(vals) / len(vals) if vals else 0
     
-    scores1 = {
-        "on_topic": avg_dimension(grades1, "on_topic"),
-        "grounded": avg_dimension(grades1, "grounded"),
-        "no_contradiction": avg_dimension(grades1, "no_contradiction"),
-        "understandability": avg_dimension(grades1, "understandability"),
-        "overall": avg_dimension(grades1, "overall"),
-    }
-    scores2 = {
-        "on_topic": avg_dimension(grades2, "on_topic"),
-        "grounded": avg_dimension(grades2, "grounded"),
-        "no_contradiction": avg_dimension(grades2, "no_contradiction"),
-        "understandability": avg_dimension(grades2, "understandability"),
-        "overall": avg_dimension(grades2, "overall"),
-    }
+    num_queries = len(successful)
     
-    # Build per-question comparison (include token details)
-    comparisons = []
+    return {
+        "name": model.name,
+        "model_id": model.model_id,
+        "api_type": model.api_type,
+        "reasoning_effort": model.reasoning_effort,
+        "verbosity": model.verbosity,
+        "successful_responses": len(successful),
+        "total_responses": len(responses),
+        # Scores
+        "avg_score": round(avg_score, 3),
+        "scores": {
+            "on_topic": round(avg_dimension("on_topic"), 3),
+            "grounded": round(avg_dimension("grounded"), 3),
+            "no_contradiction": round(avg_dimension("no_contradiction"), 3),
+            "understandability": round(avg_dimension("understandability"), 3),
+            "overall": round(avg_dimension("overall"), 3),
+        },
+        # Latency
+        "avg_latency_ms": round(avg_latency, 1),
+        "p95_latency_ms": round(p95_latency, 1),
+        # Token usage
+        "usage": {
+            "total_input_tokens": total_input_tokens,
+            "total_output_tokens": total_output_tokens,
+            "total_tokens": total_input_tokens + total_output_tokens,
+            "avg_input_tokens": round(total_input_tokens / num_queries, 1),
+            "avg_output_tokens": round(total_output_tokens / num_queries, 1),
+        },
+        # Costs
+        "costs": {
+            "input_cost": round((total_input_tokens / 1_000_000) * model.input_price_per_million, 6),
+            "output_cost": round((total_output_tokens / 1_000_000) * model.output_price_per_million, 6),
+            "total_cost": round(total_cost, 6),
+            "cost_per_query": round(total_cost / num_queries, 8),
+            "cost_per_1k": round((total_cost / num_queries) * 1000, 4),
+            "cost_per_10k": round((total_cost / num_queries) * 10000, 4),
+        },
+        # Pricing info
+        "pricing": {
+            "input_price_per_million": model.input_price_per_million,
+            "output_price_per_million": model.output_price_per_million,
+        },
+    }
+
+
+def build_unified_json(
+    questions: list[dict],
+    models: list[ModelConfig],
+    all_responses: dict[str, list[ModelResponse]],
+    all_grades: dict[str, list[GradingResult]],
+) -> dict:
+    """Build the unified JSON with all models and responses."""
+    
+    # Build model summaries
+    model_summaries = {}
+    for model in models:
+        key = get_model_key(model)
+        model_summaries[key] = build_model_summary(
+            model, all_responses[key], all_grades[key]
+        )
+    
+    # Build questions with all model responses
+    questions_data = []
     for i, q in enumerate(questions):
-        r1 = responses1[i]
-        r2 = responses2[i]
-        g1 = grades1[i]
-        g2 = grades2[i]
-        
-        comparisons.append({
+        question_entry = {
             "id": i + 1,
             "question": q["question"],
             "context": q.get("context", ""),
-            "model1": {
-                "response": r1.response,
-                "latency_ms": r1.latency_ms,
-                "input_tokens": r1.input_tokens,
-                "output_tokens": r1.output_tokens,
-                "cost": r1.cost,
+            "responses": {}
+        }
+        
+        for model in models:
+            key = get_model_key(model)
+            r = all_responses[key][i]
+            g = all_grades[key][i]
+            
+            question_entry["responses"][key] = {
+                "response": r.response,
+                "latency_ms": r.latency_ms,
+                "input_tokens": r.input_tokens,
+                "output_tokens": r.output_tokens,
+                "cost": r.cost,
                 "grade": {
-                    "on_topic": g1.on_topic,
-                    "grounded": g1.grounded,
-                    "no_contradiction": g1.no_contradiction,
-                    "understandability": g1.understandability,
-                    "overall": g1.overall,
-                    "average": g1.average,
+                    "on_topic": g.on_topic,
+                    "grounded": g.grounded,
+                    "no_contradiction": g.no_contradiction,
+                    "understandability": g.understandability,
+                    "overall": g.overall,
+                    "average": g.average,
                 },
-                "error": r1.error,
-            },
-            "model2": {
-                "response": r2.response,
-                "latency_ms": r2.latency_ms,
-                "input_tokens": r2.input_tokens,
-                "output_tokens": r2.output_tokens,
-                "cost": r2.cost,
-                "grade": {
-                    "on_topic": g2.on_topic,
-                    "grounded": g2.grounded,
-                    "no_contradiction": g2.no_contradiction,
-                    "understandability": g2.understandability,
-                    "overall": g2.overall,
-                    "average": g2.average,
-                },
-                "error": r2.error,
-            },
-        })
+                "error": r.error,
+            }
+        
+        questions_data.append(question_entry)
     
     return {
         "metadata": {
             "generated_at": datetime.now().isoformat(),
             "num_questions": len(questions),
+            "num_models": len(models),
             "grader_model": GRADER_MODEL,
             "grader_reasoning_effort": GRADER_REASONING_EFFORT,
+            "model_keys": [get_model_key(m) for m in models],
         },
-        "model1": {
-            "name": model1.name,
-            "model_id": model1.model_id,
-            "api_type": model1.api_type,
-            "reasoning_effort": model1.reasoning_effort,
-            "verbosity": model1.verbosity,
-            # Actual token usage from API
-            "usage": {
-                "total_input_tokens": total_input_tokens1,
-                "total_output_tokens": total_output_tokens1,
-                "total_tokens": total_input_tokens1 + total_output_tokens1,
-                "avg_input_tokens": round(avg_input_tokens1, 1),
-                "avg_output_tokens": round(avg_output_tokens1, 1),
-            },
-            # Actual costs from API usage
-            "costs": {
-                "input_cost": round(input_cost1, 6),
-                "output_cost": round(output_cost1, 6),
-                "total_cost": round(total_cost1, 6),
-                "cost_per_query": round(cost_per_query1, 6),
-                "cost_per_1k": round(cost_per_query1 * 1000, 4),
-                "cost_per_10k": round(cost_per_query1 * 10000, 4),
-            },
-            # Pricing used for calculation
-            "pricing": {
-                "input_price_per_million": model1.input_price_per_million,
-                "output_price_per_million": model1.output_price_per_million,
-            },
-            # Performance
-            "avg_latency_ms": round(avg_latency1, 1),
-            "p95_latency_ms": round(p95_latency1, 1),
-            "avg_score": round(avg_score1, 2),
-            "scores": {k: round(v, 2) for k, v in scores1.items()},
-            "successful_responses": len(successful1),
-        },
-        "model2": {
-            "name": model2.name,
-            "model_id": model2.model_id,
-            "api_type": model2.api_type,
-            "reasoning_effort": model2.reasoning_effort,
-            "verbosity": model2.verbosity,
-            # Actual token usage from API
-            "usage": {
-                "total_input_tokens": total_input_tokens2,
-                "total_output_tokens": total_output_tokens2,
-                "total_tokens": total_input_tokens2 + total_output_tokens2,
-                "avg_input_tokens": round(avg_input_tokens2, 1),
-                "avg_output_tokens": round(avg_output_tokens2, 1),
-            },
-            # Actual costs from API usage
-            "costs": {
-                "input_cost": round(input_cost2, 6),
-                "output_cost": round(output_cost2, 6),
-                "total_cost": round(total_cost2, 6),
-                "cost_per_query": round(cost_per_query2, 6),
-                "cost_per_1k": round(cost_per_query2 * 1000, 4),
-                "cost_per_10k": round(cost_per_query2 * 10000, 4),
-            },
-            # Pricing used for calculation
-            "pricing": {
-                "input_price_per_million": model2.input_price_per_million,
-                "output_price_per_million": model2.output_price_per_million,
-            },
-            # Performance
-            "avg_latency_ms": round(avg_latency2, 1),
-            "p95_latency_ms": round(p95_latency2, 1),
-            "avg_score": round(avg_score2, 2),
-            "scores": {k: round(v, 2) for k, v in scores2.items()},
-            "successful_responses": len(successful2),
-        },
-        "comparisons": comparisons,
+        "models": model_summaries,
+        "questions": questions_data,
     }
 
 
 async def main():
-    parser = argparse.ArgumentParser(description="Run LLM model evaluation")
-    parser.add_argument("--data", help="Path to Langfuse CSV file")
+    parser = argparse.ArgumentParser(description="Run unified LLM evaluation")
+    parser.add_argument("--data", type=str, help="Path to Langfuse CSV export")
     parser.add_argument("--samples", type=int, default=100, help="Number of samples to evaluate")
-    parser.add_argument("--models", help="Comma-separated model names to compare (exactly 2 models)")
-    parser.add_argument("--all", action="store_true", help="Run ALL comparisons: GPT-4o-mini vs each GPT-5 variant")
-    parser.add_argument("--list-models", action="store_true", help="List all available models and exit")
-    parser.add_argument("--output", default="../public/data", help="Output directory for JSON files")
-    parser.add_argument("--concurrent", type=int, default=10, help="Max concurrent API calls")
+    parser.add_argument("--models", type=str, help="Comma-separated model names (default: all)")
+    parser.add_argument("--concurrent", type=int, default=10, help="Max concurrent requests")
+    parser.add_argument("--output", type=str, default="../public/data", help="Output directory")
+    parser.add_argument("--list-models", action="store_true", help="List available models")
+    
     args = parser.parse_args()
     
-    # Handle --list-models
     if args.list_models:
         list_available_models()
         return
     
-    # Data is required for evaluation
     if not args.data:
-        print("Error: --data is required (or use --list-models to see available models)")
+        print("Error: --data is required")
+        print("Usage: python run_evaluation.py --data path/to/langfuse.csv --samples 100")
         sys.exit(1)
     
-    # Load data once
+    # Check if data file exists
+    if not os.path.exists(args.data):
+        print(f"Error: Data file not found: {args.data}")
+        sys.exit(1)
+    
+    # Load questions
     questions = load_langfuse_data(args.data, args.samples)
     if not questions:
         print("Error: No valid questions found in CSV")
         sys.exit(1)
     
-    # Determine which comparisons to run
-    if args.all:
-        # Run GPT-4o-mini vs ALL GPT-5 variants
-        comparisons_to_run = [
-            (GPT_4O_MINI, m) for m in ALL_MODELS if m.model_id != "gpt-4o-mini"
-        ]
-        print(f"\n{'='*60}")
-        print(f"Running ALL {len(comparisons_to_run)} comparisons")
-        print(f"{'='*60}\n")
-    elif args.models:
+    # Determine which models to run
+    if args.models:
         model_names = [m.strip() for m in args.models.split(",")]
-        if len(model_names) != 2:
-            print("Error: Must specify exactly 2 models to compare")
+        models_to_run = []
+        for name in model_names:
+            if name in MODELS_BY_NAME:
+                models_to_run.append(MODELS_BY_NAME[name])
+            else:
+                print(f"Warning: Unknown model '{name}', skipping")
+                print(f"  Available models: {list(MODELS_BY_NAME.keys())[:5]}...")
+        if not models_to_run:
+            print("Error: No valid models specified")
             print("Use --list-models to see available models")
             sys.exit(1)
-        model1 = MODELS_BY_NAME.get(model_names[0])
-        model2 = MODELS_BY_NAME.get(model_names[1])
-        if not model1 or not model2:
-            print(f"Error: Unknown model. Use --list-models to see available models")
-            sys.exit(1)
-        comparisons_to_run = [(model1, model2)]
     else:
-        comparisons_to_run = [DEFAULT_COMPARISON]
+        models_to_run = ALL_MODELS
     
-    # Initialize grader once
+    print(f"\n{'='*60}")
+    print("Unified LLM Evaluation")
+    print(f"{'='*60}")
+    print(f"Questions: {len(questions)}")
+    print(f"Models: {len(models_to_run)}")
+    print(f"Output: {args.output}")
+    print(f"{'='*60}")
+    
+    # Initialize grader
     grader = Grader()
     
-    # Run each comparison
-    for i, (model1, model2) in enumerate(comparisons_to_run):
-        if len(comparisons_to_run) > 1:
-            print(f"\n{'='*60}")
-            print(f"Comparison {i+1}/{len(comparisons_to_run)}: {model1.name} vs {model2.name}")
-            print(f"{'='*60}\n")
-        else:
-            print(f"\n{'='*60}")
-            print(f"LLM Model Comparison: {model1.name} vs {model2.name}")
-            print(f"{'='*60}\n")
+    # Run all models
+    all_responses: dict[str, list[ModelResponse]] = {}
+    all_grades: dict[str, list[GradingResult]] = {}
+    
+    for i, model in enumerate(models_to_run):
+        print(f"\n[{i+1}/{len(models_to_run)}] {model.name}")
+        print("-" * 40)
         
-        # Run both models
-        responses1 = await run_model_evaluation(model1, questions, args.concurrent)
-        responses2 = await run_model_evaluation(model2, questions, args.concurrent)
+        key = get_model_key(model)
+        
+        # Run model
+        responses = await run_model_evaluation(model, questions, args.concurrent)
+        all_responses[key] = responses
         
         # Grade responses
-        grades1 = grade_responses(questions, responses1, grader)
-        grades2 = grade_responses(questions, responses2, grader)
-        
-        # Build comparison JSON
-        comparison = build_comparison_json(
-            model1, model2, questions,
-            responses1, responses2, grades1, grades2
-        )
-        
-        # Ensure output directory exists
-        output_dir = Path(args.output)
-        output_dir.mkdir(parents=True, exist_ok=True)
-        
-        # Generate filename - sanitize model names for filenames
-        m1_safe = model1.model_id
-        m2_safe = model2.model_id
-        if model2.reasoning_effort and model2.verbosity:
-            m2_safe = f"{model2.model_id}_{model2.reasoning_effort}_{model2.verbosity}"
-        
-        output_file = output_dir / f"comparison_{m1_safe}_vs_{m2_safe}.json"
-        with open(output_file, "w", encoding="utf-8") as f:
-            json.dump(comparison, f, indent=2)
-        
-        print(f"\n✅ Saved: {output_file}")
-        print(f"   {model1.name}: Score={comparison['model1']['avg_score']:.2f}, Latency={comparison['model1']['avg_latency_ms']:.0f}ms, Cost=${comparison['model1']['total_cost']:.4f}")
-        print(f"   {model2.name}: Score={comparison['model2']['avg_score']:.2f}, Latency={comparison['model2']['avg_latency_ms']:.0f}ms, Cost=${comparison['model2']['total_cost']:.4f}")
+        grades = grade_responses(questions, responses, grader, model.name)
+        all_grades[key] = grades
     
-    if len(comparisons_to_run) > 1:
-        print(f"\n{'='*60}")
-        print(f"✅ All {len(comparisons_to_run)} comparisons complete!")
-        print(f"   JSON files saved to: {args.output}")
-        print(f"{'='*60}\n")
+    # Build unified JSON
+    print(f"\n{'='*60}")
+    print("Building unified JSON...")
+    
+    unified_data = build_unified_json(questions, models_to_run, all_responses, all_grades)
+    
+    # Save output
+    output_dir = Path(args.output)
+    output_dir.mkdir(parents=True, exist_ok=True)
+    
+    output_file = output_dir / "evaluation_results.json"
+    with open(output_file, "w", encoding="utf-8") as f:
+        json.dump(unified_data, f, indent=2)
+    
+    print(f"\n✅ Saved: {output_file}")
+    print(f"\n{'='*60}")
+    print("Summary")
+    print(f"{'='*60}")
+    
+    # Print summary table
+    print(f"\n{'Model':<35} {'Score':>8} {'Latency':>10} {'Cost':>10}")
+    print("-" * 65)
+    for model in models_to_run:
+        key = get_model_key(model)
+        summary = unified_data["models"][key]
+        print(f"{model.name:<35} {summary['avg_score']:>8.2f} {summary['avg_latency_ms']:>8.0f}ms ${summary['costs']['total_cost']:>8.4f}")
+    
+    # Print totals
+    total_cost = sum(unified_data["models"][get_model_key(m)]["costs"]["total_cost"] for m in models_to_run)
+    avg_score = sum(unified_data["models"][get_model_key(m)]["avg_score"] for m in models_to_run) / len(models_to_run)
+    print("-" * 65)
+    print(f"{'AVERAGE':<35} {avg_score:>8.2f} {'':>10} ${total_cost:>8.4f}")
+    
+    print(f"\n{'='*60}\n")
 
 
 if __name__ == "__main__":

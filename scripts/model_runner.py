@@ -9,7 +9,6 @@ Supports both synchronous and asynchronous execution with:
 import asyncio
 import time
 from dataclasses import dataclass
-from typing import Literal
 
 from openai import AsyncOpenAI, OpenAI
 
@@ -41,21 +40,24 @@ class ModelRunner:
     
     def run(self, question: str, context: str) -> ModelResponse:
         """Run a single question through the model."""
-        start_time = time.time()
+        last_error = None
         
         for attempt in range(self.max_retries):
             try:
+                # Reset start time for each attempt so latency reflects only the successful call
+                start_time = time.time()
+                
                 if self.config.api_type == "chat_completions":
                     return self._run_chat_completions(question, context, start_time)
                 else:
                     return self._run_responses(question, context, start_time)
+                    
             except Exception as e:
+                last_error = str(e)
                 if attempt < self.max_retries - 1:
                     time.sleep(self.retry_delay)
-                else:
-                    return self._error_response(question, context, str(e))
         
-        return self._error_response(question, context, "Max retries exceeded")
+        return self._error_response(question, context, last_error or "Max retries exceeded")
     
     def _run_chat_completions(self, question: str, context: str, start_time: float) -> ModelResponse:
         """Run using Chat Completions API (GPT-4o-mini)."""
@@ -75,11 +77,18 @@ class ModelRunner:
         input_tokens = response.usage.prompt_tokens
         output_tokens = response.usage.completion_tokens
         
+        response_text = response.choices[0].message.content or ""
+        
+        if not response_text.strip():
+            return self._error_response(
+                question, context, "Empty response from chat completions API"
+            )
+        
         return ModelResponse(
             model_name=self.config.name,
             question=question,
             context=context,
-            response=response.choices[0].message.content,
+            response=response_text,
             latency_ms=latency_ms,
             input_tokens=input_tokens,
             output_tokens=output_tokens,
@@ -103,13 +112,12 @@ class ModelRunner:
         output_tokens = response.usage.output_tokens
         
         # Extract text from response
-        response_text = ""
-        for item in response.output:
-            if item.type == "message":
-                for content in item.content:
-                    if content.type == "output_text":
-                        response_text = content.text
-                        break
+        response_text = self._extract_response_text(response)
+        
+        if not response_text.strip():
+            return self._error_response(
+                question, context, "No output_text found in responses API response"
+            )
         
         return ModelResponse(
             model_name=self.config.name,
@@ -121,6 +129,15 @@ class ModelRunner:
             output_tokens=output_tokens,
             cost=self._calculate_cost(input_tokens, output_tokens),
         )
+    
+    def _extract_response_text(self, response) -> str:
+        """Extract text content from the Responses API response."""
+        for item in response.output:
+            if item.type == "message":
+                for content in item.content:
+                    if content.type == "output_text":
+                        return content.text
+        return ""
     
     def _calculate_cost(self, input_tokens: int, output_tokens: int) -> float:
         """Calculate cost in USD."""
@@ -161,21 +178,24 @@ class AsyncModelRunner:
     async def run(self, question: str, context: str) -> ModelResponse:
         """Run a single question through the model with bounded concurrency."""
         async with self.semaphore:
-            start_time = time.time()
+            last_error = None
             
             for attempt in range(self.max_retries):
                 try:
+                    # Reset start time for each attempt so latency reflects only the successful call
+                    start_time = time.time()
+                    
                     if self.config.api_type == "chat_completions":
                         return await self._run_chat_completions(question, context, start_time)
                     else:
                         return await self._run_responses(question, context, start_time)
+                        
                 except Exception as e:
+                    last_error = str(e)
                     if attempt < self.max_retries - 1:
                         await asyncio.sleep(self.retry_delay)
-                    else:
-                        return self._error_response(question, context, str(e))
             
-            return self._error_response(question, context, "Max retries exceeded")
+            return self._error_response(question, context, last_error or "Max retries exceeded")
     
     async def _run_chat_completions(self, question: str, context: str, start_time: float) -> ModelResponse:
         """Run using Chat Completions API (GPT-4o-mini)."""
@@ -195,11 +215,18 @@ class AsyncModelRunner:
         input_tokens = response.usage.prompt_tokens
         output_tokens = response.usage.completion_tokens
         
+        response_text = response.choices[0].message.content or ""
+        
+        if not response_text.strip():
+            return self._error_response(
+                question, context, "Empty response from chat completions API"
+            )
+        
         return ModelResponse(
             model_name=self.config.name,
             question=question,
             context=context,
-            response=response.choices[0].message.content,
+            response=response_text,
             latency_ms=latency_ms,
             input_tokens=input_tokens,
             output_tokens=output_tokens,
@@ -223,13 +250,12 @@ class AsyncModelRunner:
         output_tokens = response.usage.output_tokens
         
         # Extract text from response
-        response_text = ""
-        for item in response.output:
-            if item.type == "message":
-                for content in item.content:
-                    if content.type == "output_text":
-                        response_text = content.text
-                        break
+        response_text = self._extract_response_text(response)
+        
+        if not response_text.strip():
+            return self._error_response(
+                question, context, "No output_text found in responses API response"
+            )
         
         return ModelResponse(
             model_name=self.config.name,
@@ -241,6 +267,15 @@ class AsyncModelRunner:
             output_tokens=output_tokens,
             cost=self._calculate_cost(input_tokens, output_tokens),
         )
+    
+    def _extract_response_text(self, response) -> str:
+        """Extract text content from the Responses API response."""
+        for item in response.output:
+            if item.type == "message":
+                for content in item.content:
+                    if content.type == "output_text":
+                        return content.text
+        return ""
     
     def _calculate_cost(self, input_tokens: int, output_tokens: int) -> float:
         """Calculate cost in USD."""
