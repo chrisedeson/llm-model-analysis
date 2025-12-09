@@ -1,0 +1,952 @@
+{
+  "metadata": {
+    "generated_at": "2025-12-09T20:14:20.934658",
+    "num_questions": 2,
+    "num_models": 13,
+    "grader_model": "gpt-5.1",
+    "grader_reasoning_effort": "high",
+    "model_keys": [
+      "gpt-4o-mini",
+      "gpt-5-mini_minimal_low",
+      "gpt-5-mini_minimal_medium",
+      "gpt-5-mini_minimal_high",
+      "gpt-5-mini_low_low",
+      "gpt-5-mini_low_medium",
+      "gpt-5-mini_low_high",
+      "gpt-5-nano_minimal_low",
+      "gpt-5-nano_minimal_medium",
+      "gpt-5-nano_minimal_high",
+      "gpt-5-nano_low_low",
+      "gpt-5-nano_low_medium",
+      "gpt-5-nano_low_high"
+    ]
+  },
+  "models": {
+    "gpt-4o-mini": {
+      "name": "GPT-4o-mini",
+      "model_id": "gpt-4o-mini",
+      "api_type": "chat_completions",
+      "reasoning_effort": null,
+      "verbosity": null,
+      "successful_responses": 2,
+      "total_responses": 2,
+      "avg_score": 1.0,
+      "scores": {
+        "on_topic": 1.0,
+        "grounded": 1.0,
+        "no_contradiction": 1.0,
+        "understandability": 1.0,
+        "overall": 1.0
+      },
+      "avg_latency_ms": 3538.5,
+      "p95_latency_ms": 3850.3,
+      "usage": {
+        "total_input_tokens": 2386,
+        "total_output_tokens": 12,
+        "total_tokens": 2398,
+        "avg_input_tokens": 1193.0,
+        "avg_output_tokens": 6.0
+      },
+      "costs": {
+        "input_cost": 0.000358,
+        "output_cost": 7e-06,
+        "total_cost": 0.000365,
+        "cost_per_query": 0.00018255,
+        "cost_per_1k": 0.1826,
+        "cost_per_10k": 1.8255
+      },
+      "pricing": {
+        "input_price_per_million": 0.15,
+        "output_price_per_million": 0.6
+      }
+    },
+    "gpt-5-mini_minimal_low": {
+      "name": "GPT-5-mini (minimal, low)",
+      "model_id": "gpt-5-mini",
+      "api_type": "responses",
+      "reasoning_effort": "minimal",
+      "verbosity": "low",
+      "successful_responses": 2,
+      "total_responses": 2,
+      "avg_score": 1.0,
+      "scores": {
+        "on_topic": 1.0,
+        "grounded": 1.0,
+        "no_contradiction": 1.0,
+        "understandability": 1.0,
+        "overall": 1.0
+      },
+      "avg_latency_ms": 2377.3,
+      "p95_latency_ms": 2847.4,
+      "usage": {
+        "total_input_tokens": 2384,
+        "total_output_tokens": 24,
+        "total_tokens": 2408,
+        "avg_input_tokens": 1192.0,
+        "avg_output_tokens": 12.0
+      },
+      "costs": {
+        "input_cost": 0.000596,
+        "output_cost": 4.8e-05,
+        "total_cost": 0.000644,
+        "cost_per_query": 0.000322,
+        "cost_per_1k": 0.322,
+        "cost_per_10k": 3.22
+      },
+      "pricing": {
+        "input_price_per_million": 0.25,
+        "output_price_per_million": 2.0
+      }
+    },
+    "gpt-5-mini_minimal_medium": {
+      "name": "GPT-5-mini (minimal, medium)",
+      "model_id": "gpt-5-mini",
+      "api_type": "responses",
+      "reasoning_effort": "minimal",
+      "verbosity": "medium",
+      "successful_responses": 2,
+      "total_responses": 2,
+      "avg_score": 1.0,
+      "scores": {
+        "on_topic": 1.0,
+        "grounded": 1.0,
+        "no_contradiction": 1.0,
+        "understandability": 1.0,
+        "overall": 1.0
+      },
+      "avg_latency_ms": 2157.5,
+      "p95_latency_ms": 2198.0,
+      "usage": {
+        "total_input_tokens": 2384,
+        "total_output_tokens": 24,
+        "total_tokens": 2408,
+        "avg_input_tokens": 1192.0,
+        "avg_output_tokens": 12.0
+      },
+      "costs": {
+        "input_cost": 0.000596,
+        "output_cost": 4.8e-05,
+        "total_cost": 0.000644,
+        "cost_per_query": 0.000322,
+        "cost_per_1k": 0.322,
+        "cost_per_10k": 3.22
+      },
+      "pricing": {
+        "input_price_per_million": 0.25,
+        "output_price_per_million": 2.0
+      }
+    },
+    "gpt-5-mini_minimal_high": {
+      "name": "GPT-5-mini (minimal, high)",
+      "model_id": "gpt-5-mini",
+      "api_type": "responses",
+      "reasoning_effort": "minimal",
+      "verbosity": "high",
+      "successful_responses": 2,
+      "total_responses": 2,
+      "avg_score": 1.0,
+      "scores": {
+        "on_topic": 1.0,
+        "grounded": 1.0,
+        "no_contradiction": 1.0,
+        "understandability": 1.0,
+        "overall": 1.0
+      },
+      "avg_latency_ms": 2694.6,
+      "p95_latency_ms": 3241.1,
+      "usage": {
+        "total_input_tokens": 2384,
+        "total_output_tokens": 24,
+        "total_tokens": 2408,
+        "avg_input_tokens": 1192.0,
+        "avg_output_tokens": 12.0
+      },
+      "costs": {
+        "input_cost": 0.000596,
+        "output_cost": 4.8e-05,
+        "total_cost": 0.000644,
+        "cost_per_query": 0.000322,
+        "cost_per_1k": 0.322,
+        "cost_per_10k": 3.22
+      },
+      "pricing": {
+        "input_price_per_million": 0.25,
+        "output_price_per_million": 2.0
+      }
+    },
+    "gpt-5-mini_low_low": {
+      "name": "GPT-5-mini (low, low)",
+      "model_id": "gpt-5-mini",
+      "api_type": "responses",
+      "reasoning_effort": "low",
+      "verbosity": "low",
+      "successful_responses": 2,
+      "total_responses": 2,
+      "avg_score": 1.0,
+      "scores": {
+        "on_topic": 1.0,
+        "grounded": 1.0,
+        "no_contradiction": 1.0,
+        "understandability": 1.0,
+        "overall": 1.0
+      },
+      "avg_latency_ms": 3960.3,
+      "p95_latency_ms": 4203.7,
+      "usage": {
+        "total_input_tokens": 2384,
+        "total_output_tokens": 24,
+        "total_tokens": 2408,
+        "avg_input_tokens": 1192.0,
+        "avg_output_tokens": 12.0
+      },
+      "costs": {
+        "input_cost": 0.000596,
+        "output_cost": 4.8e-05,
+        "total_cost": 0.000644,
+        "cost_per_query": 0.000322,
+        "cost_per_1k": 0.322,
+        "cost_per_10k": 3.22
+      },
+      "pricing": {
+        "input_price_per_million": 0.25,
+        "output_price_per_million": 2.0
+      }
+    },
+    "gpt-5-mini_low_medium": {
+      "name": "GPT-5-mini (low, medium)",
+      "model_id": "gpt-5-mini",
+      "api_type": "responses",
+      "reasoning_effort": "low",
+      "verbosity": "medium",
+      "successful_responses": 2,
+      "total_responses": 2,
+      "avg_score": 1.0,
+      "scores": {
+        "on_topic": 1.0,
+        "grounded": 1.0,
+        "no_contradiction": 1.0,
+        "understandability": 1.0,
+        "overall": 1.0
+      },
+      "avg_latency_ms": 3568.9,
+      "p95_latency_ms": 3626.2,
+      "usage": {
+        "total_input_tokens": 2384,
+        "total_output_tokens": 24,
+        "total_tokens": 2408,
+        "avg_input_tokens": 1192.0,
+        "avg_output_tokens": 12.0
+      },
+      "costs": {
+        "input_cost": 0.000596,
+        "output_cost": 4.8e-05,
+        "total_cost": 0.000644,
+        "cost_per_query": 0.000322,
+        "cost_per_1k": 0.322,
+        "cost_per_10k": 3.22
+      },
+      "pricing": {
+        "input_price_per_million": 0.25,
+        "output_price_per_million": 2.0
+      }
+    },
+    "gpt-5-mini_low_high": {
+      "name": "GPT-5-mini (low, high)",
+      "model_id": "gpt-5-mini",
+      "api_type": "responses",
+      "reasoning_effort": "low",
+      "verbosity": "high",
+      "successful_responses": 2,
+      "total_responses": 2,
+      "avg_score": 1.0,
+      "scores": {
+        "on_topic": 1.0,
+        "grounded": 1.0,
+        "no_contradiction": 1.0,
+        "understandability": 1.0,
+        "overall": 1.0
+      },
+      "avg_latency_ms": 2934.5,
+      "p95_latency_ms": 3244.6,
+      "usage": {
+        "total_input_tokens": 2384,
+        "total_output_tokens": 88,
+        "total_tokens": 2472,
+        "avg_input_tokens": 1192.0,
+        "avg_output_tokens": 44.0
+      },
+      "costs": {
+        "input_cost": 0.000596,
+        "output_cost": 0.000176,
+        "total_cost": 0.000772,
+        "cost_per_query": 0.000386,
+        "cost_per_1k": 0.386,
+        "cost_per_10k": 3.86
+      },
+      "pricing": {
+        "input_price_per_million": 0.25,
+        "output_price_per_million": 2.0
+      }
+    },
+    "gpt-5-nano_minimal_low": {
+      "name": "GPT-5-nano (minimal, low)",
+      "model_id": "gpt-5-nano",
+      "api_type": "responses",
+      "reasoning_effort": "minimal",
+      "verbosity": "low",
+      "successful_responses": 2,
+      "total_responses": 2,
+      "avg_score": 1.0,
+      "scores": {
+        "on_topic": 1.0,
+        "grounded": 1.0,
+        "no_contradiction": 1.0,
+        "understandability": 1.0,
+        "overall": 1.0
+      },
+      "avg_latency_ms": 1944.5,
+      "p95_latency_ms": 1945.7,
+      "usage": {
+        "total_input_tokens": 2384,
+        "total_output_tokens": 25,
+        "total_tokens": 2409,
+        "avg_input_tokens": 1192.0,
+        "avg_output_tokens": 12.5
+      },
+      "costs": {
+        "input_cost": 0.000238,
+        "output_cost": 1e-05,
+        "total_cost": 0.000248,
+        "cost_per_query": 0.0001242,
+        "cost_per_1k": 0.1242,
+        "cost_per_10k": 1.242
+      },
+      "pricing": {
+        "input_price_per_million": 0.1,
+        "output_price_per_million": 0.4
+      }
+    },
+    "gpt-5-nano_minimal_medium": {
+      "name": "GPT-5-nano (minimal, medium)",
+      "model_id": "gpt-5-nano",
+      "api_type": "responses",
+      "reasoning_effort": "minimal",
+      "verbosity": "medium",
+      "successful_responses": 2,
+      "total_responses": 2,
+      "avg_score": 1.0,
+      "scores": {
+        "on_topic": 1.0,
+        "grounded": 1.0,
+        "no_contradiction": 1.0,
+        "understandability": 1.0,
+        "overall": 1.0
+      },
+      "avg_latency_ms": 2902.4,
+      "p95_latency_ms": 2925.7,
+      "usage": {
+        "total_input_tokens": 2384,
+        "total_output_tokens": 25,
+        "total_tokens": 2409,
+        "avg_input_tokens": 1192.0,
+        "avg_output_tokens": 12.5
+      },
+      "costs": {
+        "input_cost": 0.000238,
+        "output_cost": 1e-05,
+        "total_cost": 0.000248,
+        "cost_per_query": 0.0001242,
+        "cost_per_1k": 0.1242,
+        "cost_per_10k": 1.242
+      },
+      "pricing": {
+        "input_price_per_million": 0.1,
+        "output_price_per_million": 0.4
+      }
+    },
+    "gpt-5-nano_minimal_high": {
+      "name": "GPT-5-nano (minimal, high)",
+      "model_id": "gpt-5-nano",
+      "api_type": "responses",
+      "reasoning_effort": "minimal",
+      "verbosity": "high",
+      "successful_responses": 2,
+      "total_responses": 2,
+      "avg_score": 1.0,
+      "scores": {
+        "on_topic": 1.0,
+        "grounded": 1.0,
+        "no_contradiction": 1.0,
+        "understandability": 1.0,
+        "overall": 1.0
+      },
+      "avg_latency_ms": 2447.1,
+      "p95_latency_ms": 2540.5,
+      "usage": {
+        "total_input_tokens": 2384,
+        "total_output_tokens": 63,
+        "total_tokens": 2447,
+        "avg_input_tokens": 1192.0,
+        "avg_output_tokens": 31.5
+      },
+      "costs": {
+        "input_cost": 0.000238,
+        "output_cost": 2.5e-05,
+        "total_cost": 0.000264,
+        "cost_per_query": 0.0001318,
+        "cost_per_1k": 0.1318,
+        "cost_per_10k": 1.318
+      },
+      "pricing": {
+        "input_price_per_million": 0.1,
+        "output_price_per_million": 0.4
+      }
+    },
+    "gpt-5-nano_low_low": {
+      "name": "GPT-5-nano (low, low)",
+      "model_id": "gpt-5-nano",
+      "api_type": "responses",
+      "reasoning_effort": "low",
+      "verbosity": "low",
+      "successful_responses": 2,
+      "total_responses": 2,
+      "avg_score": 1.0,
+      "scores": {
+        "on_topic": 1.0,
+        "grounded": 1.0,
+        "no_contradiction": 1.0,
+        "understandability": 1.0,
+        "overall": 1.0
+      },
+      "avg_latency_ms": 4012.3,
+      "p95_latency_ms": 4646.1,
+      "usage": {
+        "total_input_tokens": 2384,
+        "total_output_tokens": 344,
+        "total_tokens": 2728,
+        "avg_input_tokens": 1192.0,
+        "avg_output_tokens": 172.0
+      },
+      "costs": {
+        "input_cost": 0.000238,
+        "output_cost": 0.000138,
+        "total_cost": 0.000376,
+        "cost_per_query": 0.000188,
+        "cost_per_1k": 0.188,
+        "cost_per_10k": 1.88
+      },
+      "pricing": {
+        "input_price_per_million": 0.1,
+        "output_price_per_million": 0.4
+      }
+    },
+    "gpt-5-nano_low_medium": {
+      "name": "GPT-5-nano (low, medium)",
+      "model_id": "gpt-5-nano",
+      "api_type": "responses",
+      "reasoning_effort": "low",
+      "verbosity": "medium",
+      "successful_responses": 2,
+      "total_responses": 2,
+      "avg_score": 1.0,
+      "scores": {
+        "on_topic": 1.0,
+        "grounded": 1.0,
+        "no_contradiction": 1.0,
+        "understandability": 1.0,
+        "overall": 1.0
+      },
+      "avg_latency_ms": 3014.8,
+      "p95_latency_ms": 3051.6,
+      "usage": {
+        "total_input_tokens": 2384,
+        "total_output_tokens": 216,
+        "total_tokens": 2600,
+        "avg_input_tokens": 1192.0,
+        "avg_output_tokens": 108.0
+      },
+      "costs": {
+        "input_cost": 0.000238,
+        "output_cost": 8.6e-05,
+        "total_cost": 0.000325,
+        "cost_per_query": 0.0001624,
+        "cost_per_1k": 0.1624,
+        "cost_per_10k": 1.624
+      },
+      "pricing": {
+        "input_price_per_million": 0.1,
+        "output_price_per_million": 0.4
+      }
+    },
+    "gpt-5-nano_low_high": {
+      "name": "GPT-5-nano (low, high)",
+      "model_id": "gpt-5-nano",
+      "api_type": "responses",
+      "reasoning_effort": "low",
+      "verbosity": "high",
+      "successful_responses": 2,
+      "total_responses": 2,
+      "avg_score": 1.0,
+      "scores": {
+        "on_topic": 1.0,
+        "grounded": 1.0,
+        "no_contradiction": 1.0,
+        "understandability": 1.0,
+        "overall": 1.0
+      },
+      "avg_latency_ms": 2864.3,
+      "p95_latency_ms": 3013.6,
+      "usage": {
+        "total_input_tokens": 2384,
+        "total_output_tokens": 216,
+        "total_tokens": 2600,
+        "avg_input_tokens": 1192.0,
+        "avg_output_tokens": 108.0
+      },
+      "costs": {
+        "input_cost": 0.000238,
+        "output_cost": 8.6e-05,
+        "total_cost": 0.000325,
+        "cost_per_query": 0.0001624,
+        "cost_per_1k": 0.1624,
+        "cost_per_10k": 1.624
+      },
+      "pricing": {
+        "input_price_per_million": 0.1,
+        "output_price_per_million": 0.4
+      }
+    }
+  },
+  "questions": [
+    {
+      "id": 1,
+      "question": "How do PC102 students enroll in their chosen courses?",
+      "context": "",
+      "responses": {
+        "gpt-4o-mini": {
+          "response": "Sorry, I don't know.",
+          "latency_ms": 3850.346326828003,
+          "input_tokens": 1193,
+          "output_tokens": 6,
+          "cost": 0.00018255000000000002,
+          "grade": {
+            "on_topic": 1,
+            "grounded": 1,
+            "no_contradiction": 1,
+            "understandability": 1,
+            "overall": 1,
+            "average": 1.0
+          },
+          "error": null
+        },
+        "gpt-5-mini_minimal_low": {
+          "response": "Sorry, I don't know.",
+          "latency_ms": 2847.403049468994,
+          "input_tokens": 1192,
+          "output_tokens": 12,
+          "cost": 0.00032199999999999997,
+          "grade": {
+            "on_topic": 1,
+            "grounded": 1,
+            "no_contradiction": 1,
+            "understandability": 1,
+            "overall": 1,
+            "average": 1.0
+          },
+          "error": null
+        },
+        "gpt-5-mini_minimal_medium": {
+          "response": "Sorry, I don't know.",
+          "latency_ms": 2198.0485916137695,
+          "input_tokens": 1192,
+          "output_tokens": 12,
+          "cost": 0.00032199999999999997,
+          "grade": {
+            "on_topic": 1,
+            "grounded": 1,
+            "no_contradiction": 1,
+            "understandability": 1,
+            "overall": 1,
+            "average": 1.0
+          },
+          "error": null
+        },
+        "gpt-5-mini_minimal_high": {
+          "response": "Sorry, I don't know.",
+          "latency_ms": 3241.100072860718,
+          "input_tokens": 1192,
+          "output_tokens": 12,
+          "cost": 0.00032199999999999997,
+          "grade": {
+            "on_topic": 1,
+            "grounded": 1,
+            "no_contradiction": 1,
+            "understandability": 1,
+            "overall": 1,
+            "average": 1.0
+          },
+          "error": null
+        },
+        "gpt-5-mini_low_low": {
+          "response": "Sorry, I don't know.",
+          "latency_ms": 3717.0047760009766,
+          "input_tokens": 1192,
+          "output_tokens": 12,
+          "cost": 0.00032199999999999997,
+          "grade": {
+            "on_topic": 1,
+            "grounded": 1,
+            "no_contradiction": 1,
+            "understandability": 1,
+            "overall": 1,
+            "average": 1.0
+          },
+          "error": null
+        },
+        "gpt-5-mini_low_medium": {
+          "response": "Sorry, I don't know.",
+          "latency_ms": 3511.5678310394287,
+          "input_tokens": 1192,
+          "output_tokens": 12,
+          "cost": 0.00032199999999999997,
+          "grade": {
+            "on_topic": 1,
+            "grounded": 1,
+            "no_contradiction": 1,
+            "understandability": 1,
+            "overall": 1,
+            "average": 1.0
+          },
+          "error": null
+        },
+        "gpt-5-mini_low_high": {
+          "response": "Sorry, I don't know.",
+          "latency_ms": 3244.6019649505615,
+          "input_tokens": 1192,
+          "output_tokens": 76,
+          "cost": 0.00045,
+          "grade": {
+            "on_topic": 1,
+            "grounded": 1,
+            "no_contradiction": 1,
+            "understandability": 1,
+            "overall": 1,
+            "average": 1.0
+          },
+          "error": null
+        },
+        "gpt-5-nano_minimal_low": {
+          "response": "Sorry, I don\u2019t know.",
+          "latency_ms": 1945.678949356079,
+          "input_tokens": 1192,
+          "output_tokens": 13,
+          "cost": 0.0001244,
+          "grade": {
+            "on_topic": 1,
+            "grounded": 1,
+            "no_contradiction": 1,
+            "understandability": 1,
+            "overall": 1,
+            "average": 1.0
+          },
+          "error": null
+        },
+        "gpt-5-nano_minimal_medium": {
+          "response": "Sorry, I don\u2019t know.",
+          "latency_ms": 2879.1651725769043,
+          "input_tokens": 1192,
+          "output_tokens": 13,
+          "cost": 0.0001244,
+          "grade": {
+            "on_topic": 1,
+            "grounded": 1,
+            "no_contradiction": 1,
+            "understandability": 1,
+            "overall": 1,
+            "average": 1.0
+          },
+          "error": null
+        },
+        "gpt-5-nano_minimal_high": {
+          "response": "Sorry, I don\u2019t have information about PC102 enrollment procedures in the provided materials. If you have access to the specific node or document that covers PC102 course enrollment, share it and I can extract the steps with citations.",
+          "latency_ms": 2353.7588119506836,
+          "input_tokens": 1192,
+          "output_tokens": 51,
+          "cost": 0.0001396,
+          "grade": {
+            "on_topic": 1,
+            "grounded": 1,
+            "no_contradiction": 1,
+            "understandability": 1,
+            "overall": 1,
+            "average": 1.0
+          },
+          "error": null
+        },
+        "gpt-5-nano_low_low": {
+          "response": "Sorry, I don't know.",
+          "latency_ms": 4646.056175231934,
+          "input_tokens": 1192,
+          "output_tokens": 268,
+          "cost": 0.0002264,
+          "grade": {
+            "on_topic": 1,
+            "grounded": 1,
+            "no_contradiction": 1,
+            "understandability": 1,
+            "overall": 1,
+            "average": 1.0
+          },
+          "error": null
+        },
+        "gpt-5-nano_low_medium": {
+          "response": "Sorry, I don't know.",
+          "latency_ms": 2978.00612449646,
+          "input_tokens": 1192,
+          "output_tokens": 76,
+          "cost": 0.0001496,
+          "grade": {
+            "on_topic": 1,
+            "grounded": 1,
+            "no_contradiction": 1,
+            "understandability": 1,
+            "overall": 1,
+            "average": 1.0
+          },
+          "error": null
+        },
+        "gpt-5-nano_low_high": {
+          "response": "Sorry, I don't know.",
+          "latency_ms": 3013.6280059814453,
+          "input_tokens": 1192,
+          "output_tokens": 140,
+          "cost": 0.0001752,
+          "grade": {
+            "on_topic": 1,
+            "grounded": 1,
+            "no_contradiction": 1,
+            "understandability": 1,
+            "overall": 1,
+            "average": 1.0
+          },
+          "error": null
+        }
+      }
+    },
+    {
+      "id": 2,
+      "question": "When can PC102 students choose their introductory certificate course?",
+      "context": "",
+      "responses": {
+        "gpt-4o-mini": {
+          "response": "Sorry, I don't know.",
+          "latency_ms": 3226.6883850097656,
+          "input_tokens": 1193,
+          "output_tokens": 6,
+          "cost": 0.00018255000000000002,
+          "grade": {
+            "on_topic": 1,
+            "grounded": 1,
+            "no_contradiction": 1,
+            "understandability": 1,
+            "overall": 1,
+            "average": 1.0
+          },
+          "error": null
+        },
+        "gpt-5-mini_minimal_low": {
+          "response": "Sorry, I don't know.",
+          "latency_ms": 1907.1755409240723,
+          "input_tokens": 1192,
+          "output_tokens": 12,
+          "cost": 0.00032199999999999997,
+          "grade": {
+            "on_topic": 1,
+            "grounded": 1,
+            "no_contradiction": 1,
+            "understandability": 1,
+            "overall": 1,
+            "average": 1.0
+          },
+          "error": null
+        },
+        "gpt-5-mini_minimal_medium": {
+          "response": "Sorry, I don't know.",
+          "latency_ms": 2117.027759552002,
+          "input_tokens": 1192,
+          "output_tokens": 12,
+          "cost": 0.00032199999999999997,
+          "grade": {
+            "on_topic": 1,
+            "grounded": 1,
+            "no_contradiction": 1,
+            "understandability": 1,
+            "overall": 1,
+            "average": 1.0
+          },
+          "error": null
+        },
+        "gpt-5-mini_minimal_high": {
+          "response": "Sorry, I don't know.",
+          "latency_ms": 2148.139715194702,
+          "input_tokens": 1192,
+          "output_tokens": 12,
+          "cost": 0.00032199999999999997,
+          "grade": {
+            "on_topic": 1,
+            "grounded": 1,
+            "no_contradiction": 1,
+            "understandability": 1,
+            "overall": 1,
+            "average": 1.0
+          },
+          "error": null
+        },
+        "gpt-5-mini_low_low": {
+          "response": "Sorry, I don't know.",
+          "latency_ms": 4203.656196594238,
+          "input_tokens": 1192,
+          "output_tokens": 12,
+          "cost": 0.00032199999999999997,
+          "grade": {
+            "on_topic": 1,
+            "grounded": 1,
+            "no_contradiction": 1,
+            "understandability": 1,
+            "overall": 1,
+            "average": 1.0
+          },
+          "error": null
+        },
+        "gpt-5-mini_low_medium": {
+          "response": "Sorry, I don't know.",
+          "latency_ms": 3626.232862472534,
+          "input_tokens": 1192,
+          "output_tokens": 12,
+          "cost": 0.00032199999999999997,
+          "grade": {
+            "on_topic": 1,
+            "grounded": 1,
+            "no_contradiction": 1,
+            "understandability": 1,
+            "overall": 1,
+            "average": 1.0
+          },
+          "error": null
+        },
+        "gpt-5-mini_low_high": {
+          "response": "Sorry, I don't know.",
+          "latency_ms": 2624.4845390319824,
+          "input_tokens": 1192,
+          "output_tokens": 12,
+          "cost": 0.00032199999999999997,
+          "grade": {
+            "on_topic": 1,
+            "grounded": 1,
+            "no_contradiction": 1,
+            "understandability": 1,
+            "overall": 1,
+            "average": 1.0
+          },
+          "error": null
+        },
+        "gpt-5-nano_minimal_low": {
+          "response": "Sorry, I don't know.",
+          "latency_ms": 1943.389892578125,
+          "input_tokens": 1192,
+          "output_tokens": 12,
+          "cost": 0.000124,
+          "grade": {
+            "on_topic": 1,
+            "grounded": 1,
+            "no_contradiction": 1,
+            "understandability": 1,
+            "overall": 1,
+            "average": 1.0
+          },
+          "error": null
+        },
+        "gpt-5-nano_minimal_medium": {
+          "response": "Sorry, I don't know.",
+          "latency_ms": 2925.6770610809326,
+          "input_tokens": 1192,
+          "output_tokens": 12,
+          "cost": 0.000124,
+          "grade": {
+            "on_topic": 1,
+            "grounded": 1,
+            "no_contradiction": 1,
+            "understandability": 1,
+            "overall": 1,
+            "average": 1.0
+          },
+          "error": null
+        },
+        "gpt-5-nano_minimal_high": {
+          "response": "Sorry, I don't know.",
+          "latency_ms": 2540.482997894287,
+          "input_tokens": 1192,
+          "output_tokens": 12,
+          "cost": 0.000124,
+          "grade": {
+            "on_topic": 1,
+            "grounded": 1,
+            "no_contradiction": 1,
+            "understandability": 1,
+            "overall": 1,
+            "average": 1.0
+          },
+          "error": null
+        },
+        "gpt-5-nano_low_low": {
+          "response": "Sorry, I don't know.",
+          "latency_ms": 3378.469467163086,
+          "input_tokens": 1192,
+          "output_tokens": 76,
+          "cost": 0.0001496,
+          "grade": {
+            "on_topic": 1,
+            "grounded": 1,
+            "no_contradiction": 1,
+            "understandability": 1,
+            "overall": 1,
+            "average": 1.0
+          },
+          "error": null
+        },
+        "gpt-5-nano_low_medium": {
+          "response": "Sorry, I don't know.",
+          "latency_ms": 3051.6200065612793,
+          "input_tokens": 1192,
+          "output_tokens": 140,
+          "cost": 0.0001752,
+          "grade": {
+            "on_topic": 1,
+            "grounded": 1,
+            "no_contradiction": 1,
+            "understandability": 1,
+            "overall": 1,
+            "average": 1.0
+          },
+          "error": null
+        },
+        "gpt-5-nano_low_high": {
+          "response": "Sorry, I don't know.",
+          "latency_ms": 2714.994430541992,
+          "input_tokens": 1192,
+          "output_tokens": 76,
+          "cost": 0.0001496,
+          "grade": {
+            "on_topic": 1,
+            "grounded": 1,
+            "no_contradiction": 1,
+            "understandability": 1,
+            "overall": 1,
+            "average": 1.0
+          },
+          "error": null
+        }
+      }
+    }
+  ]
+}

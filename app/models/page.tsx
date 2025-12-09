@@ -264,7 +264,7 @@ export default async function ModelsPage() {
             <tbody>
               {modelsWithEfficiency.map((model, index) => (
                 <tr
-                  key={model.model_id}
+                  key={model.key}
                   className="border-b border-white/[0.06] last:border-0 hover:bg-white/[0.02] transition-colors"
                 >
                   <td className="px-6 py-4">
