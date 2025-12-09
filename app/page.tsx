@@ -262,15 +262,18 @@ python scripts/run_evaluation.py --samples 100 --models gpt-4o-mini gpt-5-mini_m
 
   // Sort models and get stats
   const sortedModels = [...data.models].sort((a, b) => b.avg_score - a.avg_score);
-  const model1 = sortedModels[0];
-  const model2 = sortedModels[1] || sortedModels[0];
+  const bestModel = sortedModels[0];
+  const runnerUp = sortedModels[1] || sortedModels[0];
   
-  const model1Better = model1.avg_score > model2.avg_score;
-  const scoreDiff = Math.abs(model1.avg_score - model2.avg_score);
-  const timeDiff = Math.abs(model1.avg_latency_ms - model2.avg_latency_ms);
-  const model1Faster = model1.avg_latency_ms < model2.avg_latency_ms;
-  const costDiff = model1.total_cost > 0 
-    ? ((model2.total_cost - model1.total_cost) / model1.total_cost) * 100 
+  // Featured comparison: Current (GPT-4o-mini) vs Candidate (GPT-5-mini minimal/low)
+  const currentModel = data.models.find(m => m.key === "gpt-4o-mini") || bestModel;
+  const candidateModel = data.models.find(m => m.key === "gpt-5-mini_minimal_low") || runnerUp;
+  
+  const scoreDiff = Math.abs(currentModel.avg_score - candidateModel.avg_score);
+  const timeDiff = Math.abs(currentModel.avg_latency_ms - candidateModel.avg_latency_ms);
+  const currentFaster = currentModel.avg_latency_ms < candidateModel.avg_latency_ms;
+  const costDiff = currentModel.total_cost > 0 
+    ? ((candidateModel.total_cost - currentModel.total_cost) / currentModel.total_cost) * 100 
     : 0;
 
   // For unified format with many models
@@ -284,7 +287,7 @@ python scripts/run_evaluation.py --samples 100 --models gpt-4o-mini gpt-5-mini_m
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <PageHeader
-          title={isMultiModel ? "LLM Model Evaluation Dashboard" : `${model1.name} vs ${model2.name}`}
+          title={isMultiModel ? "LLM Model Evaluation Dashboard" : `${currentModel.name} vs ${candidateModel.name}`}
           description={isMultiModel 
             ? `Comprehensive evaluation of ${data.models.length} models on ${data.numQuestions} questions. Compare response quality, speed, and cost.`
             : `Head-to-head comparison evaluating ${data.numQuestions} questions. Comparing response quality, speed, and cost.`
@@ -307,8 +310,8 @@ python scripts/run_evaluation.py --samples 100 --models gpt-4o-mini gpt-5-mini_m
           />
           <StatCard
             title="Quality Winner"
-            value={model1.name}
-            subtitle={`+${scoreDiff.toFixed(2)} higher avg score`}
+            value={bestModel.name}
+            subtitle={`${bestModel.avg_score.toFixed(2)} avg score`}
             color="blue"
             icon={
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -318,8 +321,8 @@ python scripts/run_evaluation.py --samples 100 --models gpt-4o-mini gpt-5-mini_m
           />
           <StatCard
             title="Speed Winner"
-            value={isMultiModel ? fastestModel.name : (model1Faster ? model1.name : model2.name)}
-            subtitle={`${Math.round(isMultiModel ? fastestModel.avg_latency_ms : timeDiff)}ms ${isMultiModel ? "avg response" : "faster avg response"}`}
+            value={fastestModel.name}
+            subtitle={`${Math.round(fastestModel.avg_latency_ms)}ms avg response`}
             color="green"
             icon={
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -328,13 +331,10 @@ python scripts/run_evaluation.py --samples 100 --models gpt-4o-mini gpt-5-mini_m
             }
           />
           <StatCard
-            title={isMultiModel ? "Most Cost-Effective" : "Cost Difference"}
-            value={isMultiModel ? cheapestModel.name : `${costDiff > 0 ? "+" : ""}${costDiff.toFixed(1)}%`}
-            subtitle={isMultiModel 
-              ? `$${cheapestModel.total_cost.toFixed(4)} total`
-              : `M1: $${model1.total_cost.toFixed(4)} | M2: $${model2.total_cost.toFixed(4)}`
-            }
-            color={isMultiModel ? "purple" : (costDiff > 0 ? "orange" : "green")}
+            title="Most Cost-Effective"
+            value={cheapestModel.name}
+            subtitle={`$${cheapestModel.total_cost.toFixed(4)} total`}
+            color="purple"
             icon={
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -343,17 +343,17 @@ python scripts/run_evaluation.py --samples 100 --models gpt-4o-mini gpt-5-mini_m
           />
         </StatCardGrid>
 
-        {/* Model Cards - Featured Comparison */}
+        {/* Model Cards - Featured Comparison: Current vs Candidate */}
         <div className="grid md:grid-cols-2 gap-4 mt-6">
           <ModelCard 
-            model={model1} 
-            label={isMultiModel ? "Best Quality" : "Model 1 (Current)"} 
+            model={currentModel} 
+            label="Current" 
             color="blue" 
             numQuestions={data.numQuestions} 
           />
           <ModelCard 
-            model={model2} 
-            label={isMultiModel ? "Runner Up" : "Model 2 (Candidate)"} 
+            model={candidateModel} 
+            label="Candidate" 
             color="purple" 
             numQuestions={data.numQuestions} 
           />
@@ -494,8 +494,8 @@ python scripts/run_evaluation.py --samples 100 --models gpt-4o-mini gpt-5-mini_m
             </h2>
             <ComparisonTable 
               comparisons={data.comparisons} 
-              model1Name={model1.name}
-              model2Name={model2.name}
+              model1Name={currentModel.name}
+              model2Name={candidateModel.name}
             />
           </div>
         )}
@@ -509,11 +509,13 @@ python scripts/run_evaluation.py --samples 100 --models gpt-4o-mini gpt-5-mini_m
             Summary
           </h3>
           <p className="mt-2 text-[14px] text-white/60 leading-relaxed">
-            Based on this evaluation, <span className="text-white font-medium">{model1.name}</span> shows
-            {" "}<span className="text-white font-medium">{scoreDiff.toFixed(2)}</span> points higher quality scores (out of 5).
-            {" "}{model1Faster ? model1.name : model2.name} is <span className="text-white font-medium">{Math.round(timeDiff)}ms faster</span> on average.
-            {" "}Cost-wise, {model2.name} is <span className="text-white font-medium">{Math.abs(costDiff).toFixed(1)}%</span>
-            {" "}{costDiff > 0 ? "more expensive" : "cheaper"} than {model1.name}.
+            Comparing <span className="text-white font-medium">{currentModel.name}</span> (current) vs{" "}
+            <span className="text-white font-medium">{candidateModel.name}</span> (candidate):{" "}
+            {candidateModel.avg_score > currentModel.avg_score ? candidateModel.name : currentModel.name} scores{" "}
+            <span className="text-white font-medium">{scoreDiff.toFixed(2)}</span> points higher.
+            {" "}{currentFaster ? currentModel.name : candidateModel.name} is <span className="text-white font-medium">{Math.round(timeDiff)}ms faster</span> on average.
+            {" "}Cost-wise, {candidateModel.name} is <span className="text-white font-medium">{Math.abs(costDiff).toFixed(1)}%</span>
+            {" "}{costDiff > 0 ? "more expensive" : "cheaper"} than {currentModel.name}.
           </p>
         </div>
 
