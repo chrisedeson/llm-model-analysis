@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "generated_at": "2025-12-09T20:14:20.934658",
+    "generated_at": "2025-12-10T01:38:22.264594",
     "num_questions": 2,
     "num_models": 13,
     "grader_model": "gpt-5.1",
@@ -30,30 +30,30 @@
       "verbosity": null,
       "successful_responses": 2,
       "total_responses": 2,
-      "avg_score": 1.0,
+      "avg_score": 4.7,
       "scores": {
-        "on_topic": 1.0,
-        "grounded": 1.0,
-        "no_contradiction": 1.0,
-        "understandability": 1.0,
-        "overall": 1.0
+        "on_topic": 4.5,
+        "grounded": 4.5,
+        "no_contradiction": 5.0,
+        "understandability": 5.0,
+        "overall": 4.5
       },
-      "avg_latency_ms": 3538.5,
-      "p95_latency_ms": 3850.3,
+      "avg_latency_ms": 6910.4,
+      "p95_latency_ms": 7853.3,
       "usage": {
-        "total_input_tokens": 2386,
-        "total_output_tokens": 12,
-        "total_tokens": 2398,
-        "avg_input_tokens": 1193.0,
-        "avg_output_tokens": 6.0
+        "total_input_tokens": 6567,
+        "total_output_tokens": 210,
+        "total_tokens": 6777,
+        "avg_input_tokens": 3283.5,
+        "avg_output_tokens": 105.0
       },
       "costs": {
-        "input_cost": 0.000358,
-        "output_cost": 7e-06,
-        "total_cost": 0.000365,
-        "cost_per_query": 0.00018255,
-        "cost_per_1k": 0.1826,
-        "cost_per_10k": 1.8255
+        "input_cost": 0.000985,
+        "output_cost": 0.000126,
+        "total_cost": 0.001111,
+        "cost_per_query": 0.00055552,
+        "cost_per_1k": 0.5555,
+        "cost_per_10k": 5.5553
       },
       "pricing": {
         "input_price_per_million": 0.15,
@@ -68,30 +68,30 @@
       "verbosity": "low",
       "successful_responses": 2,
       "total_responses": 2,
-      "avg_score": 1.0,
+      "avg_score": 5.0,
       "scores": {
-        "on_topic": 1.0,
-        "grounded": 1.0,
-        "no_contradiction": 1.0,
-        "understandability": 1.0,
-        "overall": 1.0
+        "on_topic": 5.0,
+        "grounded": 5.0,
+        "no_contradiction": 5.0,
+        "understandability": 5.0,
+        "overall": 5.0
       },
-      "avg_latency_ms": 2377.3,
-      "p95_latency_ms": 2847.4,
+      "avg_latency_ms": 3111.7,
+      "p95_latency_ms": 3249.0,
       "usage": {
-        "total_input_tokens": 2384,
-        "total_output_tokens": 24,
-        "total_tokens": 2408,
-        "avg_input_tokens": 1192.0,
-        "avg_output_tokens": 12.0
+        "total_input_tokens": 6565,
+        "total_output_tokens": 216,
+        "total_tokens": 6781,
+        "avg_input_tokens": 3282.5,
+        "avg_output_tokens": 108.0
       },
       "costs": {
-        "input_cost": 0.000596,
-        "output_cost": 4.8e-05,
-        "total_cost": 0.000644,
-        "cost_per_query": 0.000322,
-        "cost_per_1k": 0.322,
-        "cost_per_10k": 3.22
+        "input_cost": 0.001641,
+        "output_cost": 0.000432,
+        "total_cost": 0.002073,
+        "cost_per_query": 0.00103663,
+        "cost_per_1k": 1.0366,
+        "cost_per_10k": 10.3663
       },
       "pricing": {
         "input_price_per_million": 0.25,
@@ -106,30 +106,30 @@
       "verbosity": "medium",
       "successful_responses": 2,
       "total_responses": 2,
-      "avg_score": 1.0,
+      "avg_score": 4.9,
       "scores": {
-        "on_topic": 1.0,
-        "grounded": 1.0,
-        "no_contradiction": 1.0,
-        "understandability": 1.0,
-        "overall": 1.0
+        "on_topic": 5.0,
+        "grounded": 5.0,
+        "no_contradiction": 5.0,
+        "understandability": 5.0,
+        "overall": 4.5
       },
-      "avg_latency_ms": 2157.5,
-      "p95_latency_ms": 2198.0,
+      "avg_latency_ms": 3285.7,
+      "p95_latency_ms": 3573.8,
       "usage": {
-        "total_input_tokens": 2384,
-        "total_output_tokens": 24,
-        "total_tokens": 2408,
-        "avg_input_tokens": 1192.0,
-        "avg_output_tokens": 12.0
+        "total_input_tokens": 6565,
+        "total_output_tokens": 260,
+        "total_tokens": 6825,
+        "avg_input_tokens": 3282.5,
+        "avg_output_tokens": 130.0
       },
       "costs": {
-        "input_cost": 0.000596,
-        "output_cost": 4.8e-05,
-        "total_cost": 0.000644,
-        "cost_per_query": 0.000322,
-        "cost_per_1k": 0.322,
-        "cost_per_10k": 3.22
+        "input_cost": 0.001641,
+        "output_cost": 0.00052,
+        "total_cost": 0.002161,
+        "cost_per_query": 0.00108062,
+        "cost_per_1k": 1.0806,
+        "cost_per_10k": 10.8063
       },
       "pricing": {
         "input_price_per_million": 0.25,
@@ -144,30 +144,30 @@
       "verbosity": "high",
       "successful_responses": 2,
       "total_responses": 2,
-      "avg_score": 1.0,
+      "avg_score": 4.8,
       "scores": {
-        "on_topic": 1.0,
-        "grounded": 1.0,
-        "no_contradiction": 1.0,
-        "understandability": 1.0,
-        "overall": 1.0
+        "on_topic": 4.5,
+        "grounded": 5.0,
+        "no_contradiction": 5.0,
+        "understandability": 5.0,
+        "overall": 4.5
       },
-      "avg_latency_ms": 2694.6,
-      "p95_latency_ms": 3241.1,
+      "avg_latency_ms": 2945.7,
+      "p95_latency_ms": 3244.0,
       "usage": {
-        "total_input_tokens": 2384,
-        "total_output_tokens": 24,
-        "total_tokens": 2408,
-        "avg_input_tokens": 1192.0,
-        "avg_output_tokens": 12.0
+        "total_input_tokens": 6565,
+        "total_output_tokens": 188,
+        "total_tokens": 6753,
+        "avg_input_tokens": 3282.5,
+        "avg_output_tokens": 94.0
       },
       "costs": {
-        "input_cost": 0.000596,
-        "output_cost": 4.8e-05,
-        "total_cost": 0.000644,
-        "cost_per_query": 0.000322,
-        "cost_per_1k": 0.322,
-        "cost_per_10k": 3.22
+        "input_cost": 0.001641,
+        "output_cost": 0.000376,
+        "total_cost": 0.002017,
+        "cost_per_query": 0.00100862,
+        "cost_per_1k": 1.0086,
+        "cost_per_10k": 10.0862
       },
       "pricing": {
         "input_price_per_million": 0.25,
@@ -182,30 +182,30 @@
       "verbosity": "low",
       "successful_responses": 2,
       "total_responses": 2,
-      "avg_score": 1.0,
+      "avg_score": 4.9,
       "scores": {
-        "on_topic": 1.0,
-        "grounded": 1.0,
-        "no_contradiction": 1.0,
-        "understandability": 1.0,
-        "overall": 1.0
+        "on_topic": 5.0,
+        "grounded": 5.0,
+        "no_contradiction": 5.0,
+        "understandability": 5.0,
+        "overall": 4.5
       },
-      "avg_latency_ms": 3960.3,
-      "p95_latency_ms": 4203.7,
+      "avg_latency_ms": 5990.3,
+      "p95_latency_ms": 6279.1,
       "usage": {
-        "total_input_tokens": 2384,
-        "total_output_tokens": 24,
-        "total_tokens": 2408,
-        "avg_input_tokens": 1192.0,
-        "avg_output_tokens": 12.0
+        "total_input_tokens": 6565,
+        "total_output_tokens": 603,
+        "total_tokens": 7168,
+        "avg_input_tokens": 3282.5,
+        "avg_output_tokens": 301.5
       },
       "costs": {
-        "input_cost": 0.000596,
-        "output_cost": 4.8e-05,
-        "total_cost": 0.000644,
-        "cost_per_query": 0.000322,
-        "cost_per_1k": 0.322,
-        "cost_per_10k": 3.22
+        "input_cost": 0.001641,
+        "output_cost": 0.001206,
+        "total_cost": 0.002847,
+        "cost_per_query": 0.00142362,
+        "cost_per_1k": 1.4236,
+        "cost_per_10k": 14.2363
       },
       "pricing": {
         "input_price_per_million": 0.25,
@@ -220,30 +220,30 @@
       "verbosity": "medium",
       "successful_responses": 2,
       "total_responses": 2,
-      "avg_score": 1.0,
+      "avg_score": 5.0,
       "scores": {
-        "on_topic": 1.0,
-        "grounded": 1.0,
-        "no_contradiction": 1.0,
-        "understandability": 1.0,
-        "overall": 1.0
+        "on_topic": 5.0,
+        "grounded": 5.0,
+        "no_contradiction": 5.0,
+        "understandability": 5.0,
+        "overall": 5.0
       },
-      "avg_latency_ms": 3568.9,
-      "p95_latency_ms": 3626.2,
+      "avg_latency_ms": 6141.4,
+      "p95_latency_ms": 7096.8,
       "usage": {
-        "total_input_tokens": 2384,
-        "total_output_tokens": 24,
-        "total_tokens": 2408,
-        "avg_input_tokens": 1192.0,
-        "avg_output_tokens": 12.0
+        "total_input_tokens": 6565,
+        "total_output_tokens": 552,
+        "total_tokens": 7117,
+        "avg_input_tokens": 3282.5,
+        "avg_output_tokens": 276.0
       },
       "costs": {
-        "input_cost": 0.000596,
-        "output_cost": 4.8e-05,
-        "total_cost": 0.000644,
-        "cost_per_query": 0.000322,
-        "cost_per_1k": 0.322,
-        "cost_per_10k": 3.22
+        "input_cost": 0.001641,
+        "output_cost": 0.001104,
+        "total_cost": 0.002745,
+        "cost_per_query": 0.00137262,
+        "cost_per_1k": 1.3726,
+        "cost_per_10k": 13.7262
       },
       "pricing": {
         "input_price_per_million": 0.25,
@@ -258,30 +258,30 @@
       "verbosity": "high",
       "successful_responses": 2,
       "total_responses": 2,
-      "avg_score": 1.0,
+      "avg_score": 5.0,
       "scores": {
-        "on_topic": 1.0,
-        "grounded": 1.0,
-        "no_contradiction": 1.0,
-        "understandability": 1.0,
-        "overall": 1.0
+        "on_topic": 5.0,
+        "grounded": 5.0,
+        "no_contradiction": 5.0,
+        "understandability": 5.0,
+        "overall": 5.0
       },
-      "avg_latency_ms": 2934.5,
-      "p95_latency_ms": 3244.6,
+      "avg_latency_ms": 5623.8,
+      "p95_latency_ms": 6585.6,
       "usage": {
-        "total_input_tokens": 2384,
-        "total_output_tokens": 88,
-        "total_tokens": 2472,
-        "avg_input_tokens": 1192.0,
-        "avg_output_tokens": 44.0
+        "total_input_tokens": 6565,
+        "total_output_tokens": 669,
+        "total_tokens": 7234,
+        "avg_input_tokens": 3282.5,
+        "avg_output_tokens": 334.5
       },
       "costs": {
-        "input_cost": 0.000596,
-        "output_cost": 0.000176,
-        "total_cost": 0.000772,
-        "cost_per_query": 0.000386,
-        "cost_per_1k": 0.386,
-        "cost_per_10k": 3.86
+        "input_cost": 0.001641,
+        "output_cost": 0.001338,
+        "total_cost": 0.002979,
+        "cost_per_query": 0.00148963,
+        "cost_per_1k": 1.4896,
+        "cost_per_10k": 14.8963
       },
       "pricing": {
         "input_price_per_million": 0.25,
@@ -296,30 +296,30 @@
       "verbosity": "low",
       "successful_responses": 2,
       "total_responses": 2,
-      "avg_score": 1.0,
+      "avg_score": 4.8,
       "scores": {
-        "on_topic": 1.0,
-        "grounded": 1.0,
-        "no_contradiction": 1.0,
-        "understandability": 1.0,
-        "overall": 1.0
+        "on_topic": 4.5,
+        "grounded": 5.0,
+        "no_contradiction": 5.0,
+        "understandability": 5.0,
+        "overall": 4.5
       },
-      "avg_latency_ms": 1944.5,
-      "p95_latency_ms": 1945.7,
+      "avg_latency_ms": 3257.1,
+      "p95_latency_ms": 3563.7,
       "usage": {
-        "total_input_tokens": 2384,
-        "total_output_tokens": 25,
-        "total_tokens": 2409,
-        "avg_input_tokens": 1192.0,
-        "avg_output_tokens": 12.5
+        "total_input_tokens": 6565,
+        "total_output_tokens": 220,
+        "total_tokens": 6785,
+        "avg_input_tokens": 3282.5,
+        "avg_output_tokens": 110.0
       },
       "costs": {
-        "input_cost": 0.000238,
-        "output_cost": 1e-05,
-        "total_cost": 0.000248,
-        "cost_per_query": 0.0001242,
-        "cost_per_1k": 0.1242,
-        "cost_per_10k": 1.242
+        "input_cost": 0.000656,
+        "output_cost": 8.8e-05,
+        "total_cost": 0.000745,
+        "cost_per_query": 0.00037225,
+        "cost_per_1k": 0.3723,
+        "cost_per_10k": 3.7225
       },
       "pricing": {
         "input_price_per_million": 0.1,
@@ -334,30 +334,30 @@
       "verbosity": "medium",
       "successful_responses": 2,
       "total_responses": 2,
-      "avg_score": 1.0,
+      "avg_score": 4.5,
       "scores": {
-        "on_topic": 1.0,
-        "grounded": 1.0,
-        "no_contradiction": 1.0,
-        "understandability": 1.0,
-        "overall": 1.0
+        "on_topic": 4.5,
+        "grounded": 4.5,
+        "no_contradiction": 4.5,
+        "understandability": 5.0,
+        "overall": 4.0
       },
-      "avg_latency_ms": 2902.4,
-      "p95_latency_ms": 2925.7,
+      "avg_latency_ms": 3408.9,
+      "p95_latency_ms": 4180.5,
       "usage": {
-        "total_input_tokens": 2384,
-        "total_output_tokens": 25,
-        "total_tokens": 2409,
-        "avg_input_tokens": 1192.0,
-        "avg_output_tokens": 12.5
+        "total_input_tokens": 6565,
+        "total_output_tokens": 280,
+        "total_tokens": 6845,
+        "avg_input_tokens": 3282.5,
+        "avg_output_tokens": 140.0
       },
       "costs": {
-        "input_cost": 0.000238,
-        "output_cost": 1e-05,
-        "total_cost": 0.000248,
-        "cost_per_query": 0.0001242,
-        "cost_per_1k": 0.1242,
-        "cost_per_10k": 1.242
+        "input_cost": 0.000656,
+        "output_cost": 0.000112,
+        "total_cost": 0.000769,
+        "cost_per_query": 0.00038425,
+        "cost_per_1k": 0.3843,
+        "cost_per_10k": 3.8425
       },
       "pricing": {
         "input_price_per_million": 0.1,
@@ -372,30 +372,30 @@
       "verbosity": "high",
       "successful_responses": 2,
       "total_responses": 2,
-      "avg_score": 1.0,
+      "avg_score": 3.9,
       "scores": {
-        "on_topic": 1.0,
-        "grounded": 1.0,
-        "no_contradiction": 1.0,
-        "understandability": 1.0,
-        "overall": 1.0
+        "on_topic": 3.5,
+        "grounded": 4.5,
+        "no_contradiction": 3.5,
+        "understandability": 5.0,
+        "overall": 3.0
       },
-      "avg_latency_ms": 2447.1,
-      "p95_latency_ms": 2540.5,
+      "avg_latency_ms": 2866.7,
+      "p95_latency_ms": 3386.3,
       "usage": {
-        "total_input_tokens": 2384,
-        "total_output_tokens": 63,
-        "total_tokens": 2447,
-        "avg_input_tokens": 1192.0,
-        "avg_output_tokens": 31.5
+        "total_input_tokens": 6565,
+        "total_output_tokens": 210,
+        "total_tokens": 6775,
+        "avg_input_tokens": 3282.5,
+        "avg_output_tokens": 105.0
       },
       "costs": {
-        "input_cost": 0.000238,
-        "output_cost": 2.5e-05,
-        "total_cost": 0.000264,
-        "cost_per_query": 0.0001318,
-        "cost_per_1k": 0.1318,
-        "cost_per_10k": 1.318
+        "input_cost": 0.000656,
+        "output_cost": 8.4e-05,
+        "total_cost": 0.000741,
+        "cost_per_query": 0.00037025,
+        "cost_per_1k": 0.3703,
+        "cost_per_10k": 3.7025
       },
       "pricing": {
         "input_price_per_million": 0.1,
@@ -410,30 +410,30 @@
       "verbosity": "low",
       "successful_responses": 2,
       "total_responses": 2,
-      "avg_score": 1.0,
+      "avg_score": 4.7,
       "scores": {
-        "on_topic": 1.0,
-        "grounded": 1.0,
-        "no_contradiction": 1.0,
-        "understandability": 1.0,
-        "overall": 1.0
+        "on_topic": 5.0,
+        "grounded": 4.5,
+        "no_contradiction": 5.0,
+        "understandability": 5.0,
+        "overall": 4.0
       },
-      "avg_latency_ms": 4012.3,
-      "p95_latency_ms": 4646.1,
+      "avg_latency_ms": 5973.1,
+      "p95_latency_ms": 6858.7,
       "usage": {
-        "total_input_tokens": 2384,
-        "total_output_tokens": 344,
-        "total_tokens": 2728,
-        "avg_input_tokens": 1192.0,
-        "avg_output_tokens": 172.0
+        "total_input_tokens": 6565,
+        "total_output_tokens": 984,
+        "total_tokens": 7549,
+        "avg_input_tokens": 3282.5,
+        "avg_output_tokens": 492.0
       },
       "costs": {
-        "input_cost": 0.000238,
-        "output_cost": 0.000138,
-        "total_cost": 0.000376,
-        "cost_per_query": 0.000188,
-        "cost_per_1k": 0.188,
-        "cost_per_10k": 1.88
+        "input_cost": 0.000656,
+        "output_cost": 0.000394,
+        "total_cost": 0.00105,
+        "cost_per_query": 0.00052505,
+        "cost_per_1k": 0.5251,
+        "cost_per_10k": 5.2505
       },
       "pricing": {
         "input_price_per_million": 0.1,
@@ -448,30 +448,30 @@
       "verbosity": "medium",
       "successful_responses": 2,
       "total_responses": 2,
-      "avg_score": 1.0,
+      "avg_score": 4.5,
       "scores": {
-        "on_topic": 1.0,
-        "grounded": 1.0,
-        "no_contradiction": 1.0,
-        "understandability": 1.0,
-        "overall": 1.0
+        "on_topic": 5.0,
+        "grounded": 4.5,
+        "no_contradiction": 4.0,
+        "understandability": 5.0,
+        "overall": 4.0
       },
-      "avg_latency_ms": 3014.8,
-      "p95_latency_ms": 3051.6,
+      "avg_latency_ms": 5076.4,
+      "p95_latency_ms": 6927.9,
       "usage": {
-        "total_input_tokens": 2384,
-        "total_output_tokens": 216,
-        "total_tokens": 2600,
-        "avg_input_tokens": 1192.0,
-        "avg_output_tokens": 108.0
+        "total_input_tokens": 6565,
+        "total_output_tokens": 781,
+        "total_tokens": 7346,
+        "avg_input_tokens": 3282.5,
+        "avg_output_tokens": 390.5
       },
       "costs": {
-        "input_cost": 0.000238,
-        "output_cost": 8.6e-05,
-        "total_cost": 0.000325,
-        "cost_per_query": 0.0001624,
-        "cost_per_1k": 0.1624,
-        "cost_per_10k": 1.624
+        "input_cost": 0.000656,
+        "output_cost": 0.000312,
+        "total_cost": 0.000969,
+        "cost_per_query": 0.00048445,
+        "cost_per_1k": 0.4845,
+        "cost_per_10k": 4.8445
       },
       "pricing": {
         "input_price_per_million": 0.1,
@@ -486,30 +486,30 @@
       "verbosity": "high",
       "successful_responses": 2,
       "total_responses": 2,
-      "avg_score": 1.0,
+      "avg_score": 4.8,
       "scores": {
-        "on_topic": 1.0,
-        "grounded": 1.0,
-        "no_contradiction": 1.0,
-        "understandability": 1.0,
-        "overall": 1.0
+        "on_topic": 5.0,
+        "grounded": 5.0,
+        "no_contradiction": 5.0,
+        "understandability": 5.0,
+        "overall": 4.0
       },
-      "avg_latency_ms": 2864.3,
-      "p95_latency_ms": 3013.6,
+      "avg_latency_ms": 5108.5,
+      "p95_latency_ms": 5317.9,
       "usage": {
-        "total_input_tokens": 2384,
-        "total_output_tokens": 216,
-        "total_tokens": 2600,
-        "avg_input_tokens": 1192.0,
-        "avg_output_tokens": 108.0
+        "total_input_tokens": 6565,
+        "total_output_tokens": 839,
+        "total_tokens": 7404,
+        "avg_input_tokens": 3282.5,
+        "avg_output_tokens": 419.5
       },
       "costs": {
-        "input_cost": 0.000238,
-        "output_cost": 8.6e-05,
-        "total_cost": 0.000325,
-        "cost_per_query": 0.0001624,
-        "cost_per_1k": 0.1624,
-        "cost_per_10k": 1.624
+        "input_cost": 0.000656,
+        "output_cost": 0.000336,
+        "total_cost": 0.000992,
+        "cost_per_query": 0.00049605,
+        "cost_per_1k": 0.4961,
+        "cost_per_10k": 4.9605
       },
       "pricing": {
         "input_price_per_million": 0.1,
@@ -521,213 +521,213 @@
     {
       "id": 1,
       "question": "How do PC102 students enroll in their chosen courses?",
-      "context": "",
+      "context": "node_id: 1\nhttps://missionaries.prod.byu-pathway.psdops.com/pc-101-w01-gathering-agenda-pdf-printable\nAcademic Requirements / Course Completion\n\n- Complete 2 credits of Institute with a passing (P) grade.\n- Complete the gateway certificate course with a C- or better.\n- In addition, for students to be able to move from PC 101 to PC 102, and from PC 102 to PC 103, they must achieve a C or better grade. This means they achieve 70% or more of the points available in the course. Students will learn more about these requirements in PC 101. For more information, see **Academic Admissions Requirements**.\n\nnode_id: 2\nhttps://studentservices.byupathway.edu/portal/class-schedule\nGeneral Information / Program Rules\n**PathwayConnect**\n\nStudents follow a set schedule during their first three terms:\n\n* First Term: PC101 + Religion Course\n* Second Term: PC102 + Religion Course\n* Third Term: PC103 + Religion Course + First Course of the Introductory Certificate\n\n**Certificate and Degrees Program**\n\n* Courses are planned in a set sequence.\n* Students may take up to four courses per term.\n\nStep 4: Register for Courses / Add or Drop Courses:\n\n* Students can add courses by clicking the Add Course button if program rules allow.\n* Students can drop any registered course by clicking the Drop Course button.\n\nnode_id: 3\nhttps://missionaries.prod.byu-pathway.psdops.com/Learn-About-PC-103\nLearn About PC / PathwayConnect / Instructions\n\nPC 103 is the third part of PathwayConnect. During this course, students will plan and select the courses, certificates, and degrees they want to study.\n\nStudents who enroll in PC 103 will:\n\n- Discover and strengthen the skills they need for continued success as an online student.\n- Practice helpful skills, online tools, and learn how to balance the demands of home and work with the demands of online courses.\n- Receive guidance and support as they apply for admission to the Online Certificates and Degrees in partnership with BYU Idaho or Ensign College.\n\nLearn About PC / PathwayConnect / Instructions\n\nStudents who enroll in PC 103 will:\n\n- Discover and strengthen the skills they need for continued success as an online student.\n- Practice helpful skills, online tools, and learn how to balance the demands of home and work with the demands of online courses.\n- Receive guidance and support as they apply for admission to the Online Certificates and Degrees in partnership with BYU Idaho or Ensign College.\n\nLearn About PC / PathwayConnect / Instructions\n\nStudents who complete PC 103 will be able to:\n\n- Demonstrate understanding of local and online resources for online student success.\n- Begin the next steps of their educational journey.\n- Create an academic plan all the way to a bachelor's degree, indicating how they will persist in their academic plan.\n- Employ skills that can lead to a productive online student experience.\n\nnode_id: 4\nhttps://help.byupathway.edu/en-US/knowledgebase/article/?kb=KA-02860&lang=en\nKnowledge Base - Article Details / **Part 2: Plan Your Courses**\n\n1. Use Your Program Plan\n2. A Program Plan lists the courses required for your degree and the order we recommend taking them.\n3. Go to the Academic Catalog at catalog.byupathway.edu.\n4. Click Certificates &#x26; Degrees in the gold bar at the top.\n5. In the left panel, check the box next to .\n6. In the main area, choose PathwayConnect.\n7. Select your Program Plan at the top of the page.\n8. Consider bookmarking, downloading, or printing your plan for easy access.\n9. Mark any courses you\u2019ve completed, then identify the next courses you need (for example, if you are in PC 102, look at Block 3 in your plan to find your next courses).\nHere is a\narticle\nrelated to this section.\n\nKnowledge Base - Article Details / **Part 2: Plan Your Courses**\n\n**Step 2: Adjust Courses if Any Are Incorrect**\n\n1. On the Class Schedule page, click Register for additional courses.\n2. Enter the course code and name (found on your Program Plan) in the search bar\u2014for example, PC 101 - Life Skills.\n3. Click Register.\n4. Repeat for any other courses you need.\n5. If you see an error, follow the instructions in the error message.\n6. Click Go Back to Class Schedule.\n7. Your newly added courses will show as Registered in green.\n8. To drop a course, click Drop Course, check the box next to the course, and click Confirm.\n\nnode_id: 5\nhttps://missionaries.prod.byu-pathway.psdops.com/Learn-About-PC-102\nLearn About PC / Audience: Missionary Assigned to PathwayConnect / Overview\n\nPC 102 helps students build confidence, develop career skills, and prepare for future education while strengthening their faith and self-reliance. Missionaries who understand these goals can better support students through their learning and growth.\n\nLearn About PC / Audience: Missionary Assigned to PathwayConnect / Instruction\n\nWelcome to PC 102. The goals of  are to:\n\n- Help students get the gospel down into their hearts.\n- Help students become capable students.\n- Prepare students to lead and support families.\n\nPC 102 helps to advance these goals. Missionaries who understand the goals of PC 102 are better prepared to help students.\n\nLearn About PC / Audience: Missionary Assigned to PathwayConnect / The Purpose of PC 102\n\nPC 102 teaches students to use their talents to produce and add value by placing emphasis on career-building and job-crafting.\n\nLearn About PC / Throughout PC 102, Students Will:\n\n- Improve skills in writing and mathematics by creating useful tools that can be used to present themselves to the world of work, including resumes and formal communications.\n- Learn to adapt their skills to the work at hand, which will gain them professional experience.\n- Practice essential skills for working in problem-solving teams, increasing their value even more.\n- Explore certificate options. The value of further education becomes real to students as they envision the future value of certificates and degrees.\n\nLearn About PC / Throughout PC 102, Students Will: / How do you support students during PC 102?\n\nDuring PC 102, you help students build self-reliance and obtain a clearer vision of the future benefits of their educational efforts\u2014for themselves, their families, their church, their community, and the world. This vision sustains them in their studies, regardless of difficulties.\n\n- Continues to provide a Christlike example of patient, kind, and loving service.\n- Use your relationships to strengthen testimonies and faithfulness to covenant keeping.\n\nnode_id: 6\nhttps://help.byupathway.edu/en-US/knowledgebase/article/?kb=KA-03020&lang=en\n**Register** / Step 6: Select Your PathwayConnect &#x26; Religion Courses\n\n* Use the search box at the top right of the \"All Courses\" box. Type the course name or code to find your course.\n* Click the green plus (+) to select the course.\n* For **Religion Courses**: look in column 5 to find the gathering day and time that works for you and click the green (+) for that course.\n* For **PC &#x26; Intro Certificate Courses**: choose the first course at the top. You do not need to choose a specific day.\n\nnode_id: 7\nhttps://missionaries.prod.byu-pathway.psdops.com/Learn-about-PC-101\nLearn About PC / Audience: Missionary Assigned to PathwayConnect / The Purpose of PC 101\n\nStudents who enroll in PC 101 will:\n\n- Discern their pathway in life and strengthen their ability to pursue it, by better understanding their stewardships, aspirations, strengths, and talents.\n- Gain an understanding of the challenges and constraints that they need to endure, reframe, or overcome.\n- Participate in activities to learn about and practice educational stewardship, time management, financial management, avoiding thinking errors, and talent development. Learn to use math, writing, and other important skills to inform and strengthen their work.\n- Meet every week with other students in live gatherings to help and teach one another.\n\nLearn About PC / Major Topics and Assignments Students in PC 101 Will Learn: / How Do You Support Students During PC 101?\n\nPC 101 is the first of three courses that constitute PathwayConnect, which marks the beginning of each student's educational journey. Every student walks in with a specific goal in mind and with their own circumstances, challenges, and constraints. They may feel confident about their decision to enroll in PathwayConnect, or they may still be uncertain about it. Your role as a missionary can be essential in ensuring that each student is able to adapt to the demands of college learning and settle into the BYU-Pathway community.\n\nDuring PC 101, you can help students by becoming a source of inspiration, encouragement, and love.\n\nnode_id: 8\nhttps://help.byupathway.edu/en-US/knowledgebase/article/?kb=KA-02827&lang=en\nKnowledge Base - Article Details / If you would like a video guide for this article, you can review this video walk through of the process.\n\nThis article explains how to register for certificate and degree courses and how to add more courses if the incorrect courses are listed.\n**Instructions**",
       "responses": {
         "gpt-4o-mini": {
-          "response": "Sorry, I don't know.",
-          "latency_ms": 3850.346326828003,
-          "input_tokens": 1193,
-          "output_tokens": 6,
-          "cost": 0.00018255000000000002,
+          "response": "PC 102 students can enroll in their chosen courses by following these steps:\n\n1. **Use the Class Schedule page**: They need to access the Class Schedule page.\n2. **Search for Courses**: By using the search box, they can type the course name or code to find their desired course.\n3. **Add Courses**: Students can click the green plus (+) to select the course they want to enroll in.\n4. **Check for Religion Courses**: For Religion Courses, they should look in the designated column to find the gathering day and time that works for them and click the green (+) for that course [^6].\n\nThis process allows students to manage their course selections effectively during their enrollment in PC 102.",
+          "latency_ms": 7853.264093399048,
+          "input_tokens": 3154,
+          "output_tokens": 149,
+          "cost": 0.0005625,
           "grade": {
-            "on_topic": 1,
-            "grounded": 1,
-            "no_contradiction": 1,
-            "understandability": 1,
-            "overall": 1,
-            "average": 1.0
+            "on_topic": 4,
+            "grounded": 4,
+            "no_contradiction": 5,
+            "understandability": 5,
+            "overall": 4,
+            "average": 4.4
           },
           "error": null
         },
         "gpt-5-mini_minimal_low": {
-          "response": "Sorry, I don't know.",
-          "latency_ms": 2847.403049468994,
-          "input_tokens": 1192,
-          "output_tokens": 12,
-          "cost": 0.00032199999999999997,
+          "response": "PC102 students enroll by registering through the Class Schedule / registration system: they search for and add the PC & Introductory Certificate courses (choose the first course at the top) and add Religion courses by using the search box and clicking the green plus (+) for the gathering day/time that works for them [^6][^4]. The Class Schedule page also lets students add or drop courses (click \u201cAdd Course\u201d to add if program rules allow, or \u201cDrop Course\u201d to remove a course) [^2][^4].",
+          "latency_ms": 2974.299669265747,
+          "input_tokens": 3153,
+          "output_tokens": 115,
+          "cost": 0.00101825,
           "grade": {
-            "on_topic": 1,
-            "grounded": 1,
-            "no_contradiction": 1,
-            "understandability": 1,
-            "overall": 1,
-            "average": 1.0
+            "on_topic": 5,
+            "grounded": 5,
+            "no_contradiction": 5,
+            "understandability": 5,
+            "overall": 5,
+            "average": 5.0
           },
           "error": null
         },
         "gpt-5-mini_minimal_medium": {
-          "response": "Sorry, I don't know.",
-          "latency_ms": 2198.0485916137695,
-          "input_tokens": 1192,
-          "output_tokens": 12,
-          "cost": 0.00032199999999999997,
+          "response": "PC102 students enroll by using the Class Schedule / Register tools in the Student Portal: search for the course (or course code) in the All Courses box, then click the green plus (+) to add it. For religion courses, use column 5 to find the gathering day/time and click the green (+) for that meeting; for PC & Intro Certificate courses, choose the first course at the top (no specific day needed) [^6][^4][^2].\n\nReferences:\n- How to select courses and gatherings via the Register interface [^6].\n- Using the Program Plan and Class Schedule to add/register courses [^4].\n- General program schedule showing PC102 as the second-term course in PathwayConnect [^2].",
+          "latency_ms": 3573.812961578369,
+          "input_tokens": 3153,
+          "output_tokens": 157,
+          "cost": 0.00110225,
           "grade": {
-            "on_topic": 1,
-            "grounded": 1,
-            "no_contradiction": 1,
-            "understandability": 1,
-            "overall": 1,
-            "average": 1.0
+            "on_topic": 5,
+            "grounded": 5,
+            "no_contradiction": 5,
+            "understandability": 5,
+            "overall": 4,
+            "average": 4.8
           },
           "error": null
         },
         "gpt-5-mini_minimal_high": {
-          "response": "Sorry, I don't know.",
-          "latency_ms": 3241.100072860718,
-          "input_tokens": 1192,
-          "output_tokens": 12,
-          "cost": 0.00032199999999999997,
+          "response": "PC102 students enroll by registering for PC 102 and a religion course on their Class Schedule page: they use the search box (type course name or code), click the green plus (+) to select PC 102 and to choose a religion course pick a gathering day/time in column 5 and click the green (+) for that course [^6][^2]. Missionaries should know PC102 is taken in the second term of PathwayConnect as PC101 (first term) \u2192 PC102 (second term) \u2192 PC103 (third term) [^2][^5].",
+          "latency_ms": 3243.9534664154053,
+          "input_tokens": 3153,
+          "output_tokens": 124,
+          "cost": 0.00103625,
           "grade": {
-            "on_topic": 1,
-            "grounded": 1,
-            "no_contradiction": 1,
-            "understandability": 1,
-            "overall": 1,
-            "average": 1.0
+            "on_topic": 4,
+            "grounded": 5,
+            "no_contradiction": 5,
+            "understandability": 5,
+            "overall": 4,
+            "average": 4.6
           },
           "error": null
         },
         "gpt-5-mini_low_low": {
-          "response": "Sorry, I don't know.",
-          "latency_ms": 3717.0047760009766,
-          "input_tokens": 1192,
-          "output_tokens": 12,
-          "cost": 0.00032199999999999997,
+          "response": "PC102 students enroll by using the Class Schedule / Register tools in the student portal:\n\n- Go to the Class Schedule (Register) page and use the Add Course/Register options to add courses if program rules allow [^2][^4].  \n- Use the search box to find the course by name or code (for example, PC 102) [^6][^4].  \n- Click the green plus (+) to select and register for the course. For religion courses, pick the gathering day/time in column 5 before clicking the green (+) [^6].  \n- You can also add a course by entering its course code and name on the Register page and clicking Register; newly added courses will show as Registered [^4].",
+          "latency_ms": 5701.396942138672,
+          "input_tokens": 3153,
+          "output_tokens": 284,
+          "cost": 0.00135625,
           "grade": {
-            "on_topic": 1,
-            "grounded": 1,
-            "no_contradiction": 1,
-            "understandability": 1,
-            "overall": 1,
-            "average": 1.0
+            "on_topic": 5,
+            "grounded": 5,
+            "no_contradiction": 5,
+            "understandability": 5,
+            "overall": 4,
+            "average": 4.8
           },
           "error": null
         },
         "gpt-5-mini_low_medium": {
-          "response": "Sorry, I don't know.",
-          "latency_ms": 3511.5678310394287,
-          "input_tokens": 1192,
-          "output_tokens": 12,
-          "cost": 0.00032199999999999997,
+          "response": "PC102 students enroll by using their Program Plan and the Class Schedule/registration tools in the student portal:\n\n- Review your Program Plan to identify which courses you need next (look at Block 3 if you\u2019re in PC102) [^4].\n- Go to the Class Schedule (Student Portal) and use the Add Course / Register for additional courses option to add the needed course(s) [^2] [^4].\n- Use the search box to find the course by name or code, then click the green plus (+) to select it [^6] [^4].\n- For religion courses, choose a gathering time by checking column 5 for the gathering day/time and click the green (+) for that specific section [^6].\n- If needed, you can also drop registered courses from the Class Schedule using the Drop Course button [^2] [^4].",
+          "latency_ms": 7096.828937530518,
+          "input_tokens": 3153,
+          "output_tokens": 312,
+          "cost": 0.0014122499999999999,
           "grade": {
-            "on_topic": 1,
-            "grounded": 1,
-            "no_contradiction": 1,
-            "understandability": 1,
-            "overall": 1,
-            "average": 1.0
+            "on_topic": 5,
+            "grounded": 5,
+            "no_contradiction": 5,
+            "understandability": 5,
+            "overall": 5,
+            "average": 5.0
           },
           "error": null
         },
         "gpt-5-mini_low_high": {
-          "response": "Sorry, I don't know.",
-          "latency_ms": 3244.6019649505615,
-          "input_tokens": 1192,
-          "output_tokens": 76,
-          "cost": 0.00045,
+          "response": "Steps PC102 students use to enroll in their chosen courses:\n\n1. Go to the Class Schedule / Register area in the student portal (Class Schedule shows program rules and the Add/Drop options) [^2].\n2. Use the search box or Add Course button to find the course by name or course code (for example, PC 102) and click Register to add it to your schedule [^4][^2].\n3. For religion courses, use the All Courses list and look in column 5 to find a gathering day/time that works for you, then click the green plus (+) to select that specific religion section [^6].\n4. For PC and Introductory Certificate courses, choose the first course listed at the top (you do not need to select a specific day) [^6].\n5. If you need to drop a course, use the Drop Course button on the Class Schedule page, check the course, and confirm the drop [^4][^2].\n\nNote: PC102 students follow the program schedule of \u201cPC102 + Religion Course\u201d for the term [^2][^5].",
+          "latency_ms": 6585.58464050293,
+          "input_tokens": 3153,
+          "output_tokens": 426,
+          "cost": 0.00164025,
           "grade": {
-            "on_topic": 1,
-            "grounded": 1,
-            "no_contradiction": 1,
-            "understandability": 1,
-            "overall": 1,
-            "average": 1.0
+            "on_topic": 5,
+            "grounded": 5,
+            "no_contradiction": 5,
+            "understandability": 5,
+            "overall": 5,
+            "average": 5.0
           },
           "error": null
         },
         "gpt-5-nano_minimal_low": {
-          "response": "Sorry, I don\u2019t know.",
-          "latency_ms": 1945.678949356079,
-          "input_tokens": 1192,
-          "output_tokens": 13,
-          "cost": 0.0001244,
+          "response": "PC102 students enroll in their chosen courses by using the class schedule to register for additional courses or adjust their plan. Specifically:\n\n- Go to the Class Schedule page.\n- Use Register for additional courses to search for and add courses (enter the course code and name found on the Program Plan) and click Register. If you need to drop courses, use Drop Course and confirm [^4].\n\nThis aligns with the guidance on registering/adjusting courses in the program schedule and aligns with how PathwayConnect terms are structured in the system [^2], and the step-by-step process for adding/dropping courses in the knowledge base article about planning and registering courses [^4].",
+          "latency_ms": 3563.6918544769287,
+          "input_tokens": 3153,
+          "output_tokens": 142,
+          "cost": 0.00037210000000000005,
           "grade": {
-            "on_topic": 1,
-            "grounded": 1,
-            "no_contradiction": 1,
-            "understandability": 1,
-            "overall": 1,
-            "average": 1.0
+            "on_topic": 4,
+            "grounded": 5,
+            "no_contradiction": 5,
+            "understandability": 5,
+            "overall": 4,
+            "average": 4.6
           },
           "error": null
         },
         "gpt-5-nano_minimal_medium": {
-          "response": "Sorry, I don\u2019t know.",
-          "latency_ms": 2879.1651725769043,
-          "input_tokens": 1192,
-          "output_tokens": 13,
-          "cost": 0.0001244,
+          "response": "PC102 students enroll in their chosen courses by following the standard course registration process:\n\n- Use the Class Schedule or Program Plan to identify the next courses needed.\n- Register for the desired courses (click Register or Add Course as allowed by program rules).\n- If you need to adjust courses, search for the course code and name, then register; to drop courses, use the Drop Course option and confirm. Green \u201cRegistered\u201d indicates successful enrollment [^4], and general guidance on adding/dropping courses is provided in the knowledge base article about planning and adjusting courses [^4].\n\nAdditional context:\n- PC102 is part of PathwayConnect\u2019s first three terms, where students follow a set sequence and can take up to four courses per term. The process to register for and adjust courses is described in the same knowledge source [^2].\n\nCited sources:\n- Course registration steps and how to add/drop courses [^4]\n- PathwayConnect sequencing and registration flexibility during terms [^2]",
+          "latency_ms": 4180.497646331787,
+          "input_tokens": 3153,
+          "output_tokens": 206,
+          "cost": 0.0003977,
           "grade": {
-            "on_topic": 1,
-            "grounded": 1,
-            "no_contradiction": 1,
-            "understandability": 1,
-            "overall": 1,
-            "average": 1.0
+            "on_topic": 4,
+            "grounded": 4,
+            "no_contradiction": 4,
+            "understandability": 5,
+            "overall": 3,
+            "average": 4.0
           },
           "error": null
         },
         "gpt-5-nano_minimal_high": {
-          "response": "Sorry, I don\u2019t have information about PC102 enrollment procedures in the provided materials. If you have access to the specific node or document that covers PC102 course enrollment, share it and I can extract the steps with citations.",
-          "latency_ms": 2353.7588119506836,
-          "input_tokens": 1192,
-          "output_tokens": 51,
-          "cost": 0.0001396,
+          "response": "PC102 students enroll in their chosen courses by following the standard course registration process in the Class Schedule:\n\n- Go to the Class Schedule page and click Register for additional courses if program rules allow.\n- Enter the course code and name (as listed on the Program Plan) in the search bar (for example, PC 101 - Life Skills).\n- Click Register to add the course.\n- If needed, repeat for other courses.\n\nIf you see an error, follow the instructions in the error message, then Go Back to Class Schedule to see the newly registered courses in green. To drop a course, select Drop Course, check the box next to the course, and click Confirm. [^4]",
+          "latency_ms": 3386.2786293029785,
+          "input_tokens": 3153,
+          "output_tokens": 145,
+          "cost": 0.0003733,
           "grade": {
-            "on_topic": 1,
-            "grounded": 1,
-            "no_contradiction": 1,
-            "understandability": 1,
-            "overall": 1,
-            "average": 1.0
+            "on_topic": 4,
+            "grounded": 5,
+            "no_contradiction": 5,
+            "understandability": 5,
+            "overall": 4,
+            "average": 4.6
           },
           "error": null
         },
         "gpt-5-nano_low_low": {
-          "response": "Sorry, I don't know.",
-          "latency_ms": 4646.056175231934,
-          "input_tokens": 1192,
-          "output_tokens": 268,
-          "cost": 0.0002264,
+          "response": "PC102 students enroll by following the program plan and then adding courses as needed:\n\n- Start with your Program Plan: It lists the required courses for your degree and the recommended order. Go to the Academic Catalog, open Certificates & Degrees, select PathwayConnect, and choose your Program Plan. Use it to identify the next courses you need to take. You can bookmark, download, or print it for easy reference. This helps you know what to enroll in each term. [^4]\n\n- Register for courses in your Class Schedule: On the Class Schedule page, click Register for additional courses. Enter the course code and name (found on your Program Plan) in the search bar, then click Register. Repeat for any other courses you need. If you see an error, follow the error message instructions. Your newly added courses will show as Registered in green. You can drop courses by selecting Drop Course and confirming. Note: Students may take up to four courses per term. [^4][^2]\n\n- Specifics for Religion, PC, and Intro Certificate courses: For Religion Courses and PC/Intro Certificate Courses, you\u2019ll choose the appropriate course (for Religion, pick a suitable gathering time; for PC and Intro Certificate, pick the first course at the top). This selection typically occurs during the Add/Register process. [^6]\n\nIf you\u2019d like, I can summarize these steps in a quick checklist for your PC102 planning.",
+          "latency_ms": 6858.671426773071,
+          "input_tokens": 3153,
+          "output_tokens": 616,
+          "cost": 0.0005617,
           "grade": {
-            "on_topic": 1,
-            "grounded": 1,
-            "no_contradiction": 1,
-            "understandability": 1,
-            "overall": 1,
-            "average": 1.0
+            "on_topic": 5,
+            "grounded": 5,
+            "no_contradiction": 5,
+            "understandability": 5,
+            "overall": 4,
+            "average": 4.8
           },
           "error": null
         },
         "gpt-5-nano_low_medium": {
-          "response": "Sorry, I don't know.",
-          "latency_ms": 2978.00612449646,
-          "input_tokens": 1192,
-          "output_tokens": 76,
-          "cost": 0.0001496,
+          "response": "PC102 students enroll in their chosen courses by using the program plan and the class schedule workflow:\n\n- Refer to your Program Plan to see the required PC102 courses and the recommended sequence. Then go to the Class Schedule to register for those courses (or adjust if necessary) [^4].\n\n- On the Class Schedule page, click Register for additional courses, search for the desired course by its code/name, and click Register to enroll. If you need to remove a course, you can use Drop Course and confirm. Newly added courses appear as Registered in green [^4].\n\n- You can also use the Program Plan to identify the next courses you need (for example, in PC102, look at the next block to find upcoming courses) and then add them via the Class Schedule if program rules allow. If you need to adjust courses, follow the same registration process and handle any errors as instructed [^4].\n\n- For selecting specific PathwayConnect and Religion courses, you can use the \u201cRegister\u201d steps and choose the appropriate PC/Intro Certificate courses from the All Courses list, using the green plus to add them. Religion courses show a specific gathering day/time option when selecting [^6].\n\nCited sources:\n- Program planning and course registration workflow (Plan Your Courses; Class Schedule; register/drop) [^4]\n- Steps to select and register PC/Intro Certificate courses (including PC102 context) [^6]",
+          "latency_ms": 6927.864551544189,
+          "input_tokens": 3153,
+          "output_tokens": 613,
+          "cost": 0.0005605,
           "grade": {
-            "on_topic": 1,
-            "grounded": 1,
-            "no_contradiction": 1,
-            "understandability": 1,
-            "overall": 1,
-            "average": 1.0
+            "on_topic": 5,
+            "grounded": 5,
+            "no_contradiction": 5,
+            "understandability": 5,
+            "overall": 5,
+            "average": 5.0
           },
           "error": null
         },
         "gpt-5-nano_low_high": {
-          "response": "Sorry, I don't know.",
-          "latency_ms": 3013.6280059814453,
-          "input_tokens": 1192,
-          "output_tokens": 140,
-          "cost": 0.0001752,
+          "response": "PC102 students enroll by following their Program Plan and using the Class Schedule to register for courses when allowed.\n\n- Use the Program Plan to know the required sequence and the next courses to take, then go to the Class Schedule page and use Add Course to enroll (or Drop Course to remove). [^4]\n- On the Class Schedule, search for the course by code/name, click Register to add it, and follow any error messages if they appear. [^4]\n- You can drop registered courses by selecting them and clicking Drop Course, then confirming. [^4]\n- Program rules may limit how many courses you can take per term, so plan within those rules. [^2]\n\nCited sources:\n- Plan Your Courses and Adjust Courses processes (PC102 enrollment workflow) [^4]\n- Register for Courses / Add or Drop Courses steps and rules [^2]",
+          "latency_ms": 4899.050235748291,
+          "input_tokens": 3153,
+          "output_tokens": 440,
+          "cost": 0.0004913000000000001,
           "grade": {
-            "on_topic": 1,
-            "grounded": 1,
-            "no_contradiction": 1,
-            "understandability": 1,
-            "overall": 1,
-            "average": 1.0
+            "on_topic": 5,
+            "grounded": 5,
+            "no_contradiction": 5,
+            "understandability": 5,
+            "overall": 4,
+            "average": 4.8
           },
           "error": null
         }
@@ -736,213 +736,213 @@
     {
       "id": 2,
       "question": "When can PC102 students choose their introductory certificate course?",
-      "context": "",
+      "context": "node_id: 1\nhttps://studentservices.byupathway.edu/portal/class-schedule\nGeneral Information / Program Rules\n**PathwayConnect**\n\nStudents follow a set schedule during their first three terms:\n\n* First Term: PC101 + Religion Course\n* Second Term: PC102 + Religion Course\n* Third Term: PC103 + Religion Course + First Course of the Introductory Certificate\n\n**Certificate and Degrees Program**\n\n* Courses are planned in a set sequence.\n* Students may take up to four courses per term.\n\nnode_id: 2\nhttps://resourcecenter.byupathway.edu/pc102-w07-gathering-agenda\nPC 102 Week 7 PathwayConnect Gathering Agenda / Gathering Agenda\n\n**Planning for Next Steps - 15 minutes**\n*Explain - (5 minutes)*\n\nAfter this course, you will take a certificate course and PC 103 University Skills. Explain that PC 103 is a one credit course \u2013 meaning that the course work has been reduced so that you\u2019ll have enough time for your certificate course. Your gatherings will be based on PC 103 so that you\u2019ll all have the same topics and lessons to discuss.\n*Discussion - (10 minutes)*\n\nIn small groups or as a whole group, share what certificate you\u2019ll be studying next semester and why you chose it. Explain how you think it will help you become a better disciple leader.\n\nPC 102 Week 7 PathwayConnect Gathering Agenda / Gathering Agenda\n\nAfter this course, you will take a certificate course and PC 103 University Skills. Explain that PC 103 is a one credit course \u2013 meaning that the course work has been reduced so that you\u2019ll have enough time for your certificate course. Your gatherings will be based on PC 103 so that you\u2019ll all have the same topics and lessons to discuss.\n*Discussion - (10 minutes)*\n\nIn small groups or as a whole group, share what certificate you\u2019ll be studying next semester and why you chose it. Explain how you think it will help you become a better disciple leader.\n\nTalk about your long-term education plans including what degree you\u2019re pursuing and or what type of employment or career you hope to have.\n\nnode_id: 3\nhttps://missionaries.prod.byu-pathway.psdops.com/pc-101-w01-gathering-agenda-pdf-printable\nEducation Insights from President Nelson / The PathwayConnect Program - 25 Minutes / Review\n\nIf the following items have not been covered during the former student share, make sure that students understand them before leaving:\n\n- Most of the work is done online.\n- PathwayConnect credits count towards degree requirements at BYU-Idaho.\n- The PathwayConnect courses are:\n- PC 101 Life Skills\n- PC 102 Professional Skills\n- PC 103 University Skills + their first certificate course\n\nTo become eligible for an online certificate and degree program through , students must do the following:\n\n- Complete PC 101, PC 102, and PC 103 courses, with a C or better in each.\n\nAcademic Requirements / Course Completion\n\n- Complete 2 credits of Institute with a passing (P) grade.\n- Complete the gateway certificate course with a C- or better.\n- In addition, for students to be able to move from PC 101 to PC 102, and from PC 102 to PC 103, they must achieve a C or better grade. This means they achieve 70% or more of the points available in the course. Students will learn more about these requirements in PC 101. For more information, see **Academic Admissions Requirements**.\n\nnode_id: 4\nhttps://missionaries.prod.byu-pathway.psdops.com/Learn-About-PC-103\nLearn About PC / PathwayConnect / Instructions\n\nPC 103 is the third part of PathwayConnect. During this course, students will plan and select the courses, certificates, and degrees they want to study.\n\nStudents who enroll in PC 103 will:\n\n- Discover and strengthen the skills they need for continued success as an online student.\n- Practice helpful skills, online tools, and learn how to balance the demands of home and work with the demands of online courses.\n- Receive guidance and support as they apply for admission to the Online Certificates and Degrees in partnership with BYU Idaho or Ensign College.\n\nLearn About PC / PathwayConnect / Certificate-First Approach\n\nBYU-Pathway is committed to a certificate-first approach by:\n\n- Offering certificates that stack into high-quality, highly applicable degrees.\n- Helping to build confidence and persistence to complete their education.\n- Ensuring that all certificates eventually build into associate and bachelor's degrees.\n- Improving a student's employability and income.\n\nStudents also enroll in the first course of a certificate program during PC 103. This course is referred to as the introduction certificate course or gateway certificate course. BYU-Pathway offers more than thirty online certificates that build into an online degree.\n\nnode_id: 5\nhttps://studentservices.byupathway.edu/studentservices/graduation\nGraduation Requirements\nPathwayConnect &#x26; Certificates &#x26; Degrees / **PathwayConnect 2024 and Forward**\n\nStudents that did not complete PathwayConnect before January 2025 must complete the following requirements to matriculate from PathwayConnect to , or to earn a PathwayConnect certificate regardless of matriculation.\n\n**1. Complete PathwayConnect Courses**\nSuccessfully finish the PC101, PC102, and PC103 courses with a minimum\n\n**grade of C**\nin each. Past equivalent courses no longer fulfill these requirements (E.g. GS 120, Math 100G, ENG 106).\n**2. Introductory Certificate Course**\n\nnode_id: 6\nhttps://help.byupathway.edu/en-US/knowledgebase/article/?kb=KA-02272&lang=en\nKnowledge Base - Article Details / Selecting Certificates and Degrees\n\n**New students in the Certificates &#x26; Degrees program and**\n**current**\n**PC 103 students** will need to select their career, degree, and certificates. This can be accomplished by doing the following:\n\n1. **Open your Student Portal.**\n2. **Navigate to Academics > My Program.**\n3. **Click the Choose Career Path**\n\nKnowledge Base - Article Details / Selecting Certificates and Degrees\n\nContinue.\n\n9. **Select one of the available Advanced Certificates from the dropdown menu. Click Continue.**\n\n10. **You will then be given a Career Path Summary.**\n\n1. **If you are satisfied with your selections, click Continue.**\n2. **If you would like to make changes to your selections, click Back.**\n\n11. **Once Continue is clicked in step 10.1, a dialog box will appear. Check the box and click Submit.**\n\n**Note: even if you only intend to change a single certificate, you still must go through the full process of selecting a career, a degree, and certificates.**\n**\\***\n\n**Students enrolled in PC 103 will see the Choose Career Path button.**\nonce the term begins\n\nKnowledge Base - Article Details / Selecting Certificates and Degrees\n\n**Note: even if you only intend to change a single certificate, you still must go through the full process of selecting a career, a degree, and certificates.**\n**\\***\n\n**Students enrolled in PC 103 will see the Choose Career Path button.**\nonce the term begins\n\n. Students who are not yet enrolled in PC103 will instead see this message displayed in red:**\n\nnode_id: 7\nhttps://missionaries.prod.byu-pathway.psdops.com/Learn-About-PC-102\nLearn About PC / Audience: Missionary Assigned to PathwayConnect / Instruction\n\nWelcome to PC 102. The goals of  are to:\n\n- Help students get the gospel down into their hearts.\n- Help students become capable students.\n- Prepare students to lead and support families.\n\nPC 102 helps to advance these goals. Missionaries who understand the goals of PC 102 are better prepared to help students.\n\nLearn About PC / Audience: Missionary Assigned to PathwayConnect / The Purpose of PC 102\n\nPC 102 teaches students to use their talents to produce and add value by placing emphasis on career-building and job-crafting.\n\nLearn About PC / Throughout PC 102, Students Will:\n\n- Improve skills in writing and mathematics by creating useful tools that can be used to present themselves to the world of work, including resumes and formal communications.\n- Learn to adapt their skills to the work at hand, which will gain them professional experience.\n- Practice essential skills for working in problem-solving teams, increasing their value even more.\n- Explore certificate options. The value of further education becomes real to students as they envision the future value of certificates and degrees.\n\nLearn About PC / PC 102 Team Project\n\nStudents in PC 102 will further develop their teamwork skills by participating in a three-week team project in preparation for their professional careers. Additional training is provided for forming and shepherding team project groups. See the PC 102 Canvas course preview for group project details.\n\nnode_id: 8\nhttps://resourcecenter.byupathway.edu/pc103-w01-gathering-agenda\nPreparation\n\n**Matriculate.** When you matriculate to a university, you start actively earning credits towards certificates and degrees. While a student in PathwayConnect (PC 101, 102, and 103\\), you are not a matriculated student. This means that the credits you have earned while in PathwayConnect do not yet count for certificates or degrees.\nDuring PathwayConnect, you are completing steps necessary to matriculate. This includes doing the following:\n\n* Completing PC 101, PC 102, and PC 103 courses, with a C or better in\u00a0 each course to progress.\n* Completing 2 credits of Institutes of Religion courses with a passing (P) grade\n* Completing the first course of your introductory certificate with a C\\- or better\n* Completing the ecclesiastical endorsement\n\nnode_id: 9\nhttps://missionaries.prod.byu-pathway.psdops.com/pc-103-w01-gathering-agenda-pdf-printable\nPathwayconnect Progress and Academic Planning / Progress\n\nCredits you have earned while in Pathwayconnect do not yet count for certificates or degrees. During Pathwayconnect, you are completing steps necessary to matriculate. This includes doing the following:\n\n- Completing PC 101, PC 102, and PC 103 courses, with a C or better in each course.\n- Completing 2 credits of Institutes of Religion courses with a passing (P) grade.\n- Completing the first course of your introductory certificate with a C- or better.\n- Completing the ecclesiastical endorsement.\n\nOnce you are matriculated, the credits you earn during Pathwayconnect will count towards certificates and degrees soon after transfer to your record.",
       "responses": {
         "gpt-4o-mini": {
-          "response": "Sorry, I don't know.",
-          "latency_ms": 3226.6883850097656,
-          "input_tokens": 1193,
-          "output_tokens": 6,
-          "cost": 0.00018255000000000002,
+          "response": "PC 102 students can choose their introductory certificate course during PC 103, which is the next course after PC 102. In PC 103, students will plan and select the courses, certificates, and degrees they want to study, including enrolling in their first course of a certificate program [^4].",
+          "latency_ms": 5967.578887939453,
+          "input_tokens": 3413,
+          "output_tokens": 61,
+          "cost": 0.00054855,
           "grade": {
-            "on_topic": 1,
-            "grounded": 1,
-            "no_contradiction": 1,
-            "understandability": 1,
-            "overall": 1,
-            "average": 1.0
+            "on_topic": 5,
+            "grounded": 5,
+            "no_contradiction": 5,
+            "understandability": 5,
+            "overall": 5,
+            "average": 5.0
           },
           "error": null
         },
         "gpt-5-mini_minimal_low": {
-          "response": "Sorry, I don't know.",
-          "latency_ms": 1907.1755409240723,
-          "input_tokens": 1192,
-          "output_tokens": 12,
-          "cost": 0.00032199999999999997,
+          "response": "PC102 students choose their introductory certificate course when they enroll in PC103 \u2014 students in PC103 will see the \"Choose Career Path\" button in the Student Portal once the term begins and can select their career, degree, and certificates there [^4][^6]. PC102 gatherings also prepare students to pick a certificate next semester (discussing which certificate they\u2019ll study after PC102 and that PC103 includes the introductory certificate course) [^2][^4].",
+          "latency_ms": 3249.021291732788,
+          "input_tokens": 3412,
+          "output_tokens": 101,
+          "cost": 0.001055,
           "grade": {
-            "on_topic": 1,
-            "grounded": 1,
-            "no_contradiction": 1,
-            "understandability": 1,
-            "overall": 1,
-            "average": 1.0
+            "on_topic": 5,
+            "grounded": 5,
+            "no_contradiction": 5,
+            "understandability": 5,
+            "overall": 5,
+            "average": 5.0
           },
           "error": null
         },
         "gpt-5-mini_minimal_medium": {
-          "response": "Sorry, I don't know.",
-          "latency_ms": 2117.027759552002,
-          "input_tokens": 1192,
-          "output_tokens": 12,
-          "cost": 0.00032199999999999997,
+          "response": "PC102 students choose their introductory certificate course when they enroll in PC103. PC103 students plan and select the courses, certificates, and degrees they want to study and enroll in the first (introductory/gateway) certificate course during PC103 [^4][^8]. Additionally, PC102 Week 7 gathering materials instruct leaders to explain that after PC102 students will take a certificate course and PC103, and to discuss which certificate they\u2019ll study next semester [^2].",
+          "latency_ms": 2997.527599334717,
+          "input_tokens": 3412,
+          "output_tokens": 103,
+          "cost": 0.001059,
           "grade": {
-            "on_topic": 1,
-            "grounded": 1,
-            "no_contradiction": 1,
-            "understandability": 1,
-            "overall": 1,
-            "average": 1.0
+            "on_topic": 5,
+            "grounded": 5,
+            "no_contradiction": 5,
+            "understandability": 5,
+            "overall": 5,
+            "average": 5.0
           },
           "error": null
         },
         "gpt-5-mini_minimal_high": {
-          "response": "Sorry, I don't know.",
-          "latency_ms": 2148.139715194702,
-          "input_tokens": 1192,
-          "output_tokens": 12,
-          "cost": 0.00032199999999999997,
+          "response": "PC102 students choose their introductory certificate course when they enroll in PC103. During PC103 students plan and select the courses, certificates, and degrees they want to study and also enroll in the first (introductory/gateway) certificate course during PC103 [^4][^3].",
+          "latency_ms": 2647.4814414978027,
+          "input_tokens": 3412,
+          "output_tokens": 64,
+          "cost": 0.000981,
           "grade": {
-            "on_topic": 1,
-            "grounded": 1,
-            "no_contradiction": 1,
-            "understandability": 1,
-            "overall": 1,
-            "average": 1.0
+            "on_topic": 5,
+            "grounded": 5,
+            "no_contradiction": 5,
+            "understandability": 5,
+            "overall": 5,
+            "average": 5.0
           },
           "error": null
         },
         "gpt-5-mini_low_low": {
-          "response": "Sorry, I don't know.",
-          "latency_ms": 4203.656196594238,
-          "input_tokens": 1192,
-          "output_tokens": 12,
-          "cost": 0.00032199999999999997,
+          "response": "PC102 students do not officially choose and enroll in their introductory (gateway) certificate course during PC102. They prepare and plan for it in PC102 (for example, Week 7 gatherings discuss which certificate they\u2019ll study next semester) [^2]. The actual selection and enrollment into the introductory certificate course happens when they are in PC103\u2014PC103 students plan and select certificates and degrees and will enroll in the first certificate course during PC103 [^4]. Students in PC103 will also see the \"Choose Career Path\" option in the Student Portal once the PC103 term begins [^6].",
+          "latency_ms": 6279.146909713745,
+          "input_tokens": 3412,
+          "output_tokens": 319,
+          "cost": 0.0014910000000000001,
           "grade": {
-            "on_topic": 1,
-            "grounded": 1,
-            "no_contradiction": 1,
-            "understandability": 1,
-            "overall": 1,
-            "average": 1.0
+            "on_topic": 5,
+            "grounded": 5,
+            "no_contradiction": 5,
+            "understandability": 5,
+            "overall": 5,
+            "average": 5.0
           },
           "error": null
         },
         "gpt-5-mini_low_medium": {
-          "response": "Sorry, I don't know.",
-          "latency_ms": 3626.232862472534,
-          "input_tokens": 1192,
-          "output_tokens": 12,
-          "cost": 0.00032199999999999997,
+          "response": "PC102 students choose their introductory (gateway) certificate course when they take PC103. During PC103 students select their career, degree, and certificates and enroll in the first (introductory/gateway) certificate course [^4][^6]. PC102 prepares students by exploring certificate options and discussing next steps, but the actual selection/enrollment happens in PC103 (students will be shown the \"Choose Career Path\" option in their Student Portal once the PC103 term begins) [^2][^7][^6].",
+          "latency_ms": 5186.070203781128,
+          "input_tokens": 3412,
+          "output_tokens": 240,
+          "cost": 0.001333,
           "grade": {
-            "on_topic": 1,
-            "grounded": 1,
-            "no_contradiction": 1,
-            "understandability": 1,
-            "overall": 1,
-            "average": 1.0
+            "on_topic": 5,
+            "grounded": 5,
+            "no_contradiction": 5,
+            "understandability": 5,
+            "overall": 5,
+            "average": 5.0
           },
           "error": null
         },
         "gpt-5-mini_low_high": {
-          "response": "Sorry, I don't know.",
-          "latency_ms": 2624.4845390319824,
-          "input_tokens": 1192,
-          "output_tokens": 12,
-          "cost": 0.00032199999999999997,
+          "response": "PC102 students choose their introductory (gateway) certificate course during PC103 \u2014 students enroll in the first certificate course while taking PC103 [^4][^9]. The actual selection is done in the Student Portal (Academics > My Program > Choose Career Path) once the PC103 term has begun and the student sees the Choose Career Path button [^6]. PC102 gatherings begin preparing students for this step (e.g., Week 7 explains they will take a certificate course after PC102 and move into PC103) [^2].",
+          "latency_ms": 4661.985397338867,
+          "input_tokens": 3412,
+          "output_tokens": 243,
+          "cost": 0.001339,
           "grade": {
-            "on_topic": 1,
-            "grounded": 1,
-            "no_contradiction": 1,
-            "understandability": 1,
-            "overall": 1,
-            "average": 1.0
+            "on_topic": 5,
+            "grounded": 5,
+            "no_contradiction": 5,
+            "understandability": 5,
+            "overall": 5,
+            "average": 5.0
           },
           "error": null
         },
         "gpt-5-nano_minimal_low": {
-          "response": "Sorry, I don't know.",
-          "latency_ms": 1943.389892578125,
-          "input_tokens": 1192,
-          "output_tokens": 12,
-          "cost": 0.000124,
+          "response": "PC102 students can choose their introductory certificate course during PC103. BYU-Pathway uses a certificate-first approach, and students enroll in the first course of a certificate program during PC103, which is also the gateway certificate course they select as part of PC103. This is explained in the PC103 overview and the certificate-first guidance. [^4]",
+          "latency_ms": 2950.514793395996,
+          "input_tokens": 3412,
+          "output_tokens": 78,
+          "cost": 0.00037240000000000005,
           "grade": {
-            "on_topic": 1,
-            "grounded": 1,
-            "no_contradiction": 1,
-            "understandability": 1,
-            "overall": 1,
-            "average": 1.0
+            "on_topic": 5,
+            "grounded": 5,
+            "no_contradiction": 5,
+            "understandability": 5,
+            "overall": 5,
+            "average": 5.0
           },
           "error": null
         },
         "gpt-5-nano_minimal_medium": {
-          "response": "Sorry, I don't know.",
-          "latency_ms": 2925.6770610809326,
-          "input_tokens": 1192,
-          "output_tokens": 12,
-          "cost": 0.000124,
+          "response": "PC102 students can choose their introductory certificate course during PC103. The PC103 course is where students enroll in the first certificate course (the gateway/introductory certificate course) as part of the certificate-first approach described for PathwayConnect. This is reinforced by the PC103 overview and the certificate-first approach notes. [^4]",
+          "latency_ms": 2637.3517513275146,
+          "input_tokens": 3412,
+          "output_tokens": 74,
+          "cost": 0.00037080000000000007,
           "grade": {
-            "on_topic": 1,
-            "grounded": 1,
-            "no_contradiction": 1,
-            "understandability": 1,
-            "overall": 1,
-            "average": 1.0
+            "on_topic": 5,
+            "grounded": 5,
+            "no_contradiction": 5,
+            "understandability": 5,
+            "overall": 5,
+            "average": 5.0
           },
           "error": null
         },
         "gpt-5-nano_minimal_high": {
-          "response": "Sorry, I don't know.",
-          "latency_ms": 2540.482997894287,
-          "input_tokens": 1192,
-          "output_tokens": 12,
-          "cost": 0.000124,
+          "response": "PC 102 students begin planning for the introductory certificate course during PC 103. Specifically, BYU-Pathway explains the certificate-first approach and notes that students enroll in the first course of a certificate program during PC 103, which is the introduction or gateway certificate course. [^4]",
+          "latency_ms": 2347.118854522705,
+          "input_tokens": 3412,
+          "output_tokens": 65,
+          "cost": 0.00036720000000000004,
           "grade": {
-            "on_topic": 1,
-            "grounded": 1,
-            "no_contradiction": 1,
-            "understandability": 1,
-            "overall": 1,
-            "average": 1.0
+            "on_topic": 3,
+            "grounded": 4,
+            "no_contradiction": 2,
+            "understandability": 5,
+            "overall": 2,
+            "average": 3.2
           },
           "error": null
         },
         "gpt-5-nano_low_low": {
-          "response": "Sorry, I don't know.",
-          "latency_ms": 3378.469467163086,
-          "input_tokens": 1192,
-          "output_tokens": 76,
-          "cost": 0.0001496,
+          "response": "PC102 students don\u2019t choose their introductory certificate during PC102. The first certificate course (intro/gateway) is selected during PC103 as part of the certificate-first approach. [^4][^3]",
+          "latency_ms": 5087.53776550293,
+          "input_tokens": 3412,
+          "output_tokens": 368,
+          "cost": 0.0004884,
           "grade": {
-            "on_topic": 1,
-            "grounded": 1,
-            "no_contradiction": 1,
-            "understandability": 1,
-            "overall": 1,
-            "average": 1.0
+            "on_topic": 5,
+            "grounded": 4,
+            "no_contradiction": 5,
+            "understandability": 5,
+            "overall": 4,
+            "average": 4.6
           },
           "error": null
         },
         "gpt-5-nano_low_medium": {
-          "response": "Sorry, I don't know.",
-          "latency_ms": 3051.6200065612793,
-          "input_tokens": 1192,
-          "output_tokens": 140,
-          "cost": 0.0001752,
+          "response": "PC102 students do not choose the introductory certificate course yet. They enroll in the first certificate course during PC103 as part of the certificate-first approach. [^4]",
+          "latency_ms": 3224.9069213867188,
+          "input_tokens": 3412,
+          "output_tokens": 168,
+          "cost": 0.00040840000000000006,
           "grade": {
-            "on_topic": 1,
-            "grounded": 1,
-            "no_contradiction": 1,
-            "understandability": 1,
-            "overall": 1,
-            "average": 1.0
+            "on_topic": 5,
+            "grounded": 4,
+            "no_contradiction": 3,
+            "understandability": 5,
+            "overall": 3,
+            "average": 4.0
           },
           "error": null
         },
         "gpt-5-nano_low_high": {
-          "response": "Sorry, I don't know.",
-          "latency_ms": 2714.994430541992,
-          "input_tokens": 1192,
-          "output_tokens": 76,
-          "cost": 0.0001496,
+          "response": "PC102 students can choose their introductory certificate course during PC103. After completing PC102, they move into PC103, where they enroll in the first certificate course as part of the certificate-first approach. In PC103, students also select their career path/certificates (via the Student Portal\u2019s Choose Career Path). [^2][^4][^6]",
+          "latency_ms": 5317.879915237427,
+          "input_tokens": 3412,
+          "output_tokens": 399,
+          "cost": 0.0005008,
           "grade": {
-            "on_topic": 1,
-            "grounded": 1,
-            "no_contradiction": 1,
-            "understandability": 1,
-            "overall": 1,
-            "average": 1.0
+            "on_topic": 5,
+            "grounded": 5,
+            "no_contradiction": 5,
+            "understandability": 5,
+            "overall": 4,
+            "average": 4.8
           },
           "error": null
         }

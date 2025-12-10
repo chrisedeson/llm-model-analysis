@@ -116,12 +116,17 @@ class Grader:
             if data is None:
                 raise ValueError("Failed to parse JSON from response")
             
-            # Validate and clamp scores to 1-5 range
+            # Validate and extract scores (handles both nested and flat formats)
             def get_score(key: str) -> int:
-                """Extract and validate a score, clamping to 1-5 range."""
+                """Extract and validate a score, handling both nested and flat formats."""
                 raw_val = data.get(key)
                 if raw_val is None:
                     return 1
+                    
+                # Handle nested format: {"score": 5, "explanation": "..."}
+                if isinstance(raw_val, dict):
+                    raw_val = raw_val.get("score", 1)
+                
                 try:
                     val = int(raw_val)
                     return max(1, min(5, val))

@@ -58,7 +58,12 @@ def list_available_models():
 
 
 def load_langfuse_data(csv_path: str, max_samples: int | None = None) -> list[dict]:
-    """Load questions from Langfuse CSV export."""
+    """Load questions from Langfuse CSV export.
+    
+    Supports two formats:
+    1. CSV with 'context' column directly
+    2. Langfuse export with 'metadata' column containing 'retrieved_docs'
+    """
     questions = []
     
     # Use utf-8-sig to handle BOM (Byte Order Mark) if present
@@ -69,6 +74,7 @@ def load_langfuse_data(csv_path: str, max_samples: int | None = None) -> list[di
         fieldnames = reader.fieldnames or []
         input_col = next((c for c in ["input", "Input"] if c in fieldnames), None)
         context_col = next((c for c in ["context", "Context"] if c in fieldnames), None)
+        metadata_col = next((c for c in ["metadata", "Metadata"] if c in fieldnames), None)
         id_col = next((c for c in ["trace_id", "id", "ID"] if c in fieldnames), None)
         
         if not input_col:
@@ -76,8 +82,16 @@ def load_langfuse_data(csv_path: str, max_samples: int | None = None) -> list[di
             print(f"Available columns: {fieldnames}")
             return []
         
-        if not context_col:
-            print(f"Warning: No 'context' or 'Context' column found. Using empty context.")
+        # Determine context source
+        context_source = None
+        if context_col:
+            context_source = "context_column"
+            print(f"Using 'context' column for retrieved documents.")
+        elif metadata_col:
+            context_source = "metadata"
+            print(f"Extracting 'retrieved_docs' from 'metadata' column.")
+        else:
+            print(f"Warning: No 'context' or 'metadata' column found. Using empty context.")
         
         for row in reader:
             input_text = row.get(input_col, "") or ""
@@ -88,7 +102,22 @@ def load_langfuse_data(csv_path: str, max_samples: int | None = None) -> list[di
             if not input_text.strip():
                 continue
             
-            context = row.get(context_col, "") if context_col else ""
+            # Extract context from appropriate source
+            context = ""
+            if context_source == "context_column":
+                context = row.get(context_col, "") or ""
+            elif context_source == "metadata":
+                metadata_str = row.get(metadata_col, "") or ""
+                if metadata_str:
+                    try:
+                        metadata = json.loads(metadata_str)
+                        context = metadata.get("retrieved_docs", "") or ""
+                    except json.JSONDecodeError:
+                        # Try to extract retrieved_docs directly if it's not valid JSON
+                        if "retrieved_docs" in metadata_str:
+                            # Simple extraction for malformed JSON
+                            pass
+            
             trace_id = row.get(id_col, "") if id_col else ""
             
             questions.append({
@@ -100,7 +129,11 @@ def load_langfuse_data(csv_path: str, max_samples: int | None = None) -> list[di
             if max_samples and len(questions) >= max_samples:
                 break
     
+    # Report stats
+    with_context = sum(1 for q in questions if q["context"])
     print(f"Loaded {len(questions)} valid questions from {csv_path}")
+    print(f"  - {with_context}/{len(questions)} questions have context")
+    
     return questions
 
 
